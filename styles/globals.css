@@ -9,11 +9,19 @@
 }
 
 #bg-cloud{
-  background-image: url('/public/cloud.svg');
+  background-image: url('../public/cloud.svg');
   background-repeat: no-repeat;
   background-position: center;
   object-fit: contain;
 }
+
+#bg-expert{
+  background-image: url('../public/Background.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: contain;
+}
+
 h1{
   font-family: 'Playfair Display', serif;
   background: linear-gradient(to right, #EDEFF1,

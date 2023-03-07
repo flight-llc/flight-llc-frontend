@@ -5,7 +5,7 @@ import image_2 from '@/public/image_2.svg';
 
 export const ExpertTips = () => {
     return(
-        <div className="my-8 bg-white flex justify-center">
+        <div id="bg-expert" className="my-8 flex justify-center">
                 <div className="w-[70%] py-8">
                     <p className="text-start text-black uppercase px-4 text-lg font-semibold">EXPERT TIPS FOR YOUR NEXT ADVENTURE </p>
 

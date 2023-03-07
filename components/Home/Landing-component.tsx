@@ -10,7 +10,7 @@ import { ExternalAirlines } from "./airlines";
 import { UserExperienceRatings } from "./user-ratings-component";
 import { SpecialOffers } from "./special-offers";
 import flightPortal from '@/public/flightPortal.svg';
-import About from '@/public/About.svg';
+import cloud from '@/public/cloud.svg';
 import Line from '@/public/Line.svg';
 import { ExpertTips } from "./Expert-tips";
 import { AboutUs } from "./About";
@@ -151,8 +151,8 @@ const LandingComponent: FC<props> = ({ }) => {
             </div>
 
             <div id="bg-cloud" className="w-full p-4 flex justify-center">
-                <div className="w-4/5 h-auto pt-16 pb-8">
-                    <p className="text-xl font-semibold text-[#2C53B8] text-center">What flight portal users are saying - 4.9&nbsp;rating</p>
+                <div className="w-4/5 h-auto py-16">
+                    <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">What flight portal users are saying - 4.9&nbsp;rating</p>
                     {/* user ratings */}
                     <UserExperienceRatings />
                 </div>
