@@ -1,8 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Tangerine&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
+.flightPortalLogo{
+  font-family: 'Tangerine', cursive;
+}
+
+#bg-cloud{
+  background-image: url('/public/cloud.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: contain;
+}
+h1{
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(to right, #EDEFF1,
+  #0379E8);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+input[type='radio']{
+  width: 18px;
+  height: 18px;
+  accent-color: #113B75;
+}
+
+.show{
+  display : none;
+}
+
+:root{
+  background-color: #fff;
+  color: #000;
+  overflow-x: hidden;
+}
+/* :root {
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
@@ -108,4 +143,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
+} */
