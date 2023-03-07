@@ -48,11 +48,23 @@ const LandingComponent: FC<props> = ({ }) => {
                             <div className="my-12 w-[70%] bg-white border border-[#eee] rounded-lg p-4">
                                 <div className="border-b border-[#eee] flex justify-center items-center pb-3">
                                     <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
-                                        <input type="radio" defaultChecked id="html" name="fav_language" value="one Way" />
+                                        <input type="radio" 
+                                        defaultChecked 
+                                        id="html" 
+                                        name="fav_language" 
+                                        defaultValue="one Way" />
                                         <label htmlFor="html">one&nbsp;way</label>
-                                        <input type="radio" id="html" name="fav_language" value="Round Trip" />
+                                        <input 
+                                        type="radio" 
+                                        id="html" 
+                                        name="fav_language" 
+                                        defaultValue="Round Trip" />
                                         <label htmlFor="html">round&nbsp;trip</label>
-                                        <input type="radio" id="html" name="fav_language" value="Multi city" />
+                                        <input 
+                                        type="radio" 
+                                        id="html" 
+                                        name="fav_language" 
+                                        defaultValue="Multi city" />
                                         <label htmlFor="html">multi&nbsp;city</label>
                                     </div>
                                 </div>

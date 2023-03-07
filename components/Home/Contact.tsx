@@ -46,6 +46,7 @@ export const ContactUs: FC = () => {
                             <input
                                 type="Submit"
                                 value="Contact us"
+                                readOnly
                                 className="w-full outline-none capitalize bg-[#0C68BE] cursor-pointer text-white p-2.5 mb-4" />
                         </form>
                     </section>
