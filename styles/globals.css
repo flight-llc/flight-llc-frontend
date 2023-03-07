@@ -21,7 +21,9 @@ h1{
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
-
+.playfairFont{
+  font-family: 'Playfair Display', serif;
+}
 input[type='radio']{
   width: 18px;
   height: 18px;

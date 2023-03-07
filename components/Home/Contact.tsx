@@ -36,7 +36,7 @@ export const ContactUs: FC = () => {
                             <div className="w-full flex justify-start gap-2">
                                 <input
                                     type="checkbox"
-                                    value={""}
+                                    //value={""}
                                     id="sms" />
                                 <label htmlFor="sms" className="text-sm text-[#A1B0CC]">
                                     Send price quotes by SMS
