@@ -47,7 +47,7 @@ export const SpecialOffers :FC<props> = ({offers}) => {
                     />
                     <div className="px-4 py-3">
                         <div className="text-lg text-[#767E86]">{data.name}</div>
-                        <div className="flex text-xs text-[#FFC107] py-2">
+                        <div className="flex text-xs text-[#FFC107] py-2 gap-2">
                             <BsStarFill />
                             <BsStarFill />
                             <BsStarFill />

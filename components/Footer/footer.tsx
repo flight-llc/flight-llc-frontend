@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { FC } from "react";
+import footer_logo from '@/public/footer_logo.jpeg';
+import Image from "next/image";
 
 
 const footerInfo = {
@@ -48,8 +50,14 @@ const Footer :FC = () => {
         <div className="w-full">
             <div className="w-[80%] mx-auto p-8 flex justify-between items-center">
                 <section>
-                <div className="flightPortalLogo text-5xl text-black">
-                    <span>Flightportal</span>
+                <div className="">
+                    <Image
+                    src={footer_logo}
+                    alt=""
+                    width={200}
+                    height={200}
+                    />
+                    {/* <span>Flightportal</span> */}
                 </div>
                 </section>
                 {/* about us */}

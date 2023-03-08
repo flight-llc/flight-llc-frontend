@@ -39,13 +39,14 @@ const LandingComponent: FC<props> = ({ }) => {
                         {/* landing page header title */}
                         <div className="mt-28 text-white flex justify-center items-center">
                             <div className="w-[70%] text-4xl leading-relaxed text-center headerText">
-                                <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">Elevate Your Travel Experience and Save up to 40% on Business Class Flights!</h1>
+                                <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">Elevate Your Travel Experience</h1>
+                                <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">and Save up to 40% on Business Class Flights!</h1>
                             </div>
                         </div>
 
                         {/* Travel info */}
                         <div className="flex justify-center">
-                            <div className="my-12 w-[70%] bg-white border border-[#eee] rounded-lg p-4">
+                            <div className="my-12 w-fit bg-white border border-[#eee] rounded-lg p-4">
                                 <div className="border-b border-[#eee] flex justify-center items-center pb-3">
                                     <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
                                         <input type="radio" 
@@ -69,8 +70,8 @@ const LandingComponent: FC<props> = ({ }) => {
                                     </div>
                                 </div>
                                 {/* travel form */}
-                                <div className="flex pt-2 flex justify-between items-center gap-2">
-                                    <form className="basis-full flex justify-between items-center gap-2">
+                                <div className="flex pt-2">
+                                    <form className="basis-full flex justify-between items-center gap-4">
                                         <div className="flex flex-col gap-2 text-xs">
                                             <div className="font-semibold flex gap-1 items-center">
                                                 <GiAirplaneDeparture className="text-sm" />
@@ -171,7 +172,7 @@ const LandingComponent: FC<props> = ({ }) => {
             </div>
 
             {/* How it works */}
-            <div className="relative w-screen h-screen my-8">
+            <div className="relative w-screen h-[120vh] my-8">
                 <Image
                     src={flightPortal}
                     alt="how flight portal works"
@@ -183,8 +184,10 @@ const LandingComponent: FC<props> = ({ }) => {
                         <h1 className="text-4xl bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">
                             How It works
                         </h1>
-                        <div className="pt-6 text-white w-1/5">
-                            <span className="text-xs pt-2">ENTER FLIGHT INFORMATION AND DATES. CLICK SEARCH</span>
+                        <div className="pt-6 text-white lg:w-[25%] xl:w-[20%] text-center">
+                            <span className="text-xs pt-2">ENTER FLIGHT INFORMATION</span>
+                            <br/>
+                            <span className="text-xs text-center">AND DATES. CLICK SEARCH</span>
 
                             <div className="flex justify-center">
                                 <p className="flex py-2 gap-2 items-center">
@@ -193,7 +196,9 @@ const LandingComponent: FC<props> = ({ }) => {
                                 </p>
                             </div>
 
-                            <span className="text-xs pt-2">FILL IN YOUR CONTACT INFORMATION</span>
+                            <span className="text-xs pt-2">FILL IN YOUR CONTACT</span>
+                            <br/>
+                            <span className="text-xs">INFORMATION</span>
                             <div className="mx-20">
                                 <p className="flex py-2 gap-2 items-center">
                                     <BiMenu className="text-white text-3xl" />
@@ -201,7 +206,9 @@ const LandingComponent: FC<props> = ({ }) => {
                                 </p>
                             </div>
 
-                            <span className="text-xs pt-2">OUR TRAVEL ADVISERS WILL RESPOND TO YOU TO ASSIST</span>
+                            <span className="text-xs pt-2">OUR TRAVEL ADVISERS WILL</span>
+                            <br/>
+                            <span className="text-xs pt-2">RESPOND TO YOU TO ASSIST</span>
                             <div className="flex justify-center">
                                 <p className="flex py-2 gap-2 items-center">
                                     <Image src={Line} alt="" width={1} height={100} />
@@ -209,7 +216,9 @@ const LandingComponent: FC<props> = ({ }) => {
                                 </p>
                             </div>
 
-                            <span className="text-xs pt-2">CHECK INBOX FOR THE BEST DEALS</span>
+                            <span className="text-xs pt-2">CHECK INBOX FOR THE</span>
+                            <br/>
+                            <span className="text-xs pt-2">BEST DEALS</span>
                             <div className="mx-20">
                                 <p className="flex py-2 gap-2 items-center">
                                     <BiEnvelope className="text-white text-3xl" />

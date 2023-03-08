@@ -7,7 +7,7 @@ export const ExpertTips = () => {
     return(
         <div id="bg-expert" className="my-8 flex justify-center">
                 <div className="w-[70%] py-8">
-                    <p className="text-start text-black uppercase px-4 text-lg font-semibold">EXPERT TIPS FOR YOUR NEXT ADVENTURE </p>
+                    <p className="text-start text-[#6E7491] uppercase px-4 text-lg font-normal">EXPERT TIPS FOR YOUR NEXT ADVENTURE </p>
 
                     <div className="w-full flex justify-between my-8 items-center">
                         <div className="basis-2/5 rounded-md overflow-hidden bg-white shadow-md">

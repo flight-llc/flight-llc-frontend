@@ -53,7 +53,7 @@ export const NavBar = () => {
             <div className="w-fit flex flex-row text-sm items-center gap-12">
                 <p className="text-xs">24/7 live service</p>
 
-                <button className="bg-[#113B75] rounded-lg text-white outline-none text-sm p-3">
+                <button className="bg-[#113B75] rounded-lg text-white outline-none text-xs p-3">
                     <span>{navObject.phone}</span>
                 </button>
 
