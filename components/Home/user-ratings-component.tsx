@@ -1,73 +1,58 @@
 import { UserExperienceRatingsInterface } from "@/utils/types";
-import {FC} from 'react';
-//import Slider from 'react-slick';
-import {BsStarFill, BsStar} from  'react-icons/bs';
+import { FC } from 'react';
+import { BsStarFill, BsStar } from 'react-icons/bs';
+import { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-type props={
-    comments ?: [UserExperienceRatingsInterface]
+
+type props = {
+  comments?: [UserExperienceRatingsInterface]
 }
-export const UserExperienceRatings :FC<props> = ({comments}) => {
-    // var settings = {
-    //     dots: true,
-    //     infinite: true,
-    //     speed: 500,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1
-    // };
-   return(
-      //   <Slider {...settings}>
-      //   <div>
-      //     <h3>1</h3>
-      //   </div>
-      //   <div>
-      //     <h3>2</h3>
-      //   </div>
-      //   <div>
-      //     <h3>3</h3>
-      //   </div>
-      //   <div>
-      //     <h3>4</h3>
-      //   </div>
-      //   <div>
-      //     <h3>5</h3>
-      //   </div>
-      //   <div>
-      //     <h3>6</h3>
-      //   </div>
-      // </Slider>
-     <div id="bg-cloud" className="w-full p-4 flex justify-center">
-       <div className="w-4/5 h-auto py-16">
-         <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">What flight portal users are saying - 4.9&nbsp;rating</p>
-         <div className="flex justify-around my-6">
-           {[0, 1, 2].map((_: number) =>
-             <div key={_} className="text-xs w-[26%]">
-               <span className="text-[#A1B0CC]">
-                 <strong className="text-[#6E7491]">Yifei&nbsp;chen</strong>
-                 &nbsp;| 2&nbsp;hours&nbsp;ago</span>
+export const UserExperienceRatings: FC<props> = ({ comments }) => {
 
-               <div className="flex text-sm text-[#2C53B8] pt-4">
-                 <BsStarFill />
-                 <BsStarFill />
-                 <BsStarFill />
-                 <BsStarFill />
-                 <BsStar />
-               </div>
+  return (
 
-               <div className="text-sm leading-relaxed py-4">
-                 I used Mike to book my honeymoon,
-                 and I have to say,
-                 they went above and beyond my
-                 expectations. They found us a
-                 great deal on flights and accommodations,
-                 and even arranged for some special
-                 surprises along the way.
-                 We felt so pampered and taken care of. Highly recommend!
-               </div>
-             </div>
-           )}
-         </div>
-       </div>
-     </div>
+    <div id="bg-cloud" className="w-full p-4 flex justify-center">
+      <div className="w-10/12 h-auto py-16">
+        <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">What flight portal users are saying - 4.9&nbsp;rating</p>
+        <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+          {[0, 1, 2, 3].map((_: number) =>
+            <SwiperSlide key={_}>
+              <div className="flex justify-around m-6">
+                {[0, 1, 2].map((i: number) =>
+                  <div key={i} className="text-xs w-[26%]">
+                    <span className="text-[#A1B0CC]">
+                      <strong className="text-[#6E7491]">Yifei&nbsp;chen</strong>
+                      &nbsp;| 2&nbsp;hours&nbsp;ago</span>
 
-    );
+                    <div className="flex text-sm text-[#2C53B8] pt-4">
+                      <BsStarFill />
+                      <BsStarFill />
+                      <BsStarFill />
+                      <BsStarFill />
+                      <BsStar />
+                    </div>
+
+                    <div className="text-sm leading-relaxed text-start py-4">
+                      I used Mike to book my honeymoon,
+                      and I have to say,
+                      they went above and beyond my
+                      expectations. They found us a
+                      great deal on flights and accommodations,
+                      and even arranged for some special
+                      surprises along the way.
+                      We felt so pampered and taken care of. Highly recommend!
+                    </div>
+                  </div>
+                )}
+              </div>
+            </SwiperSlide>
+          )}
+        </Swiper>
+      </div>
+    </div>
+
+  );
 }
