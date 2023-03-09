@@ -28,7 +28,11 @@ const navObject = {
         }
     ]
 }
-export const NavBar = () => {
+
+type props={
+    textColor : string
+}
+export const NavBar:FC<props> = ({textColor}) => {
 
     const onClickMenuHandler = () => {
         const dropdown: HTMLDivElement | any = document.getElementById('dropdown') as HTMLDivElement;
@@ -45,7 +49,7 @@ export const NavBar = () => {
         
     }
     return(
-        <div className="w-full flex justify-between items-center text-white p-4">
+        <div className={`w-full flex justify-between items-center ${textColor} p-4`}>
             <div className="flightPortalLogo text-4xl">
                 <span>Flightportal</span>
             </div>
@@ -60,13 +64,13 @@ export const NavBar = () => {
                 <button 
                     className="relative"
                     onClick={onClickMenuHandler}>
-                    <BiMenu className="text-white text-2xl"/>
+                    <BiMenu className={`${textColor} text-2xl`}/>
                 </button>
 
                 <div id="dropdown" className="absolute hidden divide-y divide-gray-100 w-fit"
                 style={{top : '8%', right : '6.5%'}}>
                     <ul 
-                    className="py-2 text-xs text-white text-center" 
+                    className={`py-2 text-xs text-center ${textColor}`} 
                     aria-labelledby="dropdownHoverButton">
                     <Link href={'/about_us'}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">About</p>

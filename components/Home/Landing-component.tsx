@@ -10,12 +10,13 @@ import { ExternalAirlines } from "./airlines";
 import { UserExperienceRatings } from "./user-ratings-component";
 import { SpecialOffers } from "./special-offers";
 import flightPortal from '@/public/flightPortal.svg';
-import cloud from '@/public/cloud.svg';
+import group from '@/public/group.svg';
 import Line from '@/public/Line.svg';
 import { ExpertTips } from "./Expert-tips";
 import { AboutUs } from "./About";
 import { ContactUs } from "./Contact";
 import Footer from "../Footer/footer";
+import { HowItWorks } from "./how-it-works";
 
 
 
@@ -34,7 +35,7 @@ const LandingComponent: FC<props> = ({ }) => {
                 />
                 <div className="absolute w-full flex justify-center">
                     <div className="w-10/12 h-screen">
-                        <NavBar />
+                        <NavBar textColor="text-white"/>
 
                         {/* landing page header title */}
                         <div className="mt-28 text-white flex justify-center items-center">
@@ -80,7 +81,7 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-4 focus:border-[#0C68BE]"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
                                                     placeholder="Flight from?" />
                                             </div>
                                         </div>
@@ -93,7 +94,7 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-4 focus:border-[#0C68BE]"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
                                                     placeholder="Where To?" />
                                             </div>
                                         </div>
@@ -106,7 +107,7 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"date"}
-                                                    className="outline-none focus:border-b-4 focus:border-[#0C68BE]"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
                                                 />
                                             </div>
                                         </div>
@@ -119,7 +120,7 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"date"}
-                                                    className="outline-none focus:border-b-4 focus:border-[#0C68BE]"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
                                                 />
                                             </div>
                                         </div>
@@ -132,12 +133,12 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-4 focus:border-[#0C68BE]"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
                                                     placeholder="1 adult Economy" />
                                             </div>
                                         </div>
-                                        <button type="submit" className="text-md text-white bg-[#113B75] rounded-md px-5 py-3">
-                                            <BiSearch />
+                                        <button type="submit" className="text-sm text-white text-center bg-[#113B75] rounded-md p-3">
+                                            Search&nbsp;Flight
                                         </button>
                                     </form>
                                 </div>
@@ -151,15 +152,10 @@ const LandingComponent: FC<props> = ({ }) => {
                 </div>
             </div>
 
-            <div id="bg-cloud" className="w-full p-4 flex justify-center">
-                <div className="w-4/5 h-auto py-16">
-                    <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">What flight portal users are saying - 4.9&nbsp;rating</p>
-                    {/* user ratings */}
-                    <UserExperienceRatings />
-                </div>
-            </div>
+            {/* user ratings */}
+            <UserExperienceRatings />
 
-
+            {/* special offers */}
             <div className="w-full p-4 flex justify-center">
                 <div className="w-4/5 h-auto pt-16 pb-8">
                     <p className="text-xl font-semibold text-[#2C53B8] text-center">
@@ -172,63 +168,7 @@ const LandingComponent: FC<props> = ({ }) => {
             </div>
 
             {/* How it works */}
-            <div className="relative w-screen h-[120vh] my-8">
-                <Image
-                    src={flightPortal}
-                    alt="how flight portal works"
-                    fill
-                    className="object-cover"
-                />
-                <div className="absolute w-full flex justify-center">
-                    <div className="w-[70%] py-20">
-                        <h1 className="text-4xl bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">
-                            How It works
-                        </h1>
-                        <div className="pt-6 text-white lg:w-[25%] xl:w-[20%] text-center">
-                            <span className="text-xs pt-2">ENTER FLIGHT INFORMATION</span>
-                            <br/>
-                            <span className="text-xs text-center">AND DATES. CLICK SEARCH</span>
-
-                            <div className="flex justify-center">
-                                <p className="flex py-2 gap-2 items-center">
-                                    <Image src={Line} alt="" width={1} height={100} />
-                                    <BiSearch className="text-white text-3xl" />
-                                </p>
-                            </div>
-
-                            <span className="text-xs pt-2">FILL IN YOUR CONTACT</span>
-                            <br/>
-                            <span className="text-xs">INFORMATION</span>
-                            <div className="mx-20">
-                                <p className="flex py-2 gap-2 items-center">
-                                    <BiMenu className="text-white text-3xl" />
-                                    <Image src={Line} alt="" width={1} height={100} />
-                                </p>
-                            </div>
-
-                            <span className="text-xs pt-2">OUR TRAVEL ADVISERS WILL</span>
-                            <br/>
-                            <span className="text-xs pt-2">RESPOND TO YOU TO ASSIST</span>
-                            <div className="flex justify-center">
-                                <p className="flex py-2 gap-2 items-center">
-                                    <Image src={Line} alt="" width={1} height={100} />
-                                    <BiUser className="text-white text-3xl" />
-                                </p>
-                            </div>
-
-                            <span className="text-xs pt-2">CHECK INBOX FOR THE</span>
-                            <br/>
-                            <span className="text-xs pt-2">BEST DEALS</span>
-                            <div className="mx-20">
-                                <p className="flex py-2 gap-2 items-center">
-                                    <BiEnvelope className="text-white text-3xl" />
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <HowItWorks/>
 
             {/* Expert tips */}
             <ExpertTips />

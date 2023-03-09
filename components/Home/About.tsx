@@ -41,6 +41,10 @@ export const AboutUs : FC = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="flex justify-center">
+                <div className="absolute bottom-0 mx-auto w-px bg-white h-16"/>
+            </div>
         </div>
     );
 }

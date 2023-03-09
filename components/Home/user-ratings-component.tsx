@@ -35,33 +35,39 @@ export const UserExperienceRatings :FC<props> = ({comments}) => {
       //     <h3>6</h3>
       //   </div>
       // </Slider>
-        <div className="flex justify-around my-6">
-            {[0,1,2].map((_:number) => 
-                <div key={_} className="text-xs w-[26%]">
-                <span className="text-[#A1B0CC]">
-                    <strong className="text-[#6E7491]">Yifei&nbsp;chen</strong>
-                    &nbsp;| 2&nbsp;hours&nbsp;ago</span>
+     <div id="bg-cloud" className="w-full p-4 flex justify-center">
+       <div className="w-4/5 h-auto py-16">
+         <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">What flight portal users are saying - 4.9&nbsp;rating</p>
+         <div className="flex justify-around my-6">
+           {[0, 1, 2].map((_: number) =>
+             <div key={_} className="text-xs w-[26%]">
+               <span className="text-[#A1B0CC]">
+                 <strong className="text-[#6E7491]">Yifei&nbsp;chen</strong>
+                 &nbsp;| 2&nbsp;hours&nbsp;ago</span>
 
-                <div className="flex text-sm text-[#2C53B8] pt-4">
-                  <BsStarFill/>
-                  <BsStarFill/>
-                  <BsStarFill/>
-                  <BsStarFill/>
-                  <BsStar/>
-                </div>
+               <div className="flex text-sm text-[#2C53B8] pt-4">
+                 <BsStarFill />
+                 <BsStarFill />
+                 <BsStarFill />
+                 <BsStarFill />
+                 <BsStar />
+               </div>
 
-                <div className="text-sm leading-relaxed py-4">
-                I used Mike to book my honeymoon, 
-                and I have to say, 
-                they went above and beyond my 
-                expectations. They found us a 
-                great deal on flights and accommodations, 
-                and even arranged for some special 
-                surprises along the way. 
-                We felt so pampered and taken care of. Highly recommend!
-                </div>
-            </div>
-            )}
-        </div>
+               <div className="text-sm leading-relaxed py-4">
+                 I used Mike to book my honeymoon,
+                 and I have to say,
+                 they went above and beyond my
+                 expectations. They found us a
+                 great deal on flights and accommodations,
+                 and even arranged for some special
+                 surprises along the way.
+                 We felt so pampered and taken care of. Highly recommend!
+               </div>
+             </div>
+           )}
+         </div>
+       </div>
+     </div>
+
     );
 }
