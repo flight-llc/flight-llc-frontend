@@ -26,7 +26,7 @@ type props = {
 const LandingComponent: FC<props> = ({ }) => {
     return (
         <>
-            <div className="h-screen relative block">
+            <div className="h-[120vh] relative block">
                 <Image
                     src={home_img_1}
                     alt="flight seat"
@@ -39,7 +39,7 @@ const LandingComponent: FC<props> = ({ }) => {
 
                         {/* landing page header title */}
                         <div className="mt-28 text-white flex justify-center items-center">
-                            <div className="w-[70%] text-4xl leading-relaxed text-center headerText">
+                            <div className="text-4xl leading-relaxed text-center headerText">
                                 <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">Elevate Your Travel Experience</h1>
                                 <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">and Save up to 40% on Business Class Flights!</h1>
                             </div>
@@ -81,7 +81,7 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
                                                     placeholder="Flight from?" />
                                             </div>
                                         </div>
@@ -94,25 +94,25 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
                                                     placeholder="Where To?" />
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col gap-2 text-xs">
-                                            <div className="font-semibold flex gap-2 items-center">
+                                        <div className="flex flex-col gap-2 text-xs ">
+                                            <div className="font-semibold flex flex-row gap-2 items-center">
                                                 <RxCalendar className="text-sm" />
                                                 <p>Depart</p>
                                             </div>
                                             <div className="">
                                                 <input
                                                     type={"date"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
                                                 />
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col gap-2 text-xs">
+                                        {/* <div className="flex flex-col gap-2 text-xs">
                                             <div className="font-semibold flex gap-2 items-center">
                                                 <RxCalendar className="text-sm" />
                                                 <p>Return</p>
@@ -120,26 +120,28 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"date"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
                                                 />
                                             </div>
-                                        </div>
+                                        </div> */}
 
-                                        <div className="flex flex-col gap-2 text-xs">
+                                        <div className="flex flex-col gap-2 text-xs px-4">
                                             <div className="font-semibold flex gap-1 items-center">
                                                 <MdOutlineAirlineSeatReclineExtra className="text-lg" />
-                                                <p>cabin class travelers</p>
+                                                <p>cabin&nbsp;class&nbsp;travelers</p>
                                             </div>
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-1"
+                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] px-1 py-2"
                                                     placeholder="1 adult Economy" />
                                             </div>
                                         </div>
-                                        <button type="submit" className="text-sm text-white text-center bg-[#113B75] rounded-md p-3">
-                                            Search&nbsp;Flight
-                                        </button>
+                                        <div className="mt-3">
+                                            <button type="submit" className="text-sm text-white text-center bg-[#113B75] rounded-md py-3 px-6">
+                                                Search&nbsp;Flight
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
 

@@ -49,7 +49,7 @@ export const NavBar:FC<props> = ({textColor}) => {
         
     }
     return(
-        <div className={`w-full flex justify-between items-center ${textColor} p-4`}>
+        <div className={`w-full flex justify-between items-center ${textColor} py-8`}>
             <div className="flightPortalLogo text-4xl">
                 <span>Flightportal</span>
             </div>

@@ -16,13 +16,14 @@ export const UserExperienceRatings: FC<props> = ({ comments }) => {
 
     <div id="bg-cloud" className="w-full p-4 flex justify-center">
       <div className="w-10/12 h-auto py-16">
-        <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">What flight portal users are saying - 4.9&nbsp;rating</p>
+        <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">
+          <span className="text-[#6E7491]">What flight portal users are saying</span>&nbsp;- 4.9&nbsp;rating</p>
         <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
           {[0, 1, 2, 3].map((_: number) =>
             <SwiperSlide key={_}>
               <div className="flex justify-around m-6">
                 {[0, 1, 2].map((i: number) =>
-                  <div key={i} className="text-xs w-[26%]">
+                  <div key={i} className="text-xs w-[26%] text-start">
                     <span className="text-[#A1B0CC]">
                       <strong className="text-[#6E7491]">Yifei&nbsp;chen</strong>
                       &nbsp;| 2&nbsp;hours&nbsp;ago</span>
@@ -35,7 +36,7 @@ export const UserExperienceRatings: FC<props> = ({ comments }) => {
                       <BsStar />
                     </div>
 
-                    <div className="text-sm leading-relaxed text-start py-4">
+                    <div className="text-sm leading-relaxedS py-4">
                       I used Mike to book my honeymoon,
                       and I have to say,
                       they went above and beyond my

@@ -1,4 +1,7 @@
 import { FC } from 'react';
+import {AiFillFacebook, AiFillLinkedin} from 'react-icons/ai';
+import { BsInstagram } from 'react-icons/bs';
+
 
 export const ContactUs: FC = () => {
     return (
@@ -55,7 +58,11 @@ export const ContactUs: FC = () => {
                         <div className="w-full">
                             <div className="w-px h-12 bg-[#6E7491] mx-auto mb-8" />
                             <p className="text-center text-xs">24/7 CUSTOMER SERVICE&emsp;<strong>+1 310 749 56 56</strong></p>
-
+                            <div className='w-full flex justify-center gap-8 mt-12'>
+                                <AiFillFacebook className='text-[#8091C1] text-3xl'/>
+                                <BsInstagram className='text-3xl text-[#8C3AAA]'/>
+                                <AiFillLinkedin className='text-[#0A66C2] text-3xl'/>
+                            </div>
                             <div className="text-xs my-16 text-center">
                                 <p>
                                     *Price shown is a Round Trip fare in business class per person and based on weekday travel (Monday-Thursday).

@@ -45,14 +45,14 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                 <SwiperSlide key={_}>
                     <div className="flex justify-around m-6">
                         {SpecialOffer && SpecialOffer.map((data: any, i: number) =>
-                            <div key={i} className="w-[26%] rounded-xl overflow-hidden bg-[#F1F1F2]">
+                            <div key={i} className="w-[26%] text-start rounded-xl overflow-hidden bg-[#F1F1F2]">
                                 <Image
                                     src={data.image}
                                     alt={data.name}
                                     width={500}
                                     height={500}
                                 />
-                                <div className="px-4 py-3">
+                                <div className="px-4 py-2">
                                     <div className="text-lg text-[#767E86]">{data.name}</div>
                                     <div className="flex text-xs text-[#FFC107] py-2 gap-2">
                                         <BsStarFill />
@@ -61,14 +61,14 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                                         <BsStarFill />
                                         <BsStarFill />
                                     </div>
-                                    <p className="text-black text-xs">
+                                    <p className="text-black text-xs pt-2">
                                         {data.comment}
                                     </p>
                                 </div>
-                                <div className="px-4 py-2 flex justify-between items-center mb-4">
+                                <div className="px-4 py-2 flex justify-between items-center mb-2">
                                     <section className="flex items-center">
                                         <span className="text-xs text-[#767E86]">From&nbsp;</span>
-                                        <span className="text-[#0C68BE] text-2xl">${data.price}</span>
+                                        <span className="text-[#0C68BE] text-2xl">${data.price}*</span>
                                     </section>
                                     <button className="px-6 py-3 bg-[#113B75] text-xs text-white rounded-lg">
                                         <span>Book</span>
