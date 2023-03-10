@@ -36,6 +36,7 @@ input[type='radio']{
   width: 18px;
   height: 18px;
   accent-color: #113B75;
+  outline : none !important;
 }
 
 .show{

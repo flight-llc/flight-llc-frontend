@@ -48,7 +48,7 @@ const Footer :FC = () => {
 
     return(
         <div className="w-full">
-            <div className="w-[80%] mx-auto p-8 flex justify-between items-center">
+            <div className="bg-white w-[80%] mx-auto p-8 flex justify-between items-center">
                 <section>
                 <div className="">
                     <Image
@@ -56,6 +56,7 @@ const Footer :FC = () => {
                     alt=""
                     width={200}
                     height={200}
+
                     />
                     {/* <span>Flightportal</span> */}
                 </div>

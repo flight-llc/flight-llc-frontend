@@ -75,39 +75,39 @@ const LandingComponent: FC<props> = ({ }) => {
                                     <form className="basis-full flex justify-between items-center gap-4">
                                         <div className="flex flex-col gap-2 text-xs">
                                             <div className="font-semibold flex gap-1 items-center">
-                                                <GiAirplaneDeparture className="text-sm" />
+                                                <GiAirplaneDeparture className="text-base" />
                                                 <p>From</p>
                                             </div>
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
+                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2"
                                                     placeholder="Flight from?" />
                                             </div>
                                         </div>
 
                                         <div className="flex flex-col gap-2 text-xs">
                                             <div className="font-semibold flex gap-1 items-center">
-                                                <GiAirplaneArrival className="text-sm" />
+                                                <GiAirplaneArrival className="text-base" />
                                                 <p>To</p>
                                             </div>
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
+                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2"
                                                     placeholder="Where To?" />
                                             </div>
                                         </div>
 
                                         <div className="flex flex-col gap-2 text-xs ">
                                             <div className="font-semibold flex flex-row gap-2 items-center">
-                                                <RxCalendar className="text-sm" />
+                                                <RxCalendar className="text-base" />
                                                 <p>Depart</p>
                                             </div>
                                             <div className="">
                                                 <input
                                                     type={"date"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
+                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2"
                                                 />
                                             </div>
                                         </div>
@@ -133,7 +133,7 @@ const LandingComponent: FC<props> = ({ }) => {
                                             <div className="">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] px-1 py-2"
+                                                    className="outline-none focus:border-b focus:border-[#113B75] px-1 py-2"
                                                     placeholder="1 adult Economy" />
                                             </div>
                                         </div>
