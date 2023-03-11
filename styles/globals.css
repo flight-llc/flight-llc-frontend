@@ -9,14 +9,14 @@
 }
 
 #bg-cloud{
-  background-image: url('../public/cloud.svg');
+  background-image: url('/cloud.svg');
   background-repeat: no-repeat;
   background-position: center;
   object-fit: contain;
 }
 
 #bg-expert{
-  background-image: url('../public/Background.svg');
+  background-image: url('/Background.svg');
   background-repeat: no-repeat;
   background-position: center;
   object-fit: contain;
@@ -72,7 +72,7 @@ input[type='radio']{
   color: radial-gradient(#8C3AAA , #EA624C);
 } */
 .swiper-button-prev{
-  background-image: url('../public/arrow.svg');
+  background-image: url('/arrow.svg');
   background-repeat: no-repeat;
   background-size: 70% auto;
   background-position: center;
@@ -84,7 +84,7 @@ input[type='radio']{
 }
 
 .swiper-button-next{
-  background-image: url('../public/arrow.svg');
+  background-image: url('/arrow.svg');
   background-repeat: no-repeat;
   background-size: 70% auto;
   background-position: center;
