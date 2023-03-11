@@ -42,13 +42,14 @@ const footerInfo = {
         }
     ]
 }
+//#F6F6F6
 const Footer :FC = () => {
 
     const {about, support } = footerInfo;
 
     return(
-        <div className="w-full">
-            <div className="bg-white w-[80%] mx-auto p-8 flex justify-between items-center">
+        <div className="w-full bg-white">
+            <div className="w-[80%] mx-auto p-8 flex justify-between items-center">
                 <section>
                 <div className="">
                     <Image

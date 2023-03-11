@@ -34,7 +34,7 @@ export const ExpertTips = () => {
                     </div>
                 </div>
                 <Link href="/all">
-                    <div className="text-[#A1B0CC] text-base flex w-full gap-1 justify-end">
+                    <div className="text-[#A1B0CC] text-base flex w-full mt-4 gap-1 justify-end">
                         <span>All</span>
                         <Image
                             src={All_arrow}
@@ -44,7 +44,7 @@ export const ExpertTips = () => {
                         />
                     </div>
                 </Link>
-                <div className="w-full flex justify-between my-8 items-center">
+                <div className="w-full flex justify-between mt-4 mb-8 items-center">
                     <div className="basis-2/5 text-[#6E7491] p-4 text-sm text-center">
                         Managing short layovers can be challenging,
                         but with proper planning and organization
