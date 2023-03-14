@@ -15,13 +15,13 @@ export const UserExperienceRatings: FC<props> = ({ comments }) => {
   return (
 
     <div id="bg-cloud" className="w-full p-4 flex justify-center">
-      <div className="w-10/12 h-auto py-16">
+      <div className="w-4/5 h-auto py-16">
         <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">
           <span className="text-[#6E7491]">What flight portal users are saying</span>&nbsp;- 4.9&nbsp;rating</p>
         <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
           {[0, 1, 2, 3].map((_: number) =>
             <SwiperSlide key={_}>
-              <div className="flex justify-around m-6">
+              <div className="flex justify-around m-12">
                 {[0, 1, 2].map((i: number) =>
                   <div key={i} className="text-xs w-[26%] text-start">
                     <span className="text-[#A1B0CC]">

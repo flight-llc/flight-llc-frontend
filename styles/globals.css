@@ -12,7 +12,7 @@
   background-image: url('/cloud.svg');
   background-repeat: no-repeat;
   background-position: center;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 #bg-expert{
@@ -25,7 +25,7 @@
 h1{
   font-family: 'Playfair Display', serif;
   background: linear-gradient(to right, #EDEFF1,
-  #0379E8);
+  #3070CC);
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
@@ -42,7 +42,9 @@ input[type='radio']{
 .show{
   display : none;
 }
-
+.nunito{
+  font-family: 'Nunito Sans', sans-serif;
+}
 :root{
   background-color: #fff;
   color: #000;
@@ -74,9 +76,10 @@ input[type='radio']{
 .swiper-button-prev{
   background-image: url('/arrow.svg');
   background-repeat: no-repeat;
-  background-size: 70% auto;
+  background-size: 60% auto;
   background-position: center;
   rotate: 180deg;
+  
 }
 
 .swiper-button-prev::after{
@@ -86,7 +89,7 @@ input[type='radio']{
 .swiper-button-next{
   background-image: url('/arrow.svg');
   background-repeat: no-repeat;
-  background-size: 70% auto;
+  background-size: 60% auto;
   background-position: center;
 }
 
@@ -96,8 +99,8 @@ input[type='radio']{
 
 /* .disabled_swiper_button{
   display: none;
-}
-
+} */
+/*
 .swiper-button-disabled{
   display:none;   
 } */

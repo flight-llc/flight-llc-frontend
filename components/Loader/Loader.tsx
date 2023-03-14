@@ -32,19 +32,20 @@ export const Loader :FC = () => {
                                 <span className="text-sm dark:text-white">83%</span>
                                 <span className="text-sm dark:text-white">PAR</span>
                             </div>
-                            <div className="w-full flex justify-between items-center">
+                            <div className="w-full flex justify-between">
                                 <Image 
                                 src={Circle} 
                                 alt="" 
                                 className='text-white' 
                                 width={30} height={30}
                                 />
-                                <div className='w-full flex flex-row items-center gap-1'>
+                                <div className='w-full flex flex-row items-center gap-x-1 pb-3'>
                                     <div className="bg-white w-[83%] h-px"></div>
-                                    <span><IoIosAirplane className='text-white'/></span>
+                                    <span><IoIosAirplane className='text-white' size={30}/></span>
                                 </div>
                                 <Image src={Circle} alt="" className='text-white' width={30} height={30}/>
                             </div>
+                            <p className='text-[#FFFFFF] text-medium py-2 text-center nunito'>Fly solo or with a crew, we&#39;ll get you there, that much is true</p>
                         </div>
                     </div>
                 </div>

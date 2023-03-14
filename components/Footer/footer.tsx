@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FC } from "react";
-import footer_logo from '@/public/footer_logo.jpeg';
+import footer_logo from '@/public/footer_logo.png';
 import Image from "next/image";
 
 

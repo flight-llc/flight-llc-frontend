@@ -1,21 +1,27 @@
 import { FC } from 'react';
+import facebook from '@/public/facebook.jpeg';
+import Image from 'next/image';
 import {AiFillFacebook, AiFillLinkedin} from 'react-icons/ai';
 import { BsInstagram } from 'react-icons/bs';
 
 
 export const ContactUs: FC = () => {
     return (
+        <>
         <div className="w-full bg-white text-black flex justify-center">
             <div className="w-3/5 my-8">
                 <p className="text-center uppercase text-[#6E7491] text-lg font-semibold my-8">Contact us</p>
 
                 <div className="text-[#6E7491] text-center text-sm py-8">
-                    <p>Our travel specialists, who are fully committed to providing excellent service,
-                        are available to help with all of your travel requirements or inquiries.
-                        Regardless of your starting point or desired destination,
-                        we can make your journey comfortable and convenient at a discount of 15-40%.
-                        Please complete the form below and a representative will reach out to you promptly.
-                    </p>
+                <p className="our-travel-specialis valign-text-middle our-travel nunitosans-normal-storm-gray-18">
+                    Our travel specialists, who are fully committed to providing excellent service, are available to help with
+                    all of<br/> 
+                    your travel requirements or inquiries. Regardless of your starting point or desired destination, we
+                    can make your
+                    <br/>
+                    journey comfortable and convenient at a discount of 15-40%. Please complete the form below and a
+                    <br/> representative will reach out to you promptly.
+                </p>
 
                     <section className="w-full flex justify-center">
                         <form className="w-1/2 my-12">
@@ -59,32 +65,37 @@ export const ContactUs: FC = () => {
                             <div className="w-px h-12 bg-[#6E7491] mx-auto mb-8" />
                             <p className="text-center text-xs">24/7 CUSTOMER SERVICE&emsp;<strong>+1 310 749 56 56</strong></p>
                             <div className='w-full flex justify-center gap-8 mt-12'>
-                                <AiFillFacebook className='text-[#8091C1] text-3xl'/>
+                                <Image src="/facebook.jpeg" alt="" width={30} height={20}/>
                                 <BsInstagram className='text-3xl text-[#8C3AAA]'/>
                                 <AiFillLinkedin className='text-[#0A66C2] text-3xl'/>
-                            </div>
-                            <div className="text-xs my-16 text-center">
-                                <p>
-                                    *Price shown is a Round Trip fare in business class per person and based on weekday travel (Monday-Thursday).
-                                    The price is total includes all taxes and fees and is in USD.
-                                    The fares will vary based on class of travel availability, airline and city of departure.
-                                    Business-Class.com will not identify all travel partners or details
-                                    so not to compete with retail sales of our partners. Savings up to 40%
-                                    off are based on un-restricted fares of major airlines and can vary depending on the fare rules.
-                                    All fares are non-refundable and cannot be exchanged or transferred.
-                                    Please call us directly to check the most current prices and availability.
-                                    Other restrictions may apply. All fares are subject to change until ticketed.
-                                    FREE EXCHANGE - our agreement with all major Carriers is to shelter passengers from the inconvenience of COVID-19
-                                    related delays and cancellations. If the travel is to/from one of these affected areas,
-                                    passenger may be eligible to reschedule with no change fee within
-                                    the limitations of those policies.
-                                    Fare and/or tax difference may apply.
-                                </p>
                             </div>
                         </div>
                     </section>
                 </div>
             </div>
         </div>
+        <div className="text-xs my-16 text-center text-[#6E7491]">
+            <p>
+                *Price shown is a Round Trip fare in business class per person and based on weekday travel (Monday-Thursday).
+                The price is total includes all taxes and fees and is in USD.
+                The fares will vary based on class of travel availability,
+                <br/>airline and city of departure.
+                Business-Class.com will not identify all travel partners or details
+                so not to compete with retail sales of our partners. Savings up to 40%
+                off are based on un-restricted fares of major airlines and can
+                <br/>vary depending on the fare rules.
+                All fares are non-refundable and cannot be exchanged or transferred.
+                Please call us directly to check the most current prices and availability.
+                Other restrictions may apply. All fares are subject to
+                <br/>change until ticketed.
+                FREE EXCHANGE - our agreement with all major Carriers is to shelter passengers from the inconvenience of COVID-19
+                related delays and cancellations. If the travel is to/from one of these affected areas,
+                <br/>
+                passenger may be eligible to reschedule with no change fee within
+                the limitations of those policies.
+                Fare and/or tax difference may apply.<br/>
+            </p>
+        </div>
+        </>
     );
 }
