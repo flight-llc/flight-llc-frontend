@@ -29,12 +29,12 @@ export const HowItWorks: FC = () => {
             </div>
         </div>
         //     <div className="relative w-screen min-h-screen my-8">
-        //     <Image
-        //         src={flightPortal}
-        //         alt="how flight portal works"
-        //         fill
-        //         className="object-cover"
-        //     />
+            // <Image
+            //     src={flightPortal}
+            //     alt="how flight portal works"
+            //     fill
+            //     className="object-cover"
+            // />
         //     <div className="absolute w-full flex justify-center">
         //         <div className="w-[70%] h-fit pl-20 pb-0">
         //             <h1 className="text-4xl bg-gradient-to-r from-[#EDEFF1] to-[#3070CC] py-16">
