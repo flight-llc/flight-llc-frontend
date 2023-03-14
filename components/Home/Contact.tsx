@@ -74,7 +74,7 @@ export const ContactUs: FC = () => {
                 </div>
             </div>
         </div>
-        <div className="text-xs my-16 text-center text-[#6E7491]">
+        <div className="text-xs my-16 p-6 text-center text-[#6E7491]">
             <p>
                 *Price shown is a Round Trip fare in business class per person and based on weekday travel (Monday-Thursday).
                 The price is total includes all taxes and fees and is in USD.

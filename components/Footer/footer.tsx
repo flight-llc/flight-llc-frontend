@@ -57,7 +57,6 @@ const Footer :FC = () => {
                     alt=""
                     width={200}
                     height={200}
-
                     />
                     {/* <span>Flightportal</span> */}
                 </div>

@@ -97,6 +97,136 @@ input[type='radio']{
   display: none;
 }
 
+.overlap-group7 {
+  align-items: flex-start;
+  background-image: url('/flightPortal.svg');
+  background-position: 50% 50%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  gap: 104px;
+  margin-right: 6.0px;
+  margin-top: 222px;
+  min-height: 1088px;
+  padding: 190px 318px;
+  width: 1736px;
+}
+
+.how-it-works-1 {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(48, 112, 204) 100%);
+  background-clip: text;
+  letter-spacing: 0;
+  line-height: normal;
+  min-height: 75px;
+  text-fill-color: transparent;
+  font-family: 'Playfair Display', serif;
+}
+
+.group-1176 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  min-height: 509px;
+  width: 252px;
+  color:  white;
+  font-size: 14px;
+}
+
+.enter-flight-informa {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 2.38px;
+  min-height: 43px;
+  text-align: center;
+  width: 208px;
+}
+
+.flex-row-2 {
+  align-items: center;
+  display: flex;
+  gap: 19px;
+  margin-left: 56.52px;
+  margin-top: 20px;
+  min-width: 59px;
+}
+
+.line-13 {
+  height: 57px;
+  width: 1px;
+}
+
+.icon {
+  height: 39px;
+  margin-top: 5.44px;
+  width: 39px;
+}
+
+.fill-in-your-contact-information {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 2.38px;
+  margin-top: 14px;
+  min-height: 44px;
+  text-align: center;
+  width: 230px;
+}
+
+.flex-row-3 {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  margin-right: 57.55px;
+  margin-top: 14px;
+  min-width: 57px;
+}
+
+.menu-false-1 {
+  height: 44px;
+  margin-bottom: 2.72px;
+  width: 44px;
+}
+
+.line-1-1 {
+  height: 63px;
+  width: 1px;
+}
+
+.our-travel-advisers {
+  margin-right: 6.0px;
+  margin-top: 12px;
+  min-height: 39px;
+  width: 246px;
+}
+
+.flex-row-4 {
+  align-items: flex-start;
+  display: flex;
+  gap: 19px;
+  margin-left: 56.52px;
+  margin-top: 6px;
+  min-width: 59px;
+}
+
+.check-inbox-for-the-best-deals {
+  letter-spacing: 0;
+  line-height: normal;
+  margin-right: 1.47px;
+  margin-top: 23px;
+  min-height: 43px;
+  text-align: center;
+  width: 197px;
+}
+
+.icon-mail {
+  height: 46px;
+  margin-right: 6.25px;
+  margin-top: 20px;
+  width: 46px;
+}
+
 /* .disabled_swiper_button{
   display: none;
 } */

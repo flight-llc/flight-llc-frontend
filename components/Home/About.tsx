@@ -15,9 +15,18 @@ export const AboutUs : FC = () => {
                 <div className="w-3/5 py-20 text-center text-white">
                     <p className="uppercase text-lg font-semibold">About us</p>
 
-                    <div className="flightPortalLogo text-7xl my-12">
+                    {/* <div className="flightPortalLogo text-7xl my-12">
                         <span>Flightportal</span>
-                    </div>
+                    </div> */}
+                   <div className="w-full">
+                        <Image
+                        src={'/flightPortal2.svg'}
+                        alt=""
+                        width={300}
+                        height={300}
+                        className="mx-auto"
+                        />
+                   </div>   
 
                     <div className="text-sm">
                         <p>As a travel consulting agency, we craft unforgettable, 
