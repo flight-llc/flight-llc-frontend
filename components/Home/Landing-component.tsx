@@ -17,13 +17,15 @@ import { AboutUs } from "./About";
 import { ContactUs } from "./Contact";
 import Footer from "../Footer/footer";
 import { HowItWorks } from "./how-it-works";
+import { UserReviewsResponseType } from "@/utils/types";
 
 
 
 type props = {
-
+    data : UserReviewsResponseType
 }
-const LandingComponent: FC<props> = ({ }) => {
+const LandingComponent: FC<props> = ({data}) => {
+
     return (
         <>
             <div className="h-[120vh] relative block">
@@ -156,7 +158,7 @@ const LandingComponent: FC<props> = ({ }) => {
 
             {/* user ratings */}
             <div className="w-full">
-                <UserExperienceRatings />
+                <UserExperienceRatings comments={data}/>
 
                 {/* special offers */}
                 <div className="w-full p-4 flex justify-center">

@@ -3,10 +3,13 @@ import Image from 'next/image'
 //import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import LandingComponent from '@/components/Home/Landing-component'
+import axios from 'axios';
 
 //const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home(props : any) {
+  const {data} = props;
+
   return (
     <>
       <Head>
@@ -120,8 +123,26 @@ export default function Home() {
         </div>
       </main> */}
       <main>
-        <LandingComponent/>
+        <LandingComponent data={data}/>
       </main>
     </>
   )
+}
+
+export async function getServerSideProps(){
+  console.log(`user token = ${process.env.USER_TOKEN}`);
+
+  const response = await axios.get('http://38.242.211.41:8102/reviews/active-reviews?pageNumber=1&pageSize=10&Recent=true',
+  {
+    headers:{
+      'Content-Type' : 'application/json',
+      'Authorization' : `Bearer ${process.env.USER_TOKEN}`
+    }
+  });
+  const {data} = await response.data;
+  return{
+    props : {
+      data
+    }
+  };
 }
