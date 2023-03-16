@@ -15,8 +15,6 @@ import { ContactUs } from "./Contact";
 import Footer from "../Footer/footer";
 import { HowItWorks } from "./how-it-works";
 import { UserReviewsResponseType } from "@/utils/types";
-import { BsArrow90DegDown } from "react-icons/bs";
-
 
 
 
@@ -154,9 +152,9 @@ const LandingComponent: FC<props> = ({data, locations}) => {
                                                     placeholder="1" />
                                                     <select
                                                     className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
-                                                        <option value="" className="text-[#ACB0B9]">Premium Economy</option>
+                                                        <option value="" className="text-[#ACB0B9]">PremiumEconomy</option>
                                                         <option value="" className="text-[#ACB0B9]">Business</option>
-                                                        <option value="" className="text-[#ACB0B9]">First</option>
+                                                        <option value="" className="text-[#ACB0B9]">FirstClass</option>
                                                 </select>
                                             </div>
                                         </div>
