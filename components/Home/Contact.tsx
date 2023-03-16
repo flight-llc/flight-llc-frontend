@@ -1,11 +1,74 @@
-import { FC } from 'react';
+import React, { FC, useState } from 'react';
 import facebook from '@/public/facebook.jpeg';
 import Image from 'next/image';
 import {AiFillFacebook, AiFillLinkedin} from 'react-icons/ai';
 import { BsInstagram } from 'react-icons/bs';
+import { useMutation } from 'react-query';
+import { ContactUsObjectInterface } from '@/utils/types';
+import axios from 'axios';
+import { Loader } from '../Loader/Loader';
+import { validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 
 
 export const ContactUs: FC = () => {
+    const [contactDetails, setContactDetails] = useState<ContactUsObjectInterface>({
+        name : '',
+        message : '',
+        email : '',
+        phone : '',
+        smsQuote :false
+    });
+    //`${process.env.NEXT_PUBLIC_BACKEND_HOST}web/contact-us/create
+    const mutation = useMutation(
+        (contactDetails : any) => {
+            return axios.post('http://38.242.211.41:8102/web/contact-us/create', contactDetails,{
+               headers:{
+                'Content-Type' : 'application/json',
+                'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+               } 
+            });
+        }
+    );
+    const {isSuccess , isLoading, isError, mutate} = mutation;
+    const [error, setError] = useState({email :{msg : '', isError : false}, phone : {msg : '', isError : false}});
+    const {log} = console;
+    const onChangeEmailHandler = ({target} : React.ChangeEvent<HTMLInputElement>) : void => {
+        const {value} = target;
+        setContactDetails({...contactDetails, email : value});
+        // if(validateEmail(value)){
+        //     setContactDetails({...contactDetails, email : value}); 
+        // }
+       //setError({...error, email : {msg :'Invalid Email Format',isError : true}});
+    }
+
+    const onChangeNameHandler = ({target} : React.ChangeEvent<HTMLInputElement>) : void => {
+        const { value } = target;
+        setContactDetails({...contactDetails, name : value});
+    }
+
+    const onChangePhoneNumberHandler = ({target} : React.ChangeEvent<HTMLInputElement>) : void => {
+        const { value } = target;
+        setContactDetails({...contactDetails, phone: value});
+        //if(validatePhoneNumberString(value))setContactDetails({...contactDetails, phone: value})
+        //setError({...error, phone : {msg :'Numbers Required',isError : true}})
+    }
+
+    const onChangeMessageHandler = ({target}: React.ChangeEvent<HTMLTextAreaElement>) : void => {
+        const {value} = target;
+        setContactDetails({...contactDetails, message : value});
+    }
+
+    const onChangeSmsCheckBoxHandler = ({target} : React.ChangeEvent<HTMLInputElement>) : void =>{
+        const { checked } = target;
+        setContactDetails({...contactDetails, smsQuote : checked});
+    }
+
+    const onSubmitFormHandler = async (event : React.SyntheticEvent<HTMLFormElement>) : Promise<void> => {
+        event.preventDefault();
+        const {name, message, email, phone, smsQuote} = contactDetails
+        mutate({name,message,email,phone,smsQuote});
+        if(isSuccess)setContactDetails({...contactDetails, name : '', message:'', email : '', phone:'', smsQuote : false});
+    }
     return (
         <>
         <div className="w-full bg-white text-black flex justify-center">
@@ -24,28 +87,47 @@ export const ContactUs: FC = () => {
                 </p>
 
                     <section className="w-full flex justify-center">
-                        <form className="w-1/2 my-12">
+                        <form 
+                        id="contact-form" 
+                        className="w-1/2 my-12" 
+                        onSubmit={onSubmitFormHandler}>
                             <input type="email"
                                 className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4"
-                                placeholder="Email" />
+                                // className={!error.email.isError 
+                                // ? "w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4"
+                                // :"w-full outline-none border text-sm border-red-500 p-2.5 mb-0"}
+                                placeholder="Email" 
+                                required
+                                value={contactDetails.email}
+                                onChange={onChangeEmailHandler}/>
+                                {/* <span className={!error.email.isError ? 'invisible' : 'visible text-[11px] text-red-500'}>{error.email.msg}</span> */}
                             <br />
                             <input type="text"
                                 placeholder="Your name"
-                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4" />
+                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4" 
+                                required
+                                value={contactDetails.name}
+                                onChange={onChangeNameHandler}/>
                             <br />
                             <input
                                 type="text"
                                 placeholder="Phone number"
-                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4" />
+                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4" 
+                                required
+                                value={contactDetails.phone}
+                                onChange={onChangePhoneNumberHandler}/>
                             <br />
                             <textarea rows={4}
                                 placeholder="Message"
-                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4" />
+                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4" 
+                                required
+                                value={contactDetails.message}
+                                onChange={onChangeMessageHandler}/>
                             <br />
                             <div className="w-full flex justify-start gap-2">
                                 <input
                                     type="checkbox"
-                                    //value={""}
+                                    onChange={onChangeSmsCheckBoxHandler}
                                     id="sms" />
                                 <label htmlFor="sms" className="text-sm text-[#A1B0CC]">
                                     Send price quotes by SMS
@@ -54,8 +136,7 @@ export const ContactUs: FC = () => {
                             <br />
                             <input
                                 type="Submit"
-                                value="Contact us"
-                                readOnly
+                                defaultValue="Contact us"
                                 className="w-full outline-none capitalize bg-[#0C68BE] cursor-pointer text-white p-2.5 mb-4" />
                         </form>
                     </section>
@@ -96,6 +177,7 @@ export const ContactUs: FC = () => {
                 Fare and/or tax difference may apply.<br/>
             </p>
         </div>
+        {/* {isLoading && <Loader/>} */}
         </>
     );
 }

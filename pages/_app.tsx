@@ -1,6 +1,28 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      //refetchOnWindowFocus : false,
+      retry: 2,
+      retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000)
+    }
+  }
+});
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+    </QueryClientProvider>
+  );
 }

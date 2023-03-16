@@ -9,22 +9,22 @@ import { RxCalendar } from 'react-icons/rx';
 import { ExternalAirlines } from "./airlines";
 import { UserExperienceRatings } from "./user-ratings-component";
 import { SpecialOffers } from "./special-offers";
-import flightPortal from '@/public/flightPortal.svg';
-import group from '@/public/group.svg';
-import Line from '@/public/Line.svg';
 import { ExpertTips } from "./Expert-tips";
 import { AboutUs } from "./About";
 import { ContactUs } from "./Contact";
 import Footer from "../Footer/footer";
 import { HowItWorks } from "./how-it-works";
 import { UserReviewsResponseType } from "@/utils/types";
+import { BsArrow90DegDown } from "react-icons/bs";
+
 
 
 
 type props = {
-    data : UserReviewsResponseType
+    data : UserReviewsResponseType,
+    locations ?: any
 }
-const LandingComponent: FC<props> = ({data}) => {
+const LandingComponent: FC<props> = ({data, locations}) => {
 
     return (
         <>
@@ -74,18 +74,25 @@ const LandingComponent: FC<props> = ({data}) => {
                                 </div>
                                 {/* travel form */}
                                 <div className="flex pt-2">
-                                    <form className="basis-full flex justify-between items-center gap-4">
+                                    <form className="basis-full flex justify-between items-center gap-8">
                                         <div className="flex flex-col gap-2 text-xs">
                                             <div className="font-semibold flex gap-1 items-center">
                                                 <GiAirplaneDeparture className="text-base" />
                                                 <p>From</p>
                                             </div>
                                             <div className="">
-                                                <input
-                                                    type={"text"}
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2"
-                                                    placeholder="Flight from?" />
-                                            </div>
+                                                <select
+                                                className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
+                                                    <option value="" className="text-[#ACB0B9]">Flight from?</option>
+                                                    {locations && locations.map((data : any, _ :number) => 
+                                                        <option key={_} value={data.city} className="text-[#ACB0B9]">{data.city}</option>
+                                                    )}
+                                                </select>
+                                            {/* <input
+                                                type={"text"}
+                                                className="outline-none focus:border-b focus:border-[#113B75] py-2"
+                                                placeholder="Flight from?" />*/}
+                                            </div> 
                                         </div>
 
                                         <div className="flex flex-col gap-2 text-xs">
@@ -94,10 +101,18 @@ const LandingComponent: FC<props> = ({data}) => {
                                                 <p>To</p>
                                             </div>
                                             <div className="">
-                                                <input
+                                           
+                                                {/* <input
                                                     type={"text"}
                                                     className="outline-none focus:border-b focus:border-[#113B75] py-2"
-                                                    placeholder="Where To?" />
+                                                    placeholder="Where To?" /> */}
+                                                    <select
+                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
+                                                        <option value="" className="text-[#ACB0B9]">Where To?</option>
+                                                        {locations && locations.map((data : any, _ :number) => 
+                                                            <option key={_} value={data.city} className="text-[#ACB0B9]">{data.city}</option>
+                                                        )}
+                                                    </select>
                                             </div>
                                         </div>
 
@@ -132,11 +147,17 @@ const LandingComponent: FC<props> = ({data}) => {
                                                 <MdOutlineAirlineSeatReclineExtra className="text-lg" />
                                                 <p>cabin&nbsp;class&nbsp;travelers</p>
                                             </div>
-                                            <div className="">
+                                            <div className="flex flex-row items-center gap-1">
                                                 <input
                                                     type={"text"}
-                                                    className="outline-none focus:border-b focus:border-[#113B75] px-1 py-2"
-                                                    placeholder="1 adult Economy" />
+                                                    className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
+                                                    placeholder="1" />
+                                                    <select
+                                                    className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
+                                                        <option value="" className="text-[#ACB0B9]">Premium Economy</option>
+                                                        <option value="" className="text-[#ACB0B9]">Business</option>
+                                                        <option value="" className="text-[#ACB0B9]">First</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div className="mt-3">

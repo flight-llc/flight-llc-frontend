@@ -1,6 +1,6 @@
 import { ReviewRowType, UserReviewsResponseType } from '@/utils/types';
 import { FC } from 'react';
-import { BsStarFill, BsStar } from 'react-icons/bs';
+import { BsStarFill, BsStar, BsStarHalf } from 'react-icons/bs';
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -10,8 +10,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 type props = {
   comments?: UserReviewsResponseType
 }
+
 export const UserExperienceRatings: FC<props> = ({ comments }) => {
-  console.log({ comments });
+
   return (
 
     <div id="bg-cloud" className="w-full p-4 flex justify-center">
@@ -35,11 +36,11 @@ export const UserExperienceRatings: FC<props> = ({ comments }) => {
                     &nbsp;| {new Date(data.created_at).getHours()}&nbsp;ago</span>
 
                   <div className="flex text-sm text-[#2C53B8] pt-4">
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStar />
+                    {Array.from((Array(Math.trunc(Number.parseFloat(data.rating)))),(_:number, i:number) =>
+                      <BsStarFill key={i}/>
+                    )}
+                    {Number.parseFloat(data.rating)-Math.floor(Number.parseFloat(data.rating)) >= 0.5 ? <BsStarHalf />  : <BsStar/>}
+                    {Math.trunc(Number.parseFloat(data.rating)) < 4 && <BsStar/>}
                   </div>
 
                   <div className="text-sm leading-relaxedS py-4">

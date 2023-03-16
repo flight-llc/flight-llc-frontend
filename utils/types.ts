@@ -1,10 +1,3 @@
-// export interface UserExperienceRatingsInterface{
-//     name : string;
-//     time : number;
-//     rating : number;
-//     comment : string
-// }
-
 export interface SpecialOffersInterface{
     image : string;
     name : string;
@@ -26,4 +19,19 @@ export interface UserReviewsResponseType{
     count : number;
     rows : ReviewRowType[];
     totalPages : number;
+}
+
+export interface ContactUsObjectInterface{
+    name :string;
+    message : string;
+    email : string;
+    phone : string;
+    smsQuote : boolean;
+}
+export interface HttpRequestParametersInterface{
+    url : string;
+    data : any;
+    method : string;
+    baseUrl : string; 
+    contentType ?: string 
 }
