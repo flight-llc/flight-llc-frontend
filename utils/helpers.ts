@@ -67,6 +67,7 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
     if (type === "error") toast.error(message);
     if (type === "success") toast.success(message);
     return;
+  }
   export function validateEmail(email: string): boolean {
     const re =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gi;
