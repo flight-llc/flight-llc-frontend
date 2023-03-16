@@ -1,5 +1,7 @@
 
-export async function httpRequest({ url, data, method, baseUrl, contentType }) {
+import { toast } from "react-toastify";
+
+export async function httpRequest({ url, data=undefined, method, baseUrl=undefined, contentType=undefined }: {url:string, data?: any, method: string, baseUrl?: string, contentType?: string}) {
   if (!contentType) contentType ="json";
   if (!method) method ="GET";
   function PrepareData(Data: { [x: string]: string | Blob; }, type = "json") {
@@ -15,11 +17,11 @@ export async function httpRequest({ url, data, method, baseUrl, contentType }) {
     }
   }
   
-  const baseHost = process.env.API;
+  const baseHost = process.env.NEXT_PUBLIC_BACKEND_HOST;
     if (!baseUrl) baseUrl = baseHost + "/";
     let host = baseUrl;
     let _contentType = contentType === "json" ? "application/json" : contentType;
-    const requestOptions = {
+    const requestOptions: any = {
       method: method,
       headers: {},
     };
@@ -32,7 +34,7 @@ export async function httpRequest({ url, data, method, baseUrl, contentType }) {
       requestOptions.headers = { ...requestOptions.headers, ...data._headers };
       delete data._headers;
     } else {
-      requestOptions.headers = { ...requestOptions.headers, ...generateHeader() };
+      requestOptions.headers = { ...requestOptions.headers, ...{Authorization: `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}` } };
     }
     if (data && contentType === "json") {
       requestOptions["body"] = PrepareData(data, "json");
@@ -44,7 +46,7 @@ export async function httpRequest({ url, data, method, baseUrl, contentType }) {
       delete requestOptions["body"];
     }
   
-    console.log('`${host}${url}`, requestOptions', `${host}${url}`, requestOptions);
+    // console.log('`${host}${url}`, requestOptions', `${host}${url}`, requestOptions);
     return await fetch(`${host}${url}`, requestOptions)
       .then(async (res) => {
         return await res.json();
@@ -60,4 +62,10 @@ export async function httpRequest({ url, data, method, baseUrl, contentType }) {
           errorObject: err.toString(),
         };
       });
+  }
+
+  export function showToast({ type, message }: {type: string, message: string}) {
+    if (type === "error") toast.error(message);
+    if (type === "success") toast.success(message);
+    return;
   }
