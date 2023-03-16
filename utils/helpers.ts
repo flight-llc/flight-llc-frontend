@@ -1,5 +1,5 @@
 import { HttpRequestParametersInterface } from "./types";
-
+import { toast } from "react-toastify";
 export async function httpRequest({ url, data, method, baseUrl, contentType } : HttpRequestParametersInterface) {
   if (!contentType) contentType ="json";
   if (!method) method ="GET";
@@ -16,7 +16,7 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
     }
   }
   
-  const baseHost = process.env.API;
+  const baseHost = process.env.NEXT_PUBLIC_BACKEND_HOST;
     if (!baseUrl) baseUrl = baseHost + "/";
     let host = baseUrl;
     let _contentType = contentType === "json" ? "application/json" : contentType;
@@ -33,7 +33,7 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
       requestOptions.headers = { ...requestOptions.headers, ...data._headers };
       delete data._headers;
     } else {
-      requestOptions.headers = { ...requestOptions.headers};
+      requestOptions.headers = { ...requestOptions.headers, ...{Authorization: `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}` } };
     }
     if (data && contentType === "json") {
       requestOptions["body"] = PrepareData(data, "json");
@@ -45,7 +45,7 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
       delete requestOptions["body"];
     }
   
-    console.log('`${host}${url}`, requestOptions', `${host}${url}`, requestOptions);
+    // console.log('`${host}${url}`, requestOptions', `${host}${url}`, requestOptions);
     return await fetch(`${host}${url}`, requestOptions)
       .then(async (res) => {
         return await res.json();
@@ -63,6 +63,10 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
       });
   }
 
+  export function showToast({ type, message }: {type: string, message: string}) {
+    if (type === "error") toast.error(message);
+    if (type === "success") toast.success(message);
+    return;
   export function validateEmail(email: string): boolean {
     const re =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gi;
