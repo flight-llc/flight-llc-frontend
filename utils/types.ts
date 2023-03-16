@@ -30,8 +30,8 @@ export interface ContactUsObjectInterface{
 }
 export interface HttpRequestParametersInterface{
     url : string;
-    data : any;
+    data? : any;
     method : string;
-    baseUrl : string; 
+    baseUrl? : string; 
     contentType ?: string 
 }
