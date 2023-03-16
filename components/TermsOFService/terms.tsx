@@ -3,10 +3,6 @@ import { FC, useEffect, useState } from 'react';
 import "swiper/css";
 import "swiper/css/navigation";
 
-
-// type props = {
-//   comments?: [UserExperienceRatingsInterface]
-// }
 export const Terms: FC = () => {
   const [webpage, setWebpage] = useState('');
   

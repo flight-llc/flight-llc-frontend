@@ -49,7 +49,7 @@ const Footer :FC = () => {
 
     return(
         <div className="w-full bg-white">
-            <div className="w-[80%] mx-auto p-8 flex justify-between items-center">
+            <div className="w-10/12 mx-auto py-8 flex justify-between items-center">
                 <section>
                 <div className="">
                     <Image

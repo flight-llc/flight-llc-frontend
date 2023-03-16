@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
-//import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 import LandingComponent from '@/components/Home/Landing-component'
+import axios from 'axios';
+
 
 //const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home(props : any) {
+  const {data, flightLocationsData} = props;
+  console.log({flightLocationsData});
   return (
     <>
       <Head>
@@ -120,8 +122,36 @@ export default function Home() {
         </div>
       </main> */}
       <main>
-        <LandingComponent/>
+        <LandingComponent data={data} locations={flightLocationsData}/>
       </main>
     </>
   )
+}
+//  const flightLocations = await axios.get('flights/add-location')
+export async function getServerSideProps(){
+  console.log(`user token = ${process.env.NEXT_PUBLIC_USER_TOKEN}`);
+
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}reviews/active-reviews?pageNumber=1&pageSize=10&Recent=true`,
+  {
+    headers:{
+      'Content-Type' : 'application/json',
+      'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+    }
+  });
+  const flightLocations = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/active-locations`,
+  {
+    headers : {
+      'Content-Type' : 'application/json',
+      'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+    }
+  })
+
+  const {data} = await response.data;
+  const {data : flightLocationsData} = await flightLocations.data;
+  return{
+    props : {
+      data,
+      flightLocationsData
+    }
+  };
 }

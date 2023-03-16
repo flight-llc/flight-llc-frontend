@@ -1,7 +1,6 @@
-
+import { HttpRequestParametersInterface } from "./types";
 import { toast } from "react-toastify";
-
-export async function httpRequest({ url, data=undefined, method, baseUrl=undefined, contentType=undefined }: {url:string, data?: any, method: string, baseUrl?: string, contentType?: string}) {
+export async function httpRequest({ url, data, method, baseUrl, contentType } : HttpRequestParametersInterface) {
   if (!contentType) contentType ="json";
   if (!method) method ="GET";
   function PrepareData(Data: { [x: string]: string | Blob; }, type = "json") {
@@ -21,7 +20,7 @@ export async function httpRequest({ url, data=undefined, method, baseUrl=undefin
     if (!baseUrl) baseUrl = baseHost + "/";
     let host = baseUrl;
     let _contentType = contentType === "json" ? "application/json" : contentType;
-    const requestOptions: any = {
+    const requestOptions : any = {
       method: method,
       headers: {},
     };
@@ -68,4 +67,14 @@ export async function httpRequest({ url, data=undefined, method, baseUrl=undefin
     if (type === "error") toast.error(message);
     if (type === "success") toast.success(message);
     return;
+  export function validateEmail(email: string): boolean {
+    const re =
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gi;
+    ///^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+  
+  export function validatePhoneNumberString(numberString: string): boolean {
+    const pattern = /\d{4,}/g;
+    return pattern.test(numberString);
   }
