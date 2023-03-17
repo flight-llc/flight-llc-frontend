@@ -1,6 +1,13 @@
 import Result from "@/components/Result/result";
 import axios from "axios";
 import { NextPage } from "next";
+import https from 'https';
+
+
+const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
 const ResultPage : NextPage = (props : any) => {
     const {data, averageRatingData} = props;
     return <Result average={averageRatingData} data={data}/>
@@ -15,7 +22,8 @@ export async function getServerSideProps(){
       headers:{
         'Content-Type' : 'application/json',
         'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-    }
+    },
+    httpsAgent: httpsAgent,
     });
 
     const averageRating = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}reviews/average-ratings`,
@@ -23,7 +31,8 @@ export async function getServerSideProps(){
         headers : {
         'Content-Type' : 'application/json',
         'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-        }
+        },
+        httpsAgent: httpsAgent,
     });
 
     const {data} = await response.data;

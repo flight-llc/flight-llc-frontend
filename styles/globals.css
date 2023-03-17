@@ -83,11 +83,12 @@ input[type='radio']{
   color: radial-gradient(#8C3AAA , #EA624C);
 } */
 .swiper-button-prev{
-  background-image: url('/arrow.svg');
+  background-image: url('/ArrowRight.svg');
   background-repeat: no-repeat;
   background-size: 60% auto;
   background-position: center;
   rotate: 180deg;
+  width: 50px !important;
   
 }
 

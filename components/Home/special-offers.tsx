@@ -13,7 +13,15 @@ import Istanbul from '@/public/Istanbul.jpeg';
 import New_Delhi from '@/public/New_Delhi.jpeg';
 import Bankok from '@/public/Bankok.jpeg';
 import Seoul from '@/public/Seoul.jpeg';
+import Lisbon from '@/public/Lisbon.svg';
+import Athens from '@/public/Athens.svg';
+import Rome from '@/public/Rome.svg';
 import { ReadMore } from "../shared/Read-more";
+import { Lazy, Pagination } from 'swiper';
+
+
+// import 'swiper/css/lazy';
+import 'swiper/css/pagination';
 
 type props = {
     offers?: SpecialOffersInterface[]
@@ -66,7 +74,31 @@ const SpecialOffer: SpecialOffersInterface[] = [
         image: Seoul,
         name: "Seoul South Korea",
         rating: 5,
-        comment: "ubai is a city of superlatives, where luxury and extravagance meet in the middle of the desert. To make your trip to Dubai unforgettable, consider finding business class flight deals and discount business class flights using a business class flight search. By booking cheap business class airfares in advance, you can enjoy the comfort and convenience of premium travel and arrive in Dubai ready to explore all that this city has to offer. From the world's tallest building, the Burj Khalifa, to the man-made Palm Jumeirah island and the iconic Dubai Fountain, there's no shortage of incredible sights to see in Dubai. Indulge in world-class shopping and dining, and experience the city's unique blend of Middle Eastern and Western cultures. Whether you're seeking adventure or relaxation, Dubai is a destination that will leave you in awe.",
+        comment: "Seoul, the capital of South Korea, is a modern metropolis that seamlessly blends traditional culture with modern technology. If you're planning a trip to Seoul, you can make it an affordable and luxurious adventure by finding business class flight deals and discount business class flights using a business class flight search. By booking cheap business class airfares in advance, you can enjoy the comfort and convenience of premium travel without breaking the bank. Once you arrive in Seoul, you'll be captivated by the city's stunning skyline, bustling street markets, and world-class dining scene. Take a tour of the city's many historic sites and experience the unique blend of ancient traditions and modern innovations. Don't miss the opportunity to explore the city's vibrant neighborhoods and indulge in its famous street food. Whether you're traveling for business or pleasure, Seoul is a destination that offers something for everyone.",
+        price: 1670
+    }
+    ,
+    {
+        image: Lisbon,
+        name: "Lisbon, Portugal",
+        rating: 5,
+        comment: "Lisbon is a dream destination for travelers seeking a perfect mix of history, culture, and relaxation. Finding your way to Lisbon is easy thanks to the wide variety of flight options available, including business class flight deals and discount business class flights. Use a business class flight search to compare prices and options, and book your cheap business class airfares in advance to ensure you get the best deals. Once you arrive, take a stroll through the narrow streets of Alfama and soak up the vibrant colors and sounds of this charming district. Sample the delicious Portuguese cuisine, from fresh seafood to traditional pastries like the famous pastel de nata. And for those seeking a little rest and relaxation, Lisbon's stunning beaches, such as Cascais and Estoril, are just a short drive away. Whether you're traveling for business or leisure, you'll find that Lisbon is a city that will capture your heart and leave you with unforgettable memories",
+        price: 1765
+    }
+    ,
+    {
+        image: Athens,
+        name: "Athens, Greece",
+        rating: 5,
+        comment: "Athens is a city steeped in history and culture, a must-see destination for any traveler. Finding your way to Athens is easy thanks to the wide variety of flight options available, including business class flight deals and discount business class flights. Use a business class flight search to compare prices and options, and book your cheap business class airfares in advance to ensure you get the best deals. Once you arrive, explore the ancient wonders of the city, including the iconic Acropolis and Parthenon. Take a stroll through the historic Plaka district and sample the delicious Greek cuisine, from savory moussaka to sweet baklava. And for those seeking a little rest and relaxation, Athens is just a short drive from the stunning beaches of the Athenian Riviera. Whether you're traveling for business or leisure, you'll find that Athens is a city that will captivate you with its rich history and warm hospitality.",
+        price: 1830
+    }
+    ,
+    {
+        image: Rome,
+        name: "Rome, Italy",
+        rating: 5,
+        comment: "Rome is a city like no other, filled with historic landmarks, stunning architecture, and delicious cuisine. Finding your way to Rome is easy thanks to the wide variety of flight options available, including business class flight deals and discount business class flights. Use a business class flight search to compare prices and options, and book your cheap business class airfares in advance to ensure you get the best deals. Once you arrive, explore the city's iconic landmarks like the Colosseum, the Roman Forum, and the Vatican City. Take a stroll through the charming Trastevere district and sample the mouth-watering Italian cuisine, from classic pizza to gelato. And for those seeking a little rest and relaxation, Rome is just a short drive from the stunning beaches of the Tyrrhenian Sea. Whether you're traveling for business or leisure, you'll find that Rome is a city that will leave you enchanted and yearning for more.",
         price: 1570
     }
 ];
@@ -79,24 +111,24 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
             grabCursor={true}
             navigation={true}
             modules={[Navigation]}
-            className="mySwiper">
+            // className="mySwiper"
+            // lazy={true}
+            // pagination={{
+            // clickable: true,
+            // }}
+            // modules={[Lazy, Pagination, Navigation]}
+            >
             {SpecialOffer && SpecialOffer.map((data: any, i: number) =>
-                <SwiperSlide key={i}>
+                <SwiperSlide key={i} >
                     <div className="max-w-sm bg-[#F1F1F2] rounded-lg">
                         {/* <a href="#"> */}
-                            <div className="w-full max-h-[15rem] rounded-t-lg bg-green-100 relative overflow-hidden">
+                            <div className="w-full h-[15rem] rounded-t-lg bg-green-100">
                             {/* <object data={data.image} className="rounded-t-lg"></object> */}
-                            <Image
-                                src={data.image}
-                                alt={data.name}
-                                fill={true}
-                                style={{ objectFit: 'cover' }}
-                            />
-                            {/* <Image 
+                            <Image 
                             src={data.image} 
                             alt=""
-                            fill 
-                            className="rounded-t-lg"/> */}
+                            // fill 
+                            className="rounded-t-lg h-[15rem]"/>
                             </div>
                         {/* </a> className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" */}
                         <div className="px-4 py-2">

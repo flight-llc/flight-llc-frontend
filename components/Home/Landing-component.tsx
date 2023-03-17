@@ -17,6 +17,13 @@ import { HowItWorks } from "./how-it-works";
 import { IAverageRatingResponseBody, UserReviewsResponseType } from "@/utils/types";
 import { useMutation } from "react-query";
 import axios from "axios";
+import https from 'https';
+
+
+const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
 
 
 
@@ -32,7 +39,8 @@ const LandingComponent: FC<props> = ({data, locations, average}) => {
             headers:{
                 'Content-Type' : 'application/type',
                 'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-            }
+            },
+            httpsAgent: httpsAgent,
         })
     })
     const {isLoading, isSuccess, mutate} = mutation;
