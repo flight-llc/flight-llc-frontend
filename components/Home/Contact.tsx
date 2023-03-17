@@ -8,6 +8,12 @@ import { ContactUsObjectInterface } from '@/utils/types';
 import axios from 'axios';
 import { Loader } from '../Loader/Loader';
 import { validateEmail, validatePhoneNumberString } from '@/utils/helpers';
+import https from 'https';
+
+
+const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+  });
 
 
 export const ContactUs: FC = () => {
@@ -25,7 +31,8 @@ export const ContactUs: FC = () => {
                headers:{
                 'Content-Type' : 'application/json',
                 'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-               } 
+               },
+               httpsAgent: httpsAgent,
             });
         }
     );
