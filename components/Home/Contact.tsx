@@ -21,7 +21,7 @@ export const ContactUs: FC = () => {
     //`${process.env.NEXT_PUBLIC_BACKEND_HOST}web/contact-us/create
     const mutation = useMutation(
         (contactDetails : any) => {
-            return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}/web/contact-us/create`, contactDetails,{
+            return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}web/contact-us/create`, contactDetails,{
                headers:{
                 'Content-Type' : 'application/json',
                 'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
