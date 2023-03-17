@@ -1,5 +1,7 @@
+import { StaticImageData } from "next/image";
+
 export interface SpecialOffersInterface{
-    image : string;
+    image : StaticImageData;
     name : string;
     rating : number;
     comment : string;
@@ -34,4 +36,12 @@ export interface HttpRequestParametersInterface{
     method : string;
     baseUrl? : string; 
     contentType ?: string 
+}
+
+export interface IAverageRatingResponseBody{
+    status : boolean;
+    message : string;
+    extra_data : any[];
+    code : number;
+    data : number;
 }

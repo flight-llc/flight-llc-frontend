@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import home_img_1 from '@/public/home_img_1.svg';
 import Image from 'next/image';
 import { NavBar } from "../Nav/Nav-component";
@@ -14,15 +14,91 @@ import { AboutUs } from "./About";
 import { ContactUs } from "./Contact";
 import Footer from "../Footer/footer";
 import { HowItWorks } from "./how-it-works";
-import { UserReviewsResponseType } from "@/utils/types";
+import { IAverageRatingResponseBody, UserReviewsResponseType } from "@/utils/types";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 
 
 type props = {
     data : UserReviewsResponseType,
-    locations ?: any
+    locations ?: any,
+    average : number
 }
-const LandingComponent: FC<props> = ({data, locations}) => {
+const LandingComponent: FC<props> = ({data, locations, average}) => {
+
+    const mutation = useMutation((bookedFlightsPayload : any) => {
+        return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/book-flight`, bookedFlightsPayload, {
+            headers:{
+                'Content-Type' : 'application/type',
+                'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+            }
+        })
+    })
+    const {isLoading, isSuccess, mutate} = mutation;
+    const [flightType, setFlightType] =  useState({
+        roundTrip : false,
+        oneWay : false,
+        multiCity : false 
+    }) 
+
+    const [bookFlight, setBookFlight] = useState({
+        fromIATA: "",
+        toIATA: "",
+        departDate: "2023-03-16T09:24:48.320Z",
+        returnDate: "2023-03-16T09:24:48.320Z",
+        email: "string",
+        fromLocation: "string",
+        fromRegion: "string",
+        toLocation: "string",
+        toRegion: "string",
+        noOfPersons: 0,
+        cabinClass: "string",
+        name : "string",
+        phone: "string",
+        smsPriceQuote: {}
+    });
+
+    const onChangeOneWay = ({target}:React.ChangeEvent<HTMLInputElement>) =>{
+        const {checked} = target;
+        setFlightType({...flightType, oneWay : checked});
+    }
+
+    const onChangeRoundTrip= ({target}:React.ChangeEvent<HTMLInputElement>) =>{
+        const {checked} = target;
+        setFlightType({...flightType, roundTrip : checked});
+    }
+
+    const onChangeMulti = ({target}:React.ChangeEvent<HTMLInputElement>) =>{
+        const {checked} = target;
+        setFlightType({...flightType, multiCity : checked});
+    }
+
+    const onChangeSelectFrom = ({target}:React.ChangeEvent<HTMLSelectElement>) => {
+        const {value} = target;
+        console.log(JSON.parse(value));
+    }
+
+    const onChangeSelectTo = ({target}:React.ChangeEvent<HTMLSelectElement>) => {
+        const {value} = target;
+        console.log(JSON.parse(value));
+    }
+
+    const onChangeDepartureDate = ({target}:React.ChangeEvent<HTMLInputElement>) => {
+        const {value} = target;
+    }
+
+    const onChangeReturnDate = ({target}:React.ChangeEvent<HTMLInputElement>) => {
+        const {value} = target;
+    }
+
+    const onChangeSelectCabin = ({target}:React.ChangeEvent<HTMLSelectElement>) => {
+        const {value} = target;
+    }
+
+    const onChangeNumberOfPersons = ({target}:React.ChangeEvent<HTMLInputElement>) => {
+        const {value} = target;
+    }
 
     return (
         <>
@@ -54,19 +130,22 @@ const LandingComponent: FC<props> = ({data, locations}) => {
                                         defaultChecked 
                                         id="html" 
                                         name="fav_language" 
-                                        defaultValue="one Way" />
+                                        defaultValue="one Way" 
+                                        onChange={onChangeOneWay}/>
                                         <label htmlFor="html">one&nbsp;way</label>
                                         <input 
                                         type="radio" 
                                         id="html" 
                                         name="fav_language" 
-                                        defaultValue="Round Trip" />
+                                        defaultValue="Round Trip" 
+                                        onChange={onChangeRoundTrip}/>
                                         <label htmlFor="html">round&nbsp;trip</label>
                                         <input 
                                         type="radio" 
                                         id="html" 
                                         name="fav_language" 
-                                        defaultValue="Multi city" />
+                                        defaultValue="Multi city" 
+                                        onChange={onChangeMulti}/>
                                         <label htmlFor="html">multi&nbsp;city</label>
                                     </div>
                                 </div>
@@ -80,10 +159,11 @@ const LandingComponent: FC<props> = ({data, locations}) => {
                                             </div>
                                             <div className="">
                                                 <select
+                                                onChange={onChangeSelectFrom}
                                                 className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
                                                     <option value="" className="text-[#ACB0B9]">Flight from?</option>
                                                     {locations && locations.map((data : any, _ :number) => 
-                                                        <option key={_} value={data.city} className="text-[#ACB0B9]">{data.city}</option>
+                                                        <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}</option>
                                                     )}
                                                 </select>
                                             {/* <input
@@ -105,10 +185,11 @@ const LandingComponent: FC<props> = ({data, locations}) => {
                                                     className="outline-none focus:border-b focus:border-[#113B75] py-2"
                                                     placeholder="Where To?" /> */}
                                                     <select
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
+                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
+                                                    onChange={onChangeSelectTo}>
                                                         <option value="" className="text-[#ACB0B9]">Where To?</option>
                                                         {locations && locations.map((data : any, _ :number) => 
-                                                            <option key={_} value={data.city} className="text-[#ACB0B9]">{data.city}</option>
+                                                            <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}</option>
                                                         )}
                                                     </select>
                                             </div>
@@ -122,23 +203,27 @@ const LandingComponent: FC<props> = ({data, locations}) => {
                                             <div className="">
                                                 <input
                                                     type={"date"}
+                                                    onChange={onChangeDepartureDate}
                                                     className="outline-none focus:border-b focus:border-[#113B75] py-2"
                                                 />
                                             </div>
                                         </div>
 
-                                        {/* <div className="flex flex-col gap-2 text-xs">
-                                            <div className="font-semibold flex gap-2 items-center">
-                                                <RxCalendar className="text-sm" />
-                                                <p>Return</p>
+                                        {/* {flightType.roundTrip &&
+                                            <div className="flex flex-col gap-2 text-xs">
+                                                <div className="font-semibold flex gap-2 items-center">
+                                                    <RxCalendar className="text-sm" />
+                                                    <p>Return</p>
+                                                </div>
+                                                <div className="">
+                                                    <input
+                                                        type={"date"}
+                                                        onChange={onChangeReturnDate}
+                                                        className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
+                                                    />
+                                                </div>
                                             </div>
-                                            <div className="">
-                                                <input
-                                                    type={"date"}
-                                                    className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
-                                                />
-                                            </div>
-                                        </div> */}
+                                        } */}
 
                                         <div className="flex flex-col gap-2 text-xs px-4">
                                             <div className="font-semibold flex gap-1 items-center">
@@ -149,8 +234,10 @@ const LandingComponent: FC<props> = ({data, locations}) => {
                                                 <input
                                                     type={"text"}
                                                     className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
-                                                    placeholder="1" />
+                                                    placeholder="1" 
+                                                    onChange={onChangeNumberOfPersons}/>
                                                     <select
+                                                    onChange={onChangeSelectCabin}
                                                     className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
                                                         <option value="" className="text-[#ACB0B9]">PremiumEconomy</option>
                                                         <option value="" className="text-[#ACB0B9]">Business</option>
@@ -177,7 +264,7 @@ const LandingComponent: FC<props> = ({data, locations}) => {
 
             {/* user ratings */}
             <div className="w-full">
-                <UserExperienceRatings comments={data}/>
+                <UserExperienceRatings comments={data} average={average}/>
 
                 {/* special offers */}
                 <div className="w-full p-4 flex justify-center">

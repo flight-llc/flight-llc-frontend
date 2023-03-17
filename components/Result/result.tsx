@@ -9,7 +9,11 @@ import Footer from '../Footer/footer';
 import { HowItWorks } from '../Home/how-it-works';
 import { UserExperienceRatings } from '../Home/user-ratings-component';
 
-const Result :FC = () => {
+type Props={
+    average : number,
+    data : any;
+}
+const Result :FC<Props> = ({average, data}) => {
     return (
         <>
         <div className='w-10/12 py-4 mx-auto'>
@@ -136,7 +140,7 @@ const Result :FC = () => {
 
         <div className='w-full'>
             {/* user ratings */}
-            <UserExperienceRatings/>
+            <UserExperienceRatings comments={data} average={average}/>
 
             {/* How it works */}
             <HowItWorks/>

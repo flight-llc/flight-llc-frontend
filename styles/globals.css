@@ -65,6 +65,15 @@ input[type='radio']{
   justify-content: center;
   align-items: center;
 }
+/* .text{
+  display: inline;
+  width: 100%;
+} */
+  
+.read-or-hide{
+  color: skyblue;
+  cursor: pointer;
+}
 
 /* .radii{
   background: linear-gradient(to right, #8C3AAA,

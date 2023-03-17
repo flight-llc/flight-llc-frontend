@@ -7,8 +7,8 @@ import axios from 'axios';
 //const inter = Inter({ subsets: ['latin'] })
 
 export default function Home(props : any) {
-  const {data, flightLocationsData} = props;
-  console.log({flightLocationsData});
+  const {data, flightLocationsData, averageUserRatingsData} = props;
+  console.log({averageUserRatingsData});
   return (
     <>
       <Head>
@@ -122,7 +122,11 @@ export default function Home(props : any) {
         </div>
       </main> */}
       <main>
-        <LandingComponent data={data} locations={flightLocationsData}/>
+        <LandingComponent 
+        data={data} 
+        locations={flightLocationsData} 
+        average={averageUserRatingsData}
+        />
       </main>
     </>
   )
@@ -139,6 +143,15 @@ export async function getServerSideProps(){
     }
   });
   const flightLocations = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/active-locations`,
+  ///reviews/average-ratings
+  {
+    headers : {
+      'Content-Type' : 'application/json',
+      'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+    }
+  })
+
+  const averageRating = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}reviews/average-ratings`,
   {
     headers : {
       'Content-Type' : 'application/json',
@@ -148,10 +161,12 @@ export async function getServerSideProps(){
 
   const {data} = await response.data;
   const {data : flightLocationsData} = await flightLocations.data;
+  const {data : averageUserRatingsData} = await averageRating.data;
   return{
     props : {
       data,
-      flightLocationsData
+      flightLocationsData,
+      averageUserRatingsData
     }
   };
 }

@@ -1,4 +1,4 @@
-import { ReviewRowType, UserReviewsResponseType } from '@/utils/types';
+import { IAverageRatingResponseBody, ReviewRowType, UserReviewsResponseType } from '@/utils/types';
 import { FC } from 'react';
 import { BsStarFill, BsStar, BsStarHalf } from 'react-icons/bs';
 import { Navigation } from "swiper";
@@ -8,17 +8,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 
 type props = {
-  comments?: UserReviewsResponseType
+  comments?: UserReviewsResponseType,
+  average ?: number
 }
 
-export const UserExperienceRatings: FC<props> = ({ comments }) => {
-
+export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
+  console.log({average});
   return (
 
     <div id="bg-cloud" className="w-full p-4 flex justify-center">
       <div className="w-4/5 h-auto py-16">
         <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">
-          <span className="text-[#6E7491]">What flight portal users are saying</span>&nbsp;- 4.9&nbsp;rating</p>
+          <span className="text-[#6E7491]">What flight portal users are saying</span>&nbsp;- {average}&nbsp;rating</p>
         <Swiper
           slidesPerView={3}
           spaceBetween={10}
@@ -39,8 +40,9 @@ export const UserExperienceRatings: FC<props> = ({ comments }) => {
                     {Array.from((Array(Math.trunc(Number.parseFloat(data.rating)))),(_:number, i:number) =>
                       <BsStarFill key={i}/>
                     )}
-                    {Number.parseFloat(data.rating)-Math.floor(Number.parseFloat(data.rating)) >= 0.5 ? <BsStarHalf />  : <BsStar/>}
-                    {Math.trunc(Number.parseFloat(data.rating)) < 4 && <BsStar/>}
+                    {Number.parseInt(data.rating) < 5 && Number.parseFloat(data.rating)-Math.floor(Number.parseFloat(data.rating)) >= 0.5 && <BsStarHalf/>}
+
+                    {Math.trunc(Number.parseFloat(data.rating)) <= 4 && Number.parseFloat(data.rating)-Math.floor(Number.parseFloat(data.rating)) < 0.5 &&  <BsStar/>}
                   </div>
 
                   <div className="text-sm leading-relaxedS py-4">
