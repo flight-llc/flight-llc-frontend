@@ -2,6 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import LandingComponent from '@/components/Home/Landing-component'
 import axios from 'axios';
+import https from 'https';
+const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+});
 
 
 //const inter = Inter({ subsets: ['latin'] })
@@ -136,14 +140,16 @@ export async function getServerSideProps(){
     headers:{
       'Content-Type' : 'application/json',
       'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-    }
+    },
+    httpsAgent: httpsAgent,
   });
   const flightLocations = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/active-locations`,
   {
     headers : {
       'Content-Type' : 'application/json',
       'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-    }
+    },
+    httpsAgent: httpsAgent,
   })
 
   const {data} = await response.data;
