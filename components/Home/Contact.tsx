@@ -18,7 +18,7 @@ export const ContactUs: FC = () => {
         phone : '',
         smsQuote :false
     });
-    //`${process.env.NEXT_PUBLIC_BACKEND_HOST}web/contact-us/create
+    
     const mutation = useMutation(
         (contactDetails : any) => {
             return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}web/contact-us/create`, contactDetails,{

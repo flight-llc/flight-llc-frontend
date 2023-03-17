@@ -3,6 +3,7 @@ import Image from 'next/image'
 import LandingComponent from '@/components/Home/Landing-component'
 import axios from 'axios';
 import https from 'https';
+
 const httpsAgent = new https.Agent({
     rejectUnauthorized: false,
 });

@@ -84,9 +84,15 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                 <SwiperSlide key={i}>
                     <div className="max-w-sm bg-[#F1F1F2] rounded-lg">
                         {/* <a href="#"> */}
-                            <div className="w-full h-[15rem] rounded-t-lg bg-green-100">
-                            <object data={data.image} className="rounded-t-lg"></object>
-                            {/*<Image 
+                            <div className="w-full max-h-[15rem] rounded-t-lg bg-green-100 relative overflow-hidden">
+                            {/* <object data={data.image} className="rounded-t-lg"></object> */}
+                            <Image
+                                src={data.image}
+                                alt={data.name}
+                                fill={true}
+                                style={{ objectFit: 'cover' }}
+                            />
+                            {/* <Image 
                             src={data.image} 
                             alt=""
                             fill 

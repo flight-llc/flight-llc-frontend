@@ -26,7 +26,7 @@ type props = {
     average : number
 }
 const LandingComponent: FC<props> = ({data, locations, average}) => {
-
+    console.log(locations);
     const mutation = useMutation((bookedFlightsPayload : any) => {
         return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/book-flight`, bookedFlightsPayload, {
             headers:{
@@ -163,7 +163,7 @@ const LandingComponent: FC<props> = ({data, locations, average}) => {
                                                 className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
                                                     <option value="" className="text-[#ACB0B9]">Flight from?</option>
                                                     {locations && locations.map((data : any, _ :number) => 
-                                                        <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}</option>
+                                                        <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
                                                     )}
                                                 </select>
                                             {/* <input
@@ -189,7 +189,7 @@ const LandingComponent: FC<props> = ({data, locations, average}) => {
                                                     onChange={onChangeSelectTo}>
                                                         <option value="" className="text-[#ACB0B9]">Where To?</option>
                                                         {locations && locations.map((data : any, _ :number) => 
-                                                            <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}</option>
+                                                            <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
                                                         )}
                                                     </select>
                                             </div>
