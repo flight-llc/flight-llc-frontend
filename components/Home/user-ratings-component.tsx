@@ -13,7 +13,6 @@ type props = {
 }
 
 export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
-  console.log({average});
   return (
 
     <div id="bg-cloud" className="w-full p-4 flex justify-center">

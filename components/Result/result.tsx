@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import { NavBar } from '../Nav/Nav-component';
 import result from '@/public/result.svg';
 import Image from 'next/image';
@@ -8,12 +8,89 @@ import { ContactUs } from '../Home/Contact';
 import Footer from '../Footer/footer';
 import { HowItWorks } from '../Home/how-it-works';
 import { UserExperienceRatings } from '../Home/user-ratings-component';
+import { useMutation, useQuery } from 'react-query';
+import axios, { AxiosError } from 'axios';
+import { Loader } from '../Loader/Loader';
 
 type Props={
     average : number,
     data : any;
 }
+
 const Result :FC<Props> = ({average, data}) => {
+    const {
+        isLoading : isPatchLoader, 
+        isSuccess : isPatchSuccessful, 
+        isError, 
+        mutate, 
+        data:mutationResponse} = useMutation((payload : any) => {
+        return axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/update-flight-booking-status`, payload,
+        {
+            headers:{
+                'Content-Type' : 'application/json',
+                'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+            }
+        });
+    }); 
+    const [details, setDetails] = useState({
+        name :'',
+        email : '',
+        phone : '',
+        smsPriceQuote :  false
+    }) 
+    const { data : queryResponseData, isLoading, isFetched } = useQuery(
+        {
+            queryKey: ['find-user-by-token'],
+            queryFn: () => {
+                return axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/get-flight-booking/fd52f546-1088-4c00-ac79-d4cf9a72da5a`,{
+                    headers : {
+                        'Content-Type' : 'application/json',
+                        'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+                    }
+                })
+            },
+            refetchOnWindowFocus: false
+        }
+    );
+    if(isLoading){
+        <Loader/>
+    }
+    const onChangeNameHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
+        const {value : name} = target;
+        console.log(name);
+        setDetails({...details, name});
+    } 
+
+    const onChangeEmailHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
+        const {value :email} = target;
+        console.log(email);
+        setDetails({...details, email});
+    } 
+
+    const onChangePhoneNumberHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
+        const {value : phone} = target;
+        console.log(phone);
+        setDetails({...details, phone});
+    } 
+
+    const onChangeSmsPriceQuotesHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
+        const {checked} = target;
+        console.log(checked);
+        setDetails({...details, smsPriceQuote : checked});
+    } 
+
+    const sendPatchRequestForFlightBooked = () => {
+        console.log({details});
+        const {name, email, phone, smsPriceQuote} = details;
+        mutate({
+            name,
+            email,
+            phone,
+            uuid : 'fd52f546-1088-4c00-ac79-d4cf9a72da5a',
+            smsPriceQuote
+        });
+        //console.log({mutationResponse});
+    }
     return (
         <>
         <div className='w-10/12 py-4 mx-auto'>
@@ -28,37 +105,56 @@ const Result :FC<Props> = ({average, data}) => {
                 <div className='basis-3/5 flex gap-4'>
                     <div className='basis-1/2 p-8'>
                         <p className='text-[#909090] text-xs py-2'>From</p>
-                        <p className='text-xl text-[#113B75] pb-2'>Miami&nbsp;(MIA)</p>
+                        <p className='text-xl text-[#113B75] pb-2'>
+                            {queryResponseData?.data?.data?.fromLocationDTO.city}&nbsp;
+                            {`(${queryResponseData?.data?.data?.fromLocationDTO.IATA})`}
+                        </p>
 
                         <div className='w-full flex gap-2'>
                             <div className='bg-[#E7E7E7] h-px w-1/2 my-2'/>
                             <div className='text-[#113B75] text-xs w-fit'>
-                                <p className='pb-1'>Round&nbsp;Trip</p>
+                                <p className='pb-1'>{queryResponseData?.data?.data?.returnDate ? 'RoundTrip' : 'OneWay'}</p>
                                 <Image src={'/Arrows.svg'} alt="" width={22} height={22} className="mx-auto"/>
                             </div>
                         </div>
+
                         <div className=''>
                             <p className='text-[#909090] text-xs pb-2'>To</p>
-                            <p className='text-xl text-[#113B75] pb-2'>Berlin&nbsp;(BLR)</p>
+                            <p className='text-xl text-[#113B75] pb-2'>
+                            {queryResponseData?.data?.data?.toLocationDTO.city}&nbsp;
+                            {`(${queryResponseData?.data?.data?.toLocationDTO.IATA})`}
+                            </p>
                         </div>
                         <div className='bg-[#E7E7E7] h-px w-1/2 my-2'/>
                         {/* Passenger Name */}
                         <div className='bg-white rounded-lg p-2 text-xs'>
                             <span className='text-[10px] text-[#909090]'>Name</span>
-                            <p className='text-[#113B75] py-1'>Micheal Kors</p>
+                            <input 
+                            type={'text'} 
+                            defaultValue={queryResponseData?.data?.data?.name}
+                            className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                            placeholder='Micheal Kors'
+                            onChange={onChangeNameHandler}
+                            />
                         </div>
                         {/* Phone number with country code */}
                         <div className='bg-white rounded-lg p-2 text-xs my-4'>
                             <span className='text-[10px] text-[#909090]'>Phone Number</span>
-                            <p className='text-[#113B75] pb-1 bg-[#eee] rounded-md py-0.5 px-1 w-fit'>
+                            <input 
+                            type={'text'}
+                            defaultValue={queryResponseData?.data?.data?.phone} 
+                            className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                            placeholder='+1'
+                            onChange={onChangePhoneNumberHandler}/>
+                            {/* <p className='text-[#113B75] pb-1 bg-[#eee] rounded-md py-0.5 px-1 w-fit'>
                                 <span>+1-</span>
-                            </p>
+                            </p> */}
                         </div>
 
                         <div className="w-full flex justify-start gap-2">
                             <input
                                 type="checkbox"
-                                //value={""}
+                                onChange={onChangeSmsPriceQuotesHandler}
                                 id="sms" />
                             <label htmlFor="sms" className="text-xs text-[#113B75]">
                                 Send price quotes by SMS
@@ -68,38 +164,65 @@ const Result :FC<Props> = ({average, data}) => {
 
                     <div className='basis-1/2 p-8'>
                         <div className='flex text-[#113B75] font-bold justify-center pb-4'>
-                            <p className='text-4xl'>$2158</p>
+                            <p className='text-4xl'>${queryResponseData?.data?.data?.totalCost}</p>
                             <p className='text-sm'>&nbsp;*</p>
                         </div>
                         
                         {/* seat type */}
                         <div className='py-2'>       
-                            <p className='text-[#909090] text-xs text-center'>Business</p>
+                            <p className='text-[#909090] text-xs text-center'>{queryResponseData?.data?.data?.cabinClass}</p>
                             <div className='bg-[#E7E7E7] h-px w-full my-2'/>
                         </div>  
                         <div className='flex justify-between items-center'>
                             {/* departure date */}
                             <div className='w-fit text-center'>
                                 <p className='text-[#909090] text-xs text-center'>Departure</p>
-                                <p className='text-[#113B75] font-semibold py-1'>02/05</p>
+                                <p className='text-[#113B75] font-semibold py-1'>
+                                    {`${new Date(queryResponseData?.data?.data?.departDate).getDay() < 10 
+                                        ? `0${new Date(queryResponseData?.data?.data?.departDate).getDay()}` 
+                                        : `${new Date(queryResponseData?.data?.data?.departDate).getDay()}`}/
+                                        ${new Date(queryResponseData?.data?.data?.departDate).getMonth() < 10 
+                                        ? `0${new Date(queryResponseData?.data?.data?.departDate).getMonth()}` 
+                                        : `${new Date(queryResponseData?.data?.data?.departDate).getMonth()}`}`
+                                    }
+                                </p>
                             </div>
                             {/* return date */}
-                            <div className='w-fit text-center'>
-                                <p className='text-[#909090] text-xs text-center'>Return</p>
-                                <p className='text-[#113B75] font-semibold py-1'>06/30</p>
-                            </div>
+                            {queryResponseData?.data?.data?.returnDate && 
+                                <div className='w-fit text-center'>
+                                    <p className='text-[#909090] text-xs text-center'>Return</p>
+                                    <p className='text-[#113B75] font-semibold py-1'>
+                                    {`${new Date(queryResponseData?.data?.data?.returnDate).getDay() < 10 
+                                        ? `0${new Date(queryResponseData?.data?.data?.returnDate).getDay()}` 
+                                        : `${new Date(queryResponseData?.data?.data?.returnDate).getDay()}`}/
+                                        ${new Date(queryResponseData?.data?.data?.returnDate).getMonth() < 10 
+                                        ? `0${new Date(queryResponseData?.data?.data?.returnDate).getMonth()}` 
+                                        : `${new Date(queryResponseData?.data?.data?.returnDate).getMonth()}`}`
+                                    }
+                                    </p>
+                                </div>
+                            }
+                            
                             {/* number of booked passengers for flight*/}
                             <div className='w-fit text-center'>
                                 <p className='text-[#909090] text-xs text-center'>Passengers</p>
-                                <p className='text-[#113B75] font-semibold py-1'>5</p>
+                                <p className='text-[#113B75] font-semibold py-1'>{queryResponseData?.data?.data?.noOfPersons}</p>
                             </div>
                         </div>
                          {/* passenger Email */}
-                        <div className='bg-white rounded-lg p-2 mt-6 text-xs'>
+                        <div className='bg-white rounded-lg p-2 mt-6 text-xs w-full'>
                             <span className='text-[10px] text-[#909090]'>Email</span>
-                            <p className='text-[#113B75] py-1 font-semibold'>Korsmichaaelfk123@gmail.com</p>
+                            <input 
+                            type={'email'} 
+                            defaultValue={queryResponseData?.data?.data?.email}
+                            className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                            placeholder='Korsmichaaelfk123@gmail.com'
+                            onChange={onChangeEmailHandler}/>
+                            {/* <p className='text-[#113B75] py-1 font-semibold'>Korsmichaaelfk123@gmail.com</p> */}
                         </div>
-                        <div className='bg-[#113B75] text-white rounded-lg p-3.5 text-center mt-4 cursor-pointer text-sm'>
+                        <div 
+                        className='bg-[#113B75] text-white rounded-lg p-3.5 text-center mt-4 cursor-pointer text-sm'
+                        onClick={sendPatchRequestForFlightBooked}>
                             <span>Send Request</span>
                         </div>
                     </div>

@@ -143,14 +143,6 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                             <ReadMore>
                                 {`${data.comment}`}
                             </ReadMore>
-                            {/* <p className="text-black text-xs pt-2 text-start">
-
-                                {data.comment}
-                                {isReadMore ? text.slice(0, 150) : text}
-                                <span onClick={toggleReadMore} className="read-or-hide">
-                                    {isReadMore ? "...read more" : " show less"}
-                                </span>
-                            </p> */}
 
                             <div className="px-4 py-2 flex justify-between items-center mb-2">
                                 <section className="flex items-center">
