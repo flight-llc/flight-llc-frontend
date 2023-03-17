@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import Image from 'next/image';
 import LoaderImg from '@/public/LoaderImg.svg';
 import Circle from '@/public/Circle.svg';
@@ -8,7 +8,18 @@ import {IoIosAirplane} from 'react-icons/io';
  * loader should be dynamic not static
  */
 
-export const Loader :FC = () => {
+interface IParams { fromIATA: string; toIATA: string; percentage: number; };
+
+export const Loader :FC<IParams> = (props: IParams) => {
+    const [loaderPercentage, setLoaderPercentage] = useState(props.percentage || 1);
+
+    let percentageInterval;
+    useEffect(() => {
+        percentageInterval = setInterval(()=>{
+            if (loaderPercentage < 100) setLoaderPercentage(loaderPercentage+1);
+        }, 50);
+    }, []);
+    
     
     return(
         <div className='w-full h-screen relative'>
@@ -28,9 +39,9 @@ export const Loader :FC = () => {
                         <div className='w-1/2 text-white playfairFont font-light'>
                             
                             <div className="flex justify-between mb-8">
-                                <span className="text-base dark:text-white">LAX</span>
-                                <span className="text-sm dark:text-white">83%</span>
-                                <span className="text-sm dark:text-white">PAR</span>
+                                <span className="text-base dark:text-white">{props.fromIATA}</span>
+                                <span className="text-sm dark:text-white">{loaderPercentage}%</span>
+                                <span className="text-sm dark:text-white">{props.toIATA}</span>
                             </div>
                             <div className="w-full flex justify-between">
                                 <Image 
@@ -40,7 +51,7 @@ export const Loader :FC = () => {
                                 width={30} height={30}
                                 />
                                 <div className='w-full flex flex-row items-center gap-x-1 pb-3'>
-                                    <div className="bg-white w-[83%] h-px"></div>
+                                    <div className={`bg-white h-px`} style={{width: `${(loaderPercentage || 1)}%`}}></div>
                                     <span><IoIosAirplane className='text-white' size={30}/></span>
                                 </div>
                                 <Image src={Circle} alt="" className='text-white' width={30} height={30}/>
