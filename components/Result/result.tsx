@@ -52,9 +52,6 @@ const Result :FC<Props> = ({average, data}) => {
             refetchOnWindowFocus: false
         }
     );
-    if(isLoading){
-        <Loader/>
-    }
     const onChangeNameHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
         const {value : name} = target;
         console.log(name);

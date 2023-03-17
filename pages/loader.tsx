@@ -2,7 +2,7 @@ import { Loader } from "@/components/Loader/Loader"
 import { NextPage } from "next"
 
 const LoaderPage : NextPage = () => {
-    return <Loader/>
+    return <Loader fromIATA="" toIATA="" percentage={50}/>
 } 
 
 export default LoaderPage;

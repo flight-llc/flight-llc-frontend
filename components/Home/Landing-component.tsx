@@ -19,6 +19,7 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import https from 'https';
 import { NextRouter, useRouter } from "next/router";
+import { Loader } from "../Loader/Loader";
 
 
 const httpsAgent = new https.Agent({
@@ -35,16 +36,26 @@ type props = {
 }
 const LandingComponent: FC<props> = ({ data, locations, average }) => {
     const router :NextRouter = useRouter();
-    const mutation = useMutation((bookedFlightsPayload: any[]) => {
-        return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/book-flight`, bookedFlightsPayload, {
+    const bookFlightAction = async (bookedFlightsPayload: any[]) => {
+        const result = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/book-flight`, bookedFlightsPayload, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
             },
             httpsAgent: httpsAgent,
         }).catch(err => err);
-    })
-    const { isLoading, isSuccess, mutate, data : mutationResponse } = mutation;
+        console.log('result', result)
+        return result;
+    };
+    const mutation = useMutation((bookedFlightsPayload: any[]) => {
+        return bookFlightAction(bookedFlightsPayload).then(data => data);
+    }, { onSuccess: data => {
+        if (data && data['data'] && data['data']['status']) {
+            router.push(`/result`);
+        }
+    }})
+    // mutationResponse
+    const { isLoading, isSuccess, mutate, data: mutationResponse  } = mutation;
     const [flightType, setFlightType] = useState({
         roundTrip: false,
         oneWay: false,
@@ -67,6 +78,9 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         phone: "string",
         smsPriceQuote: false
     });
+
+    const [loaderPercentage, setLoaderPercentage] = useState(0);
+    const [timer, setTimer] = useState(0);
 
     const onChangeOneWay = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         const { checked } = target;
@@ -117,8 +131,15 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         setBookFlight({ ...bookFlight, noOfPersons: Number.parseInt(noOfPersons) });
     }
 
-    const OnsubmitHandlerForOneWayAndRoundTrip = (event: React.SyntheticEvent<HTMLFormElement>): void => {
+    const OnsubmitHandlerForOneWayAndRoundTrip = async(event: React.SyntheticEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault();
+        const loaderTimer = 5000;
+        setTimer(loaderTimer);
+        
+        const actionTimeout = setTimeout(() => {
+            setLoaderPercentage(100);
+            setTimer(0);
+        }, loaderTimer);
         const {
             fromIATA, 
             fromLocation, 
@@ -145,13 +166,22 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 cabinClass
             }
         ]);
-        if(isSuccess){
-            router.push(`/result`);
-        }
-        console.log({mutationResponse});
+        console.log('mutationResponse', { mutationResponse, isSuccess, data });
 
     }
+    // if(isLoading){
+    //     <Loader/>
+    // }
     return (
+        (timer > 0) ? 
+            <> 
+                <Loader 
+                    fromIATA={bookFlight.fromIATA} 
+                    percentage={loaderPercentage} 
+                    toIATA={bookFlight.toIATA}   
+                /> 
+            </> 
+        : 
         <>
             <div className="h-[120vh] relative block">
                 <Image
