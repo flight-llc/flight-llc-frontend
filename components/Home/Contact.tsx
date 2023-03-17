@@ -33,7 +33,7 @@ export const ContactUs: FC = () => {
                 'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
                },
                httpsAgent: httpsAgent,
-            });
+            }).catch(err => err);
         }
     );
     const {isSuccess , isLoading, isError, mutate} = mutation;

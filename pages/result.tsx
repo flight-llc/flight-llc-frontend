@@ -24,7 +24,7 @@ export async function getServerSideProps(){
         'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
     },
     httpsAgent: httpsAgent,
-    });
+    }).catch(err => err);
 
     const averageRating = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}reviews/average-ratings`,
     {
@@ -33,7 +33,7 @@ export async function getServerSideProps(){
         'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
         },
         httpsAgent: httpsAgent,
-    });
+    }).catch(err => err);
 
     const {data} = await response.data;
     const {data : averageRatingData} = await averageRating.data;
