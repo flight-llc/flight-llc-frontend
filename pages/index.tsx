@@ -147,7 +147,7 @@ export async function getServerSideProps(){
       'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
     },
     httpsAgent: httpsAgent,
-  });
+  }).catch(err => err);
   const flightLocations = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/active-locations`,
   ///reviews/average-ratings
   {
@@ -156,7 +156,7 @@ export async function getServerSideProps(){
       'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
     },
     httpsAgent: httpsAgent,
-  })
+  }).catch(err => err);
 
   const averageRating = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}reviews/average-ratings`,
   {
@@ -165,7 +165,7 @@ export async function getServerSideProps(){
       'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
     },
     httpsAgent: httpsAgent,
-  })
+  }).catch(err => err);
 
   const {data} = await response.data;
   const {data : flightLocationsData} = await flightLocations.data;

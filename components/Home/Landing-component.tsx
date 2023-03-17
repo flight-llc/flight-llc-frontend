@@ -42,7 +42,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
             },
             httpsAgent: httpsAgent,
-        })
+        }).catch(err => err);
     })
     const { isLoading, isSuccess, mutate, data : mutationResponse } = mutation;
     const [flightType, setFlightType] = useState({
@@ -61,8 +61,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         fromRegion: "string",
         toLocation: "string",
         toRegion: "string",
-        noOfPersons: 0,
-        cabinClass: "string",
+        noOfPersons: 1,
+        cabinClass: "PremiumEconomy",
         name: "string",
         phone: "string",
         smsPriceQuote: false
@@ -282,9 +282,9 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                 <select
                                                     onChange={onChangeSelectCabin}
                                                     className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
-                                                    <option value="PremiumEconomy" className="text-[#ACB0B9]">PremiumEconomy</option>
+                                                    <option value="PremiumEconomy" className="text-[#ACB0B9]">Premium Economy</option>
                                                     <option value="Business" className="text-[#ACB0B9]">Business</option>
-                                                    <option value="FirstClass" className="text-[#ACB0B9]">FirstClass</option>
+                                                    <option value="FirstClass" className="text-[#ACB0B9]">First Class</option>
                                                 </select>
                                             </div>
                                         </div>

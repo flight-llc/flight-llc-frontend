@@ -30,7 +30,7 @@ const Result :FC<Props> = ({average, data}) => {
                 'Content-Type' : 'application/json',
                 'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
             }
-        });
+        }).catch(err => err);
     }); 
     const [details, setDetails] = useState({
         name :'',
@@ -47,7 +47,7 @@ const Result :FC<Props> = ({average, data}) => {
                         'Content-Type' : 'application/json',
                         'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
                     }
-                })
+                }).catch(err => err);
             },
             refetchOnWindowFocus: false
         }
