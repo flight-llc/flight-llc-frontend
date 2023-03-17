@@ -153,7 +153,8 @@ export async function getServerSideProps(){
     headers : {
       'Content-Type' : 'application/json',
       'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-    }
+    },
+    httpsAgent: httpsAgent,
   })
 
   const averageRating = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}reviews/average-ratings`,
