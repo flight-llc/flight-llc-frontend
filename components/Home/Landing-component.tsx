@@ -277,15 +277,21 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <p>From</p>
                                                     </div>
                                                     <div className="">
-                                                        <Select className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  style={{width : 150}}  options={locations ? locations && locations.map((data: any, _: number) => {
+                                                        <Select 
+                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
+                                                            style={{width : 150}}  
+                                                            options={locations ? locations && locations.map((data: any, _: number) => {
                                                             return {
                                                                 label: `${data.city} (${data.IATA})`,
                                                                 value: JSON.stringify(data),
                                                             }
-                                                        }) : []} onChange={(values) => {
+                                                            }) : []}
+                                                            values={[]} 
+                                                            onChange={(values) => {
                                                             // this.setValues(values)
                                                             onChangeSelectFrom(values[0])
-                                                        }} />
+                                                            }} 
+                                                        />
                                                         {/* <select
                                                             onChange={onChangeSelectFrom}
                                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
@@ -308,7 +314,9 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                                 label: `${data.city} (${data.IATA})`,
                                                                 value: JSON.stringify(data),
                                                             }
-                                                        }) : []} onChange={(values) => {
+                                                        }) : []} 
+                                                        values={[]} 
+                                                        onChange={(values) => {
                                                             // this.setValues(values)
                                                             onChangeSelectTo(values[0])
                                                         }} />
@@ -373,6 +381,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                                     value: data.value,
                                                                 }
                                                             })} 
+                                                            values={[]} 
                                                             onChange={(values) => {
                                                                 console.log('values', values);
                                                             // this.setValues(values)
