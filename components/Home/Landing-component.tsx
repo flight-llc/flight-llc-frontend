@@ -22,6 +22,7 @@ import { NextRouter, useRouter } from "next/router";
 import { Loader } from "../Loader/Loader";
 import { MultiCityForm } from "./Multi-city-form";
 import { showToast } from "@/utils/helpers";
+import Select from "react-dropdown-select";
 
 
 const httpsAgent = new https.Agent({
@@ -111,16 +112,31 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         setFlightType({ ...flightType, multiCity: checked, roundTrip: false, oneWay: false });
     }
 
-    const onChangeSelectFrom = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
-        const { value } = target;
-        const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value);
+    // const onChangeSelectFrom = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const { value } = target;
+    //     const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value);
+    //     console.log(fromLocation, fromRegion);
+    //     setBookFlight({ ...bookFlight, fromIATA, fromLocation, fromRegion });
+    // }
+
+    const onChangeSelectFrom = (value: any) => {
+        console.log('value', value);
+        // const { value } = target;
+        const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value.value);
         console.log(fromLocation, fromRegion);
         setBookFlight({ ...bookFlight, fromIATA, fromLocation, fromRegion });
     }
 
-    const onChangeSelectTo = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
-        const { value } = target;
-        const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value);
+    // const onChangeSelectTo = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const { value } = target;
+    //     const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value);
+    //     console.log(toLocation, toRegion);
+    //     setBookFlight({ ...bookFlight, toIATA, toLocation, toRegion });
+    // }
+
+    const onChangeSelectTo = (value : any) => {
+        // const { value } = target;
+        const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value.value);
         console.log(toLocation, toRegion);
         setBookFlight({ ...bookFlight, toIATA, toLocation, toRegion });
     }
@@ -135,7 +151,12 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         setBookFlight({ ...bookFlight, returnDate });
     }
 
-    const onChangeSelectCabin = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+    // const onChangeSelectCabin = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const { value: cabinClass } = target;
+    //     setBookFlight({ ...bookFlight, cabinClass });
+    // }
+
+    const onChangeSelectCabin = (target: any) => {
         const { value: cabinClass } = target;
         setBookFlight({ ...bookFlight, cabinClass });
     }
@@ -186,7 +207,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     }
   
     return (
-        (timer > 0) ?
+        (isLoading) ?
             <>
                 <Loader
                     fromIATA={bookFlight.fromIATA}
@@ -256,14 +277,23 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <p>From</p>
                                                     </div>
                                                     <div className="">
-                                                        <select
+                                                        <Select className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  style={{width : 150}}  options={locations ? locations && locations.map((data: any, _: number) => {
+                                                            return {
+                                                                label: `${data.city} (${data.IATA})`,
+                                                                value: JSON.stringify(data),
+                                                            }
+                                                        }) : []} onChange={(values) => {
+                                                            // this.setValues(values)
+                                                            onChangeSelectFrom(values[0])
+                                                        }} />
+                                                        {/* <select
                                                             onChange={onChangeSelectFrom}
                                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
                                                             <option value="" className="text-[#ACB0B9]">Flight from?</option>
                                                             {locations && locations.map((data: any, _: number) =>
                                                                 <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
                                                             )}
-                                                        </select>
+                                                        </select> */}
                                                     </div>
                                                 </div>
 
@@ -273,15 +303,24 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <p>To</p>
                                                     </div>
                                                     <div className="">
+                                                        <Select className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2" style={{width : 150}}  options={locations ? locations && locations.map((data: any, _: number) => {
+                                                            return {
+                                                                label: `${data.city} (${data.IATA})`,
+                                                                value: JSON.stringify(data),
+                                                            }
+                                                        }) : []} onChange={(values) => {
+                                                            // this.setValues(values)
+                                                            onChangeSelectTo(values[0])
+                                                        }} />
 
-                                                        <select
+                                                        {/* <select
                                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
                                                             onChange={onChangeSelectTo}>
                                                             <option value="" className="text-[#ACB0B9]">Where To?</option>
                                                             {locations && locations.map((data: any, _: number) =>
                                                                 <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
                                                             )}
-                                                        </select>
+                                                        </select> */}
                                                     </div>
                                                 </div>
 
@@ -326,13 +365,27 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
                                                             defaultValue={1}
                                                             onChange={onChangeNumberOfPersons} />
-                                                        <select
+                                                        <Select 
+                                                            className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  style={{width : 150}}  
+                                                            options={[{ text:'Premium Economy', value: 'PremiumEconomy' },{ text:'Business', value: 'Business' },{ text:'First Class', value: 'FirstClass' }].map((data: any, _: number) => {
+                                                                return {
+                                                                    label: `${data.text}`,
+                                                                    value: data.value,
+                                                                }
+                                                            })} 
+                                                            onChange={(values) => {
+                                                                console.log('values', values);
+                                                            // this.setValues(values)
+                                                            onChangeSelectCabin(values[0].value)
+                                                            }} 
+                                                        />
+                                                        {/* <select
                                                             onChange={onChangeSelectCabin}
                                                             className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
                                                             <option value="PremiumEconomy" className="text-[#ACB0B9]">Premium Economy</option>
                                                             <option value="Business" className="text-[#ACB0B9]">Business</option>
                                                             <option value="FirstClass" className="text-[#ACB0B9]">First Class</option>
-                                                        </select>
+                                                        </select> */}
                                                     </div>
                                                 </div>
 
