@@ -219,7 +219,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             {/* Travel info */}
                             <div className="flex justify-center">
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e) 
-                                    :e.preventDefault()} className="mx-auto w-11/12">
+                                    :e.preventDefault()} className="mx-auto W-[96%]">
                                     <div className="mt-12 w-full bg-white border border-[#eee] rounded-lg p-4">
                                         <div className="border-b border-[#eee] flex justify-center items-center pb-3">
                                             <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
