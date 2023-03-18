@@ -20,7 +20,8 @@ const footerInfo = {
         },
         {
             title : 'Deals',
-            route : '/route'
+            // route : '/route'
+            route : '/'
         }
     ],
     support : [
@@ -34,11 +35,11 @@ const footerInfo = {
         },
         {
             title : 'Privacy policy',
-            route : 'privacy_policy'
+            route : 'privacy-policy'
         },
         {
             title : 'Terms of service',
-            route : 'terms_of_service'
+            route : 'terms'
         }
     ]
 }
