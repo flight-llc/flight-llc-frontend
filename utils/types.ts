@@ -45,3 +45,18 @@ export interface IAverageRatingResponseBody{
     code : number;
     data : number;
 }
+
+export interface ItermsAndPolicy{
+code: number;
+data :{
+    created_at : string;
+    status : string;
+    textContent : string; 
+    uuid : string;
+    __v : number;
+    _id : string;
+}; 
+extra_data : any[];
+message:string;
+status: boolean;
+}
