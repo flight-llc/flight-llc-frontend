@@ -32,8 +32,7 @@ const Result :FC<Props> = ({average, data}) => {
         isLoading : isPatchLoader, 
         isSuccess : isPatchSuccessful, 
         isError, 
-        mutate, 
-        data:mutationResponse} = useMutation((payload : any) => {
+        mutate} = useMutation((payload : any) => {
             showToast({ type: 'success', message: 'Confirming Flight' });
         return axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/update-flight-booking-status`, payload,
         {
@@ -53,7 +52,7 @@ const Result :FC<Props> = ({average, data}) => {
     }, {
         onSuccess: (data) => {
             console.log('data', data);
-            showToast({ message: 'Flight Booked sucessfully', type: 'sucess' });
+            showToast({ message: 'Flight Booked successfully', type: 'success' });
         },
         onError: (error) => {
             console.error(error);
@@ -68,7 +67,7 @@ const Result :FC<Props> = ({average, data}) => {
             queryFn: () => {
                 const flightId: string | null = getParam('flight');
                 setFlightId(flightId + '');
-                return axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/get-flight-booking/${flightId || ''}`,{
+                return axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/get-flight-booking/${router.query.uuid}`,{
                     headers : {
                         'Content-Type' : 'application/json',
                         'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
@@ -103,13 +102,13 @@ const Result :FC<Props> = ({average, data}) => {
     } 
 
     const sendPatchRequestForFlightBooked = () => {
-        console.log({details});
+        const {query} = router;
         const {name, email, phone, smsPriceQuote} = details;
         mutate({
             name,
             email,
             phone,
-            uuid: flightId,
+            uuid: query.uuid,
             smsPriceQuote
         });
         //console.log({mutationResponse});

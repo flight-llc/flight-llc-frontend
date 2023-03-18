@@ -36,6 +36,7 @@ type props = {
 }
 const LandingComponent: FC<props> = ({ data, locations, average }) => {
     const router :NextRouter = useRouter();
+
     const bookFlightAction = async (bookedFlightsPayload: any[]) => {
         const result = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/book-flight`, bookedFlightsPayload, {
             headers: {
@@ -51,15 +52,16 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     }, { onSuccess: data => {
         const responseData: any = data['data'];
         if (responseData && responseData['status']) {
-            let url = `/result`;
                 if (responseData && responseData.data && responseData.data.flights.length > 0) {
-                    url += `?flight=${responseData.data.flights[0].uuid}`;
+                    router.push({
+                        pathname : '/result',
+                        query : `uuid=${responseData.data.flights[0].uuid}`
+                    });
                 }
-                router.push(url);
+                
         }
     }})
-    // mutationResponse
-    const { isLoading, isSuccess, mutate, data: mutationResponse  } = mutation;
+    const { isLoading, isSuccess, mutate } = mutation;
     
     const [flightType, setFlightType] = useState({
         roundTrip: false,
@@ -85,7 +87,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     });
 
     const [timer, setTimer] = useState(0);
-    const [bookingResponse, setBookingResponse] = useState();
 
     const onChangeOneWay = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         const { checked } = target;
@@ -171,7 +172,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 cabinClass
             }
         ]);
-        // console.log('mutationResponse', { mutationResponse, isSuccess, data });
 
     }
     // if(isLoading){
@@ -311,14 +311,14 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                 <input
                                                     type={"text"}
                                                     className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
-                                                    placeholder="1"
+                                                    defaultValue={1}
                                                     onChange={onChangeNumberOfPersons} />
                                                 <select
                                                     onChange={onChangeSelectCabin}
                                                     className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
-                                                    <option value="PremiumEconomy" className="text-[#ACB0B9]">Premium Economy</option>
+                                                    <option value="PremiumEconomy" className="text-[#ACB0B9]">PremiumEconomy</option>
                                                     <option value="Business" className="text-[#ACB0B9]">Business</option>
-                                                    <option value="FirstClass" className="text-[#ACB0B9]">First Class</option>
+                                                    <option value="FirstClass" className="text-[#ACB0B9]">FirstClass</option>
                                                 </select>
                                             </div>
                                         </div>
