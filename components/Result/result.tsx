@@ -13,6 +13,7 @@ import axios, { AxiosError } from 'axios';
 import { Loader } from '../Loader/Loader';
 import { getParam, showToast } from '@/utils/helpers';
 import { NextRouter, useRouter } from 'next/router';
+import moment from 'moment';
 
 type Props={
     average : number,
@@ -200,13 +201,14 @@ const Result :FC<Props> = ({average, data}) => {
                             <div className='w-fit text-center'>
                                 <p className='text-[#909090] text-xs text-center'>Departure</p>
                                 <p className='text-[#113B75] font-semibold py-1'>
-                                    {`${new Date(queryResponseData?.data?.data?.departDate).getDay() < 10 
+                                    {moment(new Date(queryResponseData?.data?.data?.departDate)).format('DD/MM')}
+                                    {/* {`${new Date(queryResponseData?.data?.data?.departDate).getDay() < 10 
                                         ? `0${new Date(queryResponseData?.data?.data?.departDate).getDay()}` 
                                         : `${new Date(queryResponseData?.data?.data?.departDate).getDay()}`}/
                                         ${new Date(queryResponseData?.data?.data?.departDate).getMonth() < 10 
                                         ? `0${new Date(queryResponseData?.data?.data?.departDate).getMonth()}` 
                                         : `${new Date(queryResponseData?.data?.data?.departDate).getMonth()}`}`
-                                    }
+                                    } */}
                                 </p>
                             </div>
                             {/* return date */}
