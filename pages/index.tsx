@@ -149,7 +149,6 @@ export async function getServerSideProps(){
     httpsAgent: httpsAgent,
   }).catch(err => err);
   const flightLocations = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/active-locations`,
-  ///reviews/average-ratings
   {
     headers : {
       'Content-Type' : 'application/json',

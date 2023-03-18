@@ -7,6 +7,24 @@ export interface SpecialOffersInterface{
     comment : string;
     price : number
 }
+
+export interface IBookFlightPayload{
+    fromIATA: any;
+    toIATA: any;
+    departDate: string;
+    returnDate ?: string,
+    email ?: string,
+    fromLocation?: string,
+    fromRegion?: string,
+    toLocation?: string,
+    toRegion?: string,
+    noOfPersons: number,
+    cabinClass: string,
+    name?: string,
+    phone?: string,
+    smsPriceQuote?: boolean
+}
+
 export type ReviewRowType = {
     created_at : string,
     name : string,

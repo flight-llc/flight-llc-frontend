@@ -1,7 +1,7 @@
 import { SpecialOffersInterface } from "@/utils/types";
 import Image from "next/image";
 import { FC, useState } from 'react';
-import { BsStarFill} from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -13,9 +13,9 @@ import Istanbul from '@/public/Istanbul.jpeg';
 import New_Delhi from '@/public/New_Delhi.jpeg';
 import Bankok from '@/public/Bankok.jpeg';
 import Seoul from '@/public/Seoul.jpeg';
+import Rome from '@/public/Rome.svg';
 import Lisbon from '@/public/Lisbon.svg';
 import Athens from '@/public/Athens.svg';
-import Rome from '@/public/Rome.svg';
 import { ReadMore } from "../shared/Read-more";
 import { Lazy, Pagination } from 'swiper';
 
@@ -105,59 +105,76 @@ const SpecialOffer: SpecialOffersInterface[] = [
 export const SpecialOffers: FC<props> = ({ offers }) => {
     const [isReadMore, setIsReadMore] = useState<boolean>(true);
     return (
-        <Swiper
-            slidesPerView={3}
-            spaceBetween={20}
-            grabCursor={true}
-            navigation={true}
-            modules={[Navigation]}
-            // className="mySwiper"
-            // lazy={true}
-            // pagination={{
-            // clickable: true,
-            // }}
-            // modules={[Lazy, Pagination, Navigation]}
+        <div className="my-4">
+            <Swiper
+                slidesPerView={3}
+                spaceBetween={20}
+                grabCursor={true}
+                navigation={true}
+                modules={[Navigation]}
+                breakpoints={{
+                    // when window width is >= 480px
+                    480: {
+                        slidesPerView: 1.5,
+                        spaceBetween: 10
+                    },
+                    // when window width is >= 640px
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 10
+                    },
+                    992:{
+                        slidesPerView : 2.5,
+                        spaceBetween:10
+                    },
+                    1200:{
+                        slidesPerView : 3,
+                        spaceBetween:10
+                    }
+                }}
+                className="mySwiper"
             >
-            {SpecialOffer && SpecialOffer.map((data: any, i: number) =>
-                <SwiperSlide key={i} >
-                    <div className="max-w-sm bg-[#F1F1F2] rounded-lg">
-                        {/* <a href="#"> */}
-                            <div className="w-full h-[15rem] rounded-t-lg bg-green-100">
-                            {/* <object data={data.image} className="rounded-t-lg"></object> */}
-                            <Image 
-                            src={data.image} 
-                            alt=""
-                            // fill 
-                            className="rounded-t-lg h-[15rem]"/>
+                {SpecialOffer && SpecialOffer.map((data: any, i: number) =>
+                    <SwiperSlide key={i} >
+                        <div className="max-w-sm bg-[#F1F1F2] rounded-3xl">
+                            {/* <a href="#"> */}
+                            <div className="w-full h-[15rem] rounded-t-3xl">
+                                {/* <object data={data.image} className="rounded-t-lg"></object> */}
+                                <Image
+                                    src={data.image}
+                                    alt={data.name}
+                                    //fill 
+                                    className="rounded-t-3xl w-full h-[15rem]" />
                             </div>
-                        {/* </a> className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" */}
-                        <div className="px-4 py-2">
-                            <div className="text-lg text-[#767E86] text-start">{data.name}</div>
-                            <div className="flex text-xs text-[#FFC107] py-2 gap-2">
-                                <BsStarFill />
-                                <BsStarFill />
-                                <BsStarFill />
-                                <BsStarFill />
-                                <BsStarFill />
-                            </div>
-                            <ReadMore>
-                                {`${data.comment}`}
-                            </ReadMore>
+                            {/* </a> className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" */}
+                            <div className="px-4 py-2">
+                                <div className="text-lg text-[#767E86] text-start">{data.name}</div>
+                                <div className="flex text-xs text-[#FFC107] py-2 gap-2">
+                                    <BsStarFill />
+                                    <BsStarFill />
+                                    <BsStarFill />
+                                    <BsStarFill />
+                                    <BsStarFill />
+                                </div>
+                                <ReadMore>
+                                    {`${data.comment}`}
+                                </ReadMore>
 
-                            <div className="px-4 py-2 flex justify-between items-center mb-2">
-                                <section className="flex items-center">
-                                    <span className="text-xs text-[#767E86]">From&nbsp;</span>
-                                    <span className="text-[#0C68BE] text-2xl">${data.price}*</span>
-                                </section>
-                                <button className="px-6 py-3 bg-[#113B75] text-xs text-white rounded-lg">
-                                    <span>Book</span>
-                                </button>
+                                <div className="px-4 py-2 flex justify-between items-center mb-2">
+                                    <section className="flex items-center">
+                                        <span className="text-xs text-[#767E86]">From&nbsp;</span>
+                                        <span className="text-[#0C68BE] text-2xl">${data.price}*</span>
+                                    </section>
+                                    <button className="px-6 py-3 bg-[#113B75] text-xs text-white rounded-lg">
+                                        <span>Book</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </SwiperSlide>
-            )}
+                    </SwiperSlide>
+                )}
 
-        </Swiper>
+            </Swiper>
+        </div>
     );
 }

@@ -65,30 +65,19 @@ input[type='radio']{
   justify-content: center;
   align-items: center;
 }
-/* .text{
-  display: inline;
-  width: 100%;
-} */
-  
+
 .read-or-hide{
   color: skyblue;
   cursor: pointer;
 }
 
-/* .radii{
-  background: linear-gradient(to right, #8C3AAA,
-  #EA624C);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  color: radial-gradient(#8C3AAA , #EA624C);
-} */
 .swiper-button-prev{
   background-image: url('/ArrowRight.svg');
   background-repeat: no-repeat;
   background-size: 60% auto;
   background-position: center;
   rotate: 0deg !important;
-  width: 50px !important;
+  width: 50px !important;;
   
 }
 
@@ -237,12 +226,24 @@ input[type='radio']{
   width: 46px;
 }
 
-/* .disabled_swiper_button{
-  display: none;
-} */
-
 .swiper-button-disabled{
   display:none;   
+}
+
+div::-webkit-scrollbar {
+  width: 6px;
+  max-height: 8px;
+}
+  div::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+  div::-webkit-scrollbar-thumb {
+  background: #afb4b4; 
+    border-radius:10px;
+}
+div::-webkit-scrollbar-thumb:hover {
+  
+  background: #afb4b4; 
 }
 
 /* :root {

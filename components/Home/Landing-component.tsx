@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import home_img_1 from '@/public/home_img_1.svg';
 import Image from 'next/image';
 import { NavBar } from "../Nav/Nav-component";
@@ -14,12 +14,14 @@ import { AboutUs } from "./About";
 import { ContactUs } from "./Contact";
 import Footer from "../Footer/footer";
 import { HowItWorks } from "./how-it-works";
-import { IAverageRatingResponseBody, UserReviewsResponseType } from "@/utils/types";
+import { IBookFlightPayload, UserReviewsResponseType } from "@/utils/types";
 import { useMutation } from "react-query";
 import axios from "axios";
 import https from 'https';
 import { NextRouter, useRouter } from "next/router";
 import { Loader } from "../Loader/Loader";
+import { MultiCityForm } from "./Multi-city-form";
+import { showToast } from "@/utils/helpers";
 
 
 const httpsAgent = new https.Agent({
@@ -27,15 +29,30 @@ const httpsAgent = new https.Agent({
 });
 
 
-
-
 type props = {
     data: UserReviewsResponseType,
     locations?: any,
     average: number
 }
+
+const defaultPayload = {
+    fromIATA: "",
+    toIATA: "",
+    departDate: "2023-03-16T09:24:48.320Z",
+    returnDate: "2023-03-16T09:24:48.320Z",
+    email: "string",
+    fromLocation: "string",
+    fromRegion: "string",
+    toLocation: "string",
+    toRegion: "string",
+    noOfPersons: 1,
+    cabinClass: "PremiumEconomy",
+    name: "string",
+    phone: "string",
+    smsPriceQuote: false
+}
 const LandingComponent: FC<props> = ({ data, locations, average }) => {
-    const router :NextRouter = useRouter();
+    const router: NextRouter = useRouter();
 
     const bookFlightAction = async (bookedFlightsPayload: any[]) => {
         const result = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/book-flight`, bookedFlightsPayload, {
@@ -49,71 +66,62 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     };
     const mutation = useMutation((bookedFlightsPayload: any[]) => {
         return bookFlightAction(bookedFlightsPayload).then(data => data);
-    }, { onSuccess: data => {
-        const responseData: any = data['data'];
-        if (responseData && responseData['status']) {
+    }, {
+        onSuccess: data => {
+            const responseData: any = data['data'];
+            if (responseData && responseData['status']) {
                 if (responseData && responseData.data && responseData.data.flights.length > 0) {
                     router.push({
-                        pathname : '/result',
-                        query : `uuid=${responseData.data.flights[0].uuid}`
+                        pathname: '/result',
+                        query: `uuid=${responseData.data.flights[0].uuid}`
                     });
                 }
-                
+
+            }
+        },
+        onError : error => {
+            showToast({ message: 'Flight Booking failed, please try again.', type: 'error'});
+            console.log(error);
         }
-    }})
+    })
     const { isLoading, isSuccess, mutate } = mutation;
-    
+
     const [flightType, setFlightType] = useState({
         roundTrip: false,
         oneWay: false,
         multiCity: false
-    })
-
-    const [bookFlight, setBookFlight] = useState({
-        fromIATA: "",
-        toIATA: "",
-        departDate: "2023-03-16T09:24:48.320Z",
-        returnDate: "2023-03-16T09:24:48.320Z",
-        email: "string",
-        fromLocation: "string",
-        fromRegion: "string",
-        toLocation: "string",
-        toRegion: "string",
-        noOfPersons: 1,
-        cabinClass: "PremiumEconomy",
-        name: "string",
-        phone: "string",
-        smsPriceQuote: false
     });
+
+    const [bookFlight, setBookFlight] = useState<IBookFlightPayload>(defaultPayload);
 
     const [timer, setTimer] = useState(0);
 
     const onChangeOneWay = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         const { checked } = target;
-        setFlightType({ ...flightType, oneWay: checked, roundTrip : false, multiCity : false});
+        setFlightType({ ...flightType, oneWay: checked, roundTrip: false, multiCity: false });
     }
 
     const onChangeRoundTrip = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         const { checked } = target;
-        setFlightType({ ...flightType, roundTrip: checked, oneWay :false, multiCity : false });
+        setFlightType({ ...flightType, roundTrip: checked, oneWay: false, multiCity: false });
     }
 
     const onChangeMulti = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         const { checked } = target;
-        setFlightType({ ...flightType, multiCity: checked, roundTrip : false, oneWay :false });
+        setFlightType({ ...flightType, multiCity: checked, roundTrip: false, oneWay: false });
     }
 
     const onChangeSelectFrom = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = target;
         const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value);
-        console.log(fromLocation,fromRegion);
+        console.log(fromLocation, fromRegion);
         setBookFlight({ ...bookFlight, fromIATA, fromLocation, fromRegion });
     }
 
     const onChangeSelectTo = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = target;
         const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value);
-        console.log(toLocation,toRegion);
+        console.log(toLocation, toRegion);
         setBookFlight({ ...bookFlight, toIATA, toLocation, toRegion });
     }
 
@@ -137,25 +145,27 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         setBookFlight({ ...bookFlight, noOfPersons: Number.parseInt(noOfPersons) });
     }
 
-    const OnsubmitHandlerForOneWayAndRoundTrip = async(event: React.SyntheticEvent<HTMLFormElement>): Promise<void> => {
+    const OnsubmitHandlerForOneWayAndRoundTrip = 
+    async (event: React.SyntheticEvent<HTMLFormElement>)
+    : Promise<void> => {
         event.preventDefault();
         const loaderTimer = 5000;
         setTimer(loaderTimer);
-        
-        const actionTimeout = setTimeout(() => {
+
+        setTimeout(() => {
             // handle request timeout
             setTimer(0);
         }, loaderTimer);
         const {
-            fromIATA, 
-            fromLocation, 
-            fromRegion, 
-            toIATA, 
+            fromIATA,
+            fromLocation,
+            fromRegion,
+            toIATA,
             toLocation,
             toRegion,
-            departDate, 
+            departDate,
             returnDate,
-            cabinClass, 
+            cabinClass,
             noOfPersons
         } = bookFlight;
         mutate([
@@ -163,10 +173,10 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 fromIATA,
                 toIATA,
                 departDate,
-                returnDate : flightType.roundTrip ? returnDate : null, 
+                returnDate: flightType.roundTrip ? returnDate : null,
                 fromLocation,
                 fromRegion,
-                toLocation, 
+                toLocation,
                 toRegion,
                 noOfPersons,
                 cabinClass
@@ -174,205 +184,217 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         ]);
 
     }
-    // if(isLoading){
-    //     <Loader/>
-    // }
+  
     return (
-        (timer > 0) ? 
-            <> 
-                <Loader 
-                    fromIATA={bookFlight.fromIATA} 
-                    toIATA={bookFlight.toIATA}   
-                /> 
-            </> 
-        : 
-        <>
-            <div className="h-[120vh] relative block">
-                <Image
-                    src={home_img_1}
-                    alt="flight seat"
-                    fill
-                    className="object-cover"
+        (timer > 0) ?
+            <>
+                <Loader
+                    fromIATA={bookFlight.fromIATA}
+                    toIATA={bookFlight.toIATA}
                 />
-                <div className="absolute w-full flex justify-center">
-                    <div className="w-10/12 h-screen">
-                        <NavBar textColor="text-white" />
+            </>
+            :
+            <>
+                <div className="min-h-[120vh] relative block">
+                    <Image
+                        src={home_img_1}
+                        alt="flight seat"
+                        fill
+                        className="object-cover"
+                    />
+                    <div className="absolute w-full flex justify-center items-center">
+                        <div className="w-10/12 h-auto">
+                            <NavBar textColor="text-white" />
 
-                        {/* landing page header title */}
-                        <div className="mt-28 text-white flex justify-center items-center">
-                            <div className="text-4xl leading-relaxed text-center headerText">
-                                <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">Elevate Your Travel Experience</h1>
-                                <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">and Save up to 40% on Business Class Flights!</h1>
+                            {/* landing page header title */}
+                            <div className="text-white flex justify-center items-center">
+                                <div className={`${!flightType.multiCity 
+                                ? 'mt-28 text-4xl leading-relaxed text-center headerText'
+                                :'text-4xl leading-relaxed text-center headerText'}`}>
+                                    <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">Elevate Your Travel Experience</h1>
+                                    <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">and Save up to 40% on Business Class Flights!</h1>
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Travel info */}
-                        <div className="flex justify-center">
-                            <div className="my-12 w-fit bg-white border border-[#eee] rounded-lg p-4">
-                                <div className="border-b border-[#eee] flex justify-center items-center pb-3">
-                                    <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
-                                        <input type="radio"
-                                            defaultChecked
-                                            id="html"
-                                            name="fav_language"
-                                            defaultValue="one Way"
-                                            onChange={onChangeOneWay} />
-                                        <label htmlFor="html">one&nbsp;way</label>
-                                        <input
-                                            type="radio"
-                                            id="html"
-                                            name="fav_language"
-                                            defaultValue="Round Trip"
-                                            onChange={onChangeRoundTrip} />
-                                        <label htmlFor="html">round&nbsp;trip</label>
-                                        <input
-                                            type="radio"
-                                            id="html"
-                                            name="fav_language"
-                                            defaultValue="Multi city"
-                                            onChange={onChangeMulti} />
-                                        <label htmlFor="html">multi&nbsp;city</label>
+                            {/* Travel info */}
+                            <div className="flex justify-center">
+                                <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e) 
+                                    :e.preventDefault()} className="mx-auto">
+                                    <div className="mt-12 w-fit bg-white border border-[#eee] rounded-lg p-4">
+                                        <div className="border-b border-[#eee] flex justify-center items-center pb-3">
+                                            <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
+                                                <input type="radio"
+                                                    defaultChecked
+                                                    id="html"
+                                                    name="fav_language"
+                                                    defaultValue="one Way"
+                                                    onChange={onChangeOneWay} />
+                                                <label htmlFor="html">one&nbsp;way</label>
+                                                <input
+                                                    type="radio"
+                                                    id="html"
+                                                    name="fav_language"
+                                                    defaultValue="Round Trip"
+                                                    onChange={onChangeRoundTrip} />
+                                                <label htmlFor="html">round&nbsp;trip</label>
+                                                <input
+                                                    type="radio"
+                                                    id="html"
+                                                    name="fav_language"
+                                                    defaultValue="Multi city"
+                                                    onChange={onChangeMulti} />
+                                                <label htmlFor="html">multi&nbsp;city</label>
+                                            </div>
+                                        </div>
+                                        {/* travel form */}
+                                        <div className="flex pt-2">
+
+                                            <div className="basis-full flex justify-between items-center gap-8">
+                                                <div className="flex flex-col gap-2 text-xs">
+                                                    <div className="font-semibold flex gap-1 items-center">
+                                                        <GiAirplaneDeparture className="text-base" />
+                                                        <p>From</p>
+                                                    </div>
+                                                    <div className="">
+                                                        <select
+                                                            onChange={onChangeSelectFrom}
+                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
+                                                            <option value="" className="text-[#ACB0B9]">Flight from?</option>
+                                                            {locations && locations.map((data: any, _: number) =>
+                                                                <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
+                                                            )}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col gap-2 text-xs">
+                                                    <div className="font-semibold flex gap-1 items-center">
+                                                        <GiAirplaneArrival className="text-base" />
+                                                        <p>To</p>
+                                                    </div>
+                                                    <div className="">
+
+                                                        <select
+                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
+                                                            onChange={onChangeSelectTo}>
+                                                            <option value="" className="text-[#ACB0B9]">Where To?</option>
+                                                            {locations && locations.map((data: any, _: number) =>
+                                                                <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
+                                                            )}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col gap-2 text-xs ">
+                                                    <div className="font-semibold flex flex-row gap-2 items-center">
+                                                        <RxCalendar className="text-base" />
+                                                        <p>Depart</p>
+                                                    </div>
+                                                    <div className="">
+                                                        <input
+                                                            type={"date"}
+                                                            onChange={onChangeDepartureDate}
+                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                {flightType.roundTrip &&
+                                                    <div className="flex flex-col gap-2 text-xs">
+                                                        <div className="font-semibold flex gap-2 items-center">
+                                                            <RxCalendar className="text-sm" />
+                                                            <p>Return</p>
+                                                        </div>
+                                                        <div className="">
+                                                            <input
+                                                                type={"date"}
+                                                                onChange={onChangeReturnDate}
+                                                                className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                                <div className="flex flex-col gap-2 text-xs px-4">
+                                                    <div className="font-semibold flex gap-1 items-center">
+                                                        <MdOutlineAirlineSeatReclineExtra className="text-lg" />
+                                                        <p>cabin&nbsp;class&nbsp;travelers</p>
+                                                    </div>
+                                                    <div className="flex flex-row items-center gap-1">
+                                                        <input
+                                                            type={"text"}
+                                                            className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
+                                                            defaultValue={1}
+                                                            onChange={onChangeNumberOfPersons} />
+                                                        <select
+                                                            onChange={onChangeSelectCabin}
+                                                            className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
+                                                            <option value="PremiumEconomy" className="text-[#ACB0B9]">PremiumEconomy</option>
+                                                            <option value="Business" className="text-[#ACB0B9]">Business</option>
+                                                            <option value="FirstClass" className="text-[#ACB0B9]">FirstClass</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                {!flightType.multiCity &&
+                                                    <div className="mt-3">
+                                                        <button type="submit" className="text-sm text-white text-center bg-[#113B75] rounded-md py-3 px-6">
+                                                            Search&nbsp;Flight
+                                                        </button>
+                                                    </div>
+                                                }
+                                            </div>
+
+                                        </div>
                                     </div>
-                                </div>
-                                {/* travel form */}
-                                <div className="flex pt-2">
-                                    <form onSubmit={OnsubmitHandlerForOneWayAndRoundTrip} className="basis-full flex justify-between items-center gap-8">
-                                        <div className="flex flex-col gap-2 text-xs">
-                                            <div className="font-semibold flex gap-1 items-center">
-                                                <GiAirplaneDeparture className="text-base" />
-                                                <p>From</p>
-                                            </div>
-                                            <div className="">
-                                                <select
-                                                    onChange={onChangeSelectFrom}
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
-                                                    <option value="" className="text-[#ACB0B9]">Flight from?</option>
-                                                    {locations && locations.map((data: any, _: number) =>
-                                                        <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </div>
 
-                                        <div className="flex flex-col gap-2 text-xs">
-                                            <div className="font-semibold flex gap-1 items-center">
-                                                <GiAirplaneArrival className="text-base" />
-                                                <p>To</p>
-                                            </div>
-                                            <div className="">
+                                    <div className=" w-fit flex flex-column ">
+                                        {flightType.multiCity && 
+                                        <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={setTimer}/>}
+                                    </div>
+                                </form>
+                            </div>
 
-                                                <select
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
-                                                    onChange={onChangeSelectTo}>
-                                                    <option value="" className="text-[#ACB0B9]">Where To?</option>
-                                                    {locations && locations.map((data: any, _: number) =>
-                                                        <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
-                                                    )}
-                                                </select>
-                                            </div>
-                                        </div>
+                                    {/* other airlines */}
+                                    <ExternalAirlines />
+                            </div>
+                        </div>
+                    </div>
 
-                                        <div className="flex flex-col gap-2 text-xs ">
-                                            <div className="font-semibold flex flex-row gap-2 items-center">
-                                                <RxCalendar className="text-base" />
-                                                <p>Depart</p>
-                                            </div>
-                                            <div className="">
-                                                <input
-                                                    type={"date"}
-                                                    onChange={onChangeDepartureDate}
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2"
-                                                />
-                                            </div>
-                                        </div>
+                    {/* user ratings */}
+                    <div className="w-full">
+                        <UserExperienceRatings comments={data} average={average} />
 
-                                        {flightType.roundTrip &&
-                                            <div className="flex flex-col gap-2 text-xs">
-                                                <div className="font-semibold flex gap-2 items-center">
-                                                    <RxCalendar className="text-sm" />
-                                                    <p>Return</p>
-                                                </div>
-                                                <div className="">
-                                                    <input
-                                                        type={"date"}
-                                                        onChange={onChangeReturnDate}
-                                                        className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
-                                                    />
-                                                </div>
-                                            </div>
-                                        }
-
-                                        <div className="flex flex-col gap-2 text-xs px-4">
-                                            <div className="font-semibold flex gap-1 items-center">
-                                                <MdOutlineAirlineSeatReclineExtra className="text-lg" />
-                                                <p>cabin&nbsp;class&nbsp;travelers</p>
-                                            </div>
-                                            <div className="flex flex-row items-center gap-1">
-                                                <input
-                                                    type={"text"}
-                                                    className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
-                                                    defaultValue={1}
-                                                    onChange={onChangeNumberOfPersons} />
-                                                <select
-                                                    onChange={onChangeSelectCabin}
-                                                    className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
-                                                    <option value="PremiumEconomy" className="text-[#ACB0B9]">PremiumEconomy</option>
-                                                    <option value="Business" className="text-[#ACB0B9]">Business</option>
-                                                    <option value="FirstClass" className="text-[#ACB0B9]">FirstClass</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div className="mt-3">
-                                            <button type="submit" className="text-sm text-white text-center bg-[#113B75] rounded-md py-3 px-6">
-                                                Search&nbsp;Flight
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-
+                        {/* special offers */}
+                        <div className="w-full p-4 flex justify-center">
+                            <div className="w-4/5 h-auto pt-16 pb-8">
+                                <p className="text-xl font-semibold text-[#2C53B8] text-center">
+                                    <h1 className="text-4xl text-center capitalize bg-gradient-to-r from-[#3070CC] to-[#134997]">Special offers</h1>
+                                    <p className="text-center text-sm font-normal text-black py-4">Don&apos;t Miss Out on Our Deals on Business Class Flights&#33;</p>
+                                </p>
+                                {/* user ratings */}
+                                <SpecialOffers />
                             </div>
                         </div>
 
-                        {/* other airlines */}
-                        <ExternalAirlines />
                     </div>
-                </div>
-            </div>
 
-            {/* user ratings */}
-            <div className="w-full">
-                <UserExperienceRatings comments={data} average={average} />
+                    {/* How it works */}
+                    <HowItWorks />
 
-                {/* special offers */}
-                <div className="w-full p-4 flex justify-center">
-                    <div className="w-4/5 h-auto pt-16 pb-8">
-                        <p className="text-xl font-semibold text-[#2C53B8] text-center">
-                            <h1 className="text-4xl text-center capitalize bg-gradient-to-r from-[#3070CC] to-[#134997]">Special offers</h1>
-                            <p className="text-center text-sm font-normal text-black py-4">Don&apos;t Miss Out on Our Deals on Business Class Flights&#33;</p>
-                        </p>
-                        {/* user ratings */}
-                        <SpecialOffers />
-                    </div>
-                </div>
+                    {/* Expert tips */}
+                    <ExpertTips />
 
-            </div>
+                    {/* About us */}
+                    <AboutUs />
 
-            {/* How it works */}
-            <HowItWorks />
+                    {/* contact us */}
+                    <ContactUs />
 
-            {/* Expert tips */}
-            <ExpertTips />
-
-            {/* About us */}
-            <AboutUs />
-
-            {/* contact us */}
-            <ContactUs />
-
-            {/* Footer */}
-            <Footer />
-        </>
-    );
+                    {/* Footer */}
+                    <Footer />
+            </>
+        );
 }
 
-export default LandingComponent;
+                export default LandingComponent;

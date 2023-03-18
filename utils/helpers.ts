@@ -1,5 +1,8 @@
 import { HttpRequestParametersInterface } from "./types";
 import { toast } from "react-toastify";
+import axios from "axios";
+import https from 'https';
+
 export async function httpRequest({ url, data, method, baseUrl, contentType } : HttpRequestParametersInterface) {
   if (!contentType) contentType ="json";
   if (!method) method ="GET";
@@ -92,3 +95,18 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
     }
     return null;
   }
+
+  const httpsAgent = new https.Agent({
+    rejectUnauthorized: false,
+  });
+
+  export const bookFlightAction = async (bookedFlightsPayload: any[]) => {
+    const result = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/book-flight`, bookedFlightsPayload, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+        },
+        httpsAgent: httpsAgent,
+    }).catch(err => err);
+    return result;
+};
