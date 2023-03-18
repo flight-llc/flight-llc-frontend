@@ -8,24 +8,32 @@ import {IoIosAirplane} from 'react-icons/io';
  * loader should be dynamic not static
  */
 
-interface IParams { fromIATA: string; toIATA: string; percentage: number; };
+interface IParams { fromIATA: string; toIATA: string; };
 
 export const Loader :FC<IParams> = (props: IParams) => {
-    const [loaderPercentage, setLoaderPercentage] = useState(props.percentage || 1);
+    const [loaderPercentage, setLoaderPercentage] = useState(1);
 
-    let percentageInterval;
+    let percentageInterval: NodeJS.Timer;
     useEffect(() => {
-        percentageInterval = setInterval(()=>{
-            if (loaderPercentage < 100) setLoaderPercentage(loaderPercentage+1);
-        }, 50);
+        incrementProgress();
+        return () => {
+            clearInterval(percentageInterval);
+        }
     }, []);
+
+    const incrementProgress = () => {
+        let counter = 0;
+        percentageInterval = setInterval(()=>{
+            if (counter < 99) setLoaderPercentage(counter+=1);
+        }, 50);
+    }
     
     
     return(
         <div className='w-full h-screen relative'>
             <Image
             src={LoaderImg}
-            alt=""
+            alt="searching for flight"
             fill
             className='object-cover'
             />
