@@ -78,7 +78,7 @@ export const ContactUs: FC = () => {
     }
     return (
         <>
-        <div className="w-full bg-white text-black flex justify-center">
+        <div className="w-full bg-white text-black flex justify-center" id='ContactUs'>
             <div className="w-3/5 my-8">
                 <p className="text-center uppercase text-[#6E7491] text-lg font-semibold my-8">Contact us</p>
 

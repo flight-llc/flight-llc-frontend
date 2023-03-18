@@ -8,11 +8,11 @@ const footerInfo = {
     about : [
         {
             title : 'About Flight Portal',
-            route : '/about_us'
+            route : '/#AboutUs'
         },
         {
             title : 'How it works',
-            route : '/how_it_works'
+            route : '/#HowItWorks'
         },
         {
             title : 'Blog',
@@ -21,7 +21,7 @@ const footerInfo = {
         {
             title : 'Deals',
             // route : '/route'
-            route : '/'
+            route : '/#deal'
         }
     ],
     support : [
@@ -31,7 +31,7 @@ const footerInfo = {
         },
         {
             title : 'Contact us',
-            route : '/contact_us'
+            route : '/#ContactUs'
         },
         {
             title : 'Privacy policy',

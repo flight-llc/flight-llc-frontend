@@ -8,11 +8,11 @@ const navObject = {
     dropDown : [
         {
             name : 'about',
-            route : '/about'
+            route : '/#AboutUs'
         },
         {
             name : 'How it works',
-            route : 'how-it-works'
+            route : '#HowItWorks'
         },
         {
             name : 'Blog',
@@ -20,11 +20,11 @@ const navObject = {
         },
         {
             name : 'Deals',
-            route : '/deals'
+            route : '/#deal'
         },
         {
             name : 'contacts',
-            route : '/contacts'
+            route : '/#ContactUs'
         }
     ]
 }
@@ -72,19 +72,19 @@ export const NavBar:FC<props> = ({textColor}) => {
                     <ul 
                     className={`py-2 text-xs text-center ${textColor}`} 
                     aria-labelledby="dropdownHoverButton">
-                    <Link href={'/about_us'}>
+                    <Link href={'/#AboutUs'}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">About</p>
                     </Link>
-                    <Link href={"/how_it_works"}>
+                    <Link href={"/#HowItWorks"}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">How it Works</p>
                     </Link>
                     <Link href={"/blog"}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">Blog</p>
                     </Link>
-                    <Link href={'/deals'}>
+                    <Link href={'/#deal'}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">Deals</p>
                     </Link>
-                    <Link href={'/contact_us'}>
+                    <Link href={'/#ContactUs'}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">Contact us</p>
                     </Link>
                     </ul>
