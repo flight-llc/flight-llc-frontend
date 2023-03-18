@@ -105,7 +105,7 @@ const SpecialOffer: SpecialOffersInterface[] = [
 export const SpecialOffers: FC<props> = ({ offers }) => {
     const [isReadMore, setIsReadMore] = useState<boolean>(true);
     return (
-        <div className="my-4">
+        <div className="my-4" id="deal">
             <Swiper
                 slidesPerView={3}
                 spaceBetween={20}

@@ -4,7 +4,7 @@ import {FC} from 'react';
 
 export const AboutUs : FC = () => {
     return(
-        <div className="relative w-screen h-screen my-8">
+        <div className="relative w-screen h-screen my-8" id={'AboutUs'}>
             <Image
                 src={About}
                 alt=""
