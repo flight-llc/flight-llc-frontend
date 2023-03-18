@@ -88,7 +88,12 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                         query: `uuid=${responseData.data.flights[0].uuid}`
                     });
                 }
-
+            }
+            else {
+                if (responseData && !responseData['status']) {
+                    return showToast({ message: responseData['message'] || 'Trip could not be found, please try again later.' , type: 'error' });
+                }
+                showToast({ message: 'Failed to find trip information, please try again later.' , type: 'error' });
             }
         },
         onError : error => {

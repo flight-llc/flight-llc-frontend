@@ -71,13 +71,18 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         onSuccess: data => {
             const responseData: any = data['data'];
             if (responseData && responseData['status']) {
-                if (responseData && responseData.data && responseData.data.flights.length > 0) {
+                if (responseData.data && responseData.data.flights.length > 0) {
                     router.push({
                         pathname: '/result',
                         query: `uuid=${responseData.data.flights[0].uuid}`
                     });
+                } 
+            }
+            else {
+                if (responseData && !responseData['status']) {
+                    return showToast({ message: responseData['message'] || 'Trip could not be found, please try again later.' , type: 'error' });
                 }
-
+                showToast({ message: 'Failed to find trip information, please try again later.' , type: 'error' });
             }
         },
         onError : error => {
@@ -158,7 +163,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
     const onChangeSelectCabin = (target: any) => {
         const { value: cabinClass } = target;
-        setBookFlight({ ...bookFlight, cabinClass });
+        setBookFlight({ ...bookFlight, ...{ cabinClass: target } });
     }
 
     const onChangeNumberOfPersons = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -381,7 +386,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                                     value: data.value,
                                                                 }
                                                             })} 
-                                                            values={[]} 
                                                             onChange={(values) => {
                                                                 console.log('values', values);
                                                             // this.setValues(values)
