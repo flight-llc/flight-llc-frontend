@@ -40,15 +40,15 @@ const defaultPayload = {
     toIATA: "",
     departDate: "2023-03-16T09:24:48.320Z",
     returnDate: "2023-03-16T09:24:48.320Z",
-    email: "string",
-    fromLocation: "string",
-    fromRegion: "string",
-    toLocation: "string",
-    toRegion: "string",
+    email: "",
+    fromLocation: "",
+    fromRegion: "",
+    toLocation: "",
+    toRegion: "",
     noOfPersons: 1,
     cabinClass: "PremiumEconomy",
-    name: "string",
-    phone: "string",
+    name: "",
+    phone: "",
     smsPriceQuote: false
 }
 const LandingComponent: FC<props> = ({ data, locations, average }) => {
@@ -219,7 +219,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             {/* Travel info */}
                             <div className="flex justify-center">
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e) 
-                                    :e.preventDefault()} className="mx-auto w-11/12">
+                                    :e.preventDefault()} className="mx-auto W-[96%]">
                                     <div className="mt-12 w-full bg-white border border-[#eee] rounded-lg p-4">
                                         <div className="border-b border-[#eee] flex justify-center items-center pb-3">
                                             <div className="flex flex-row gap-4 capitalize text-xs font-semibold">

@@ -25,15 +25,15 @@ const defaultPayload = {
     toIATA: "",
     departDate: "2023-03-16T09:24:48.320Z",
     returnDate: "2023-03-16T09:24:48.320Z",
-    email: "string",
-    fromLocation: "string",
-    fromRegion: "string",
-    toLocation: "string",
-    toRegion: "string",
+    email: "",
+    fromLocation: "",
+    fromRegion: "",
+    toLocation: "",
+    toRegion: "",
     noOfPersons: 1,
     cabinClass: "PremiumEconomy",
-    name: "string",
-    phone: "string",
+    name: "",
+    phone: "",
     smsPriceQuote: false
 }
 
