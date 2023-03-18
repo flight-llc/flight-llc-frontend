@@ -90,4 +90,5 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
       )
         return decodeURIComponent(queryName[1]);
     }
+    return null;
   }

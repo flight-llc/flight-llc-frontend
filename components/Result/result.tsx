@@ -11,39 +11,63 @@ import { UserExperienceRatings } from '../Home/user-ratings-component';
 import { useMutation, useQuery } from 'react-query';
 import axios, { AxiosError } from 'axios';
 import { Loader } from '../Loader/Loader';
-import { getParam } from '@/utils/helpers';
+import { getParam, showToast } from '@/utils/helpers';
+import { NextRouter, useRouter } from 'next/router';
 
 type Props={
     average : number,
     data : any;
 }
 
+const defaultPayload = {
+    name :'',
+    email : '',
+    phone : '',
+    smsPriceQuote :  false
+};
+
 const Result :FC<Props> = ({average, data}) => {
+    const router :NextRouter = useRouter();
     const {
         isLoading : isPatchLoader, 
         isSuccess : isPatchSuccessful, 
         isError, 
         mutate, 
         data:mutationResponse} = useMutation((payload : any) => {
+            showToast({ type: 'success', message: 'Confirming Flight' });
         return axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/update-flight-booking-status`, payload,
         {
             headers:{
                 'Content-Type' : 'application/json',
                 'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
             }
-        }).catch(err => err);
+        }).then(data => {
+            showToast({ type: 'success', message: 'Flight Confirmed. Redirecting...' });
+            setDetails({...defaultPayload});
+            router.back();
+            return data;
+        }).catch(err => {
+            showToast({ type: 'failed', message: 'Flight failed to be confirmed.' });
+            return err;
+        });
+    }, {
+        onSuccess: (data) => {
+            console.log('data', data);
+            showToast({ message: 'Flight Booked sucessfully', type: 'sucess' });
+        },
+        onError: (error) => {
+            console.error(error);
+            showToast({ message: 'Flight Booking failed, please try again.', type: 'error' });
+        },
     }); 
-    const [details, setDetails] = useState({
-        name :'',
-        email : '',
-        phone : '',
-        smsPriceQuote :  false
-    }) 
+    const [details, setDetails] = useState({...defaultPayload}) 
+    const [flightId, setFlightId] = useState('');
     const { data : queryResponseData, isLoading, isFetched } = useQuery(
         {
             queryKey: ['find-user-by-token'],
             queryFn: () => {
-                const flightId = getParam('flight');
+                const flightId: string | null = getParam('flight');
+                setFlightId(flightId + '');
                 return axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/get-flight-booking/${flightId || ''}`,{
                     headers : {
                         'Content-Type' : 'application/json',
@@ -85,7 +109,7 @@ const Result :FC<Props> = ({average, data}) => {
             name,
             email,
             phone,
-            uuid : 'fd52f546-1088-4c00-ac79-d4cf9a72da5a',
+            uuid: flightId,
             smsPriceQuote
         });
         //console.log({mutationResponse});
