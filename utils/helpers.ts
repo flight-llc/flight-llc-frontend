@@ -79,3 +79,15 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
     const pattern = /\d{4,}/g;
     return pattern.test(numberString);
   }
+
+  export function getParam(name: string | number | boolean) {
+    if (typeof window !== "undefined") {
+      let queryName:any;
+      if (
+        (queryName = new RegExp("[?&]" + encodeURIComponent(name) + "=([^&]*)").exec(
+          window.location.search
+        ))
+      )
+        return decodeURIComponent(queryName[1]);
+    }
+  }
