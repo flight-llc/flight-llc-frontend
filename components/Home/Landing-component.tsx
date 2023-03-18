@@ -44,18 +44,23 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
             },
             httpsAgent: httpsAgent,
         }).catch(err => err);
-        console.log('result', result)
         return result;
     };
     const mutation = useMutation((bookedFlightsPayload: any[]) => {
         return bookFlightAction(bookedFlightsPayload).then(data => data);
     }, { onSuccess: data => {
-        if (data && data['data'] && data['data']['status']) {
-            router.push(`/result`);
+        const responseData: any = data['data'];
+        if (responseData && responseData['status']) {
+            let url = `/result`;
+                if (responseData && responseData.data && responseData.data.flights.length > 0) {
+                    url += `?flight=${responseData.data.flights[0].uuid}`;
+                }
+                router.push(url);
         }
     }})
     // mutationResponse
     const { isLoading, isSuccess, mutate, data: mutationResponse  } = mutation;
+    
     const [flightType, setFlightType] = useState({
         roundTrip: false,
         oneWay: false,
@@ -79,8 +84,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         smsPriceQuote: false
     });
 
-    const [loaderPercentage, setLoaderPercentage] = useState(0);
     const [timer, setTimer] = useState(0);
+    const [bookingResponse, setBookingResponse] = useState();
 
     const onChangeOneWay = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         const { checked } = target;
@@ -137,7 +142,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         setTimer(loaderTimer);
         
         const actionTimeout = setTimeout(() => {
-            setLoaderPercentage(100);
+            // handle request timeout
             setTimer(0);
         }, loaderTimer);
         const {
@@ -166,7 +171,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 cabinClass
             }
         ]);
-        console.log('mutationResponse', { mutationResponse, isSuccess, data });
+        // console.log('mutationResponse', { mutationResponse, isSuccess, data });
 
     }
     // if(isLoading){
@@ -177,7 +182,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
             <> 
                 <Loader 
                     fromIATA={bookFlight.fromIATA} 
-                    percentage={loaderPercentage} 
                     toIATA={bookFlight.toIATA}   
                 /> 
             </> 
