@@ -11,6 +11,7 @@ import { UserExperienceRatings } from '../Home/user-ratings-component';
 import { useMutation, useQuery } from 'react-query';
 import axios, { AxiosError } from 'axios';
 import { Loader } from '../Loader/Loader';
+import { getParam } from '@/utils/helpers';
 
 type Props={
     average : number,
@@ -42,7 +43,8 @@ const Result :FC<Props> = ({average, data}) => {
         {
             queryKey: ['find-user-by-token'],
             queryFn: () => {
-                return axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/get-flight-booking/fd52f546-1088-4c00-ac79-d4cf9a72da5a`,{
+                const flightId = getParam('flight');
+                return axios.get(`${process.env.NEXT_PUBLIC_BACKEND_HOST}flights/get-flight-booking/${flightId || ''}`,{
                     headers : {
                         'Content-Type' : 'application/json',
                         'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
