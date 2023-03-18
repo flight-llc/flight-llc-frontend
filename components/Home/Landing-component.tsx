@@ -207,7 +207,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             <NavBar textColor="text-white" />
 
                             {/* landing page header title */}
-                            <div className="text-white flex justify-center items-center">
+                            <div className="text-white flex justify-center items-center w-full">
                                 <div className={`${!flightType.multiCity 
                                 ? 'mt-28 text-4xl leading-relaxed text-center headerText'
                                 :'text-4xl leading-relaxed text-center headerText'}`}>
@@ -219,8 +219,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             {/* Travel info */}
                             <div className="flex justify-center">
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e) 
-                                    :e.preventDefault()} className="mx-auto">
-                                    <div className="mt-12 w-fit bg-white border border-[#eee] rounded-lg p-4">
+                                    :e.preventDefault()} className="mx-auto w-11/12">
+                                    <div className="mt-12 w-full bg-white border border-[#eee] rounded-lg p-4">
                                         <div className="border-b border-[#eee] flex justify-center items-center pb-3">
                                             <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
                                                 <input type="radio"
@@ -348,7 +348,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                         </div>
                                     </div>
 
-                                    <div className=" w-fit flex flex-column ">
+                                    <div className=" w-full flex flex-column ">
                                         {flightType.multiCity && 
                                         <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={setTimer}/>}
                                     </div>

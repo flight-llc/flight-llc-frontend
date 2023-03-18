@@ -155,12 +155,12 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
     },[watch]);
 
     return (
-        <div className='w-fit'>
+        <div className='w-full'>
         {/* <form onSubmit={onSubmitMultiCityFlights}> */}
-            <div className='max-h-[17rem] overflow-y-auto mt-4 mr-2 rounded-lg'>
+            <div className='max-h-[17rem] overflow-y-auto mt-4 rounded-lg'>
                 {fields && fields.map((data: any, i: number) =>
                     <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
-                        <div className="flex p-3 bg-white mb-3 rounded-lg">
+                        <div className="w-full flex p-3 bg-white mb-3 rounded-lg">
                             <section className="basis-full flex justify-between items-center gap-section">
                                 <div className="flex flex-col gap-2 text-xs">
                                     <div className="font-semibold flex gap-1 items-center">
@@ -254,8 +254,8 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
 
 
             <div className='flex flex-column gap-2'>
-                <div className='flex justify-between items-center gap-4'>
-                    <div className='bg-white rounded-lg p-2 text-xs'>
+                <div className='w-full flex justify-between items-center gap-4'>
+                    <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
                         <span className='text-[10px] text-[#909090]'>Name</span>
                         <input
                             type={'text'}
@@ -266,7 +266,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                         />
                     </div>
                     {/* Phone number with country code */}
-                    <div className='bg-white rounded-lg p-2 text-xs my-4'>
+                    <div className='w-1/4  bg-white rounded-lg p-2 text-xs my-4'>
                         <span className='text-[10px] text-[#909090]'>Phone Number</span>
                         <input
                             type={'text'}
@@ -276,7 +276,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                             onChange={onChangePhoneNumberHandler}
                         />
                     </div>
-                    <div className='bg-white rounded-lg p-2 text-xs my-4'>
+                    <div className='w-1/4 bg-white rounded-lg p-2 text-xs my-4'>
                         <span className='text-[10px] text-[#909090]'>email</span>
                         <input
                             type={'text'}
@@ -291,7 +291,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                         value={"Send Request"}
                         onClick={onSubmitMultiCityFlights}
                         readOnly
-                        className='bg-[#113B75] text-white rounded-lg p-3.5 text-center mt-4 text-xs' 
+                        className='bg-[#113B75] text-white rounded-lg p-3.5 px-6 text-center w-fit mt-4 text-xs' 
                     />
                 </div>
             </div>
@@ -302,7 +302,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                     Add Flight
                 </button>
                 <button
-                onClick={() => reset()} 
+                onClick={() => setValue('flights',[])} 
                 className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center mt-4 text-xs'>
                     Clear all
                 </button>
