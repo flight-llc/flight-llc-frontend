@@ -87,7 +87,7 @@ input[type='radio']{
   background-repeat: no-repeat;
   background-size: 60% auto;
   background-position: center;
-  rotate: 180deg;
+  rotate: 0deg !important;
   width: 50px !important;
   
 }
