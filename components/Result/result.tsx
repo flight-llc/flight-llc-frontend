@@ -216,13 +216,14 @@ const Result :FC<Props> = ({average, data}) => {
                                 <div className='w-fit text-center'>
                                     <p className='text-[#909090] text-xs text-center'>Return</p>
                                     <p className='text-[#113B75] font-semibold py-1'>
-                                    {`${new Date(queryResponseData?.data?.data?.returnDate).getDay() < 10 
+                                    {moment(new Date(queryResponseData?.data?.data?.returnDate)).format("DD/MM")}
+                                    {/* {`${new Date(queryResponseData?.data?.data?.returnDate).getDay() < 10 
                                         ? `0${new Date(queryResponseData?.data?.data?.returnDate).getDay()}` 
                                         : `${new Date(queryResponseData?.data?.data?.returnDate).getDay()}`}/
                                         ${new Date(queryResponseData?.data?.data?.returnDate).getMonth() < 10 
                                         ? `0${new Date(queryResponseData?.data?.data?.returnDate).getMonth()}` 
                                         : `${new Date(queryResponseData?.data?.data?.returnDate).getMonth()}`}`
-                                    }
+                                    } */}
                                     </p>
                                 </div>
                             }
