@@ -30,12 +30,12 @@ export const Loader :FC<IParams> = (props: IParams) => {
     
     
     return(
-        <div className='w-full h-screen relative'>
+        <div className='w-full h-screen relative' style={{ overflow: 'hidden' }}>
             <Image
             src={LoaderImg}
             alt="searching for flight"
             fill
-            className='object-cover'
+            className='object-cover h-screen'
             />
             <div className='absolute w-full'>
                 <div className='w-4/5 h-screen mx-auto pt-8'>
