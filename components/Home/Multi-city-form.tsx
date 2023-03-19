@@ -11,7 +11,7 @@ import https from 'https';
 import { NextRouter, useRouter } from 'next/router';
 import { Loader } from '../Loader/Loader';
 import { useMutation } from 'react-query';
-import { showToast } from '@/utils/helpers';
+import { showToast, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 import Select from 'react-dropdown-select';
 //import { bookFlightAction } from '@/utils/helpers';
 
@@ -150,6 +150,17 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
         mutate(backendPayload);
 
     }
+    const disableButton = () => {
+        const {name, email, phone} = person;
+        if(!email && !phone && !name && !phone) return false;
+
+        if(!validateEmail(email) || 
+        !validatePhoneNumberString(phone) ||
+        !name)
+        return true;
+
+        return false;
+    }
     useEffect(() => {
         const subscription = watch((value, { name, type }) => console.log(value, name, type));
         return () => subscription.unsubscribe();
@@ -282,28 +293,32 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                 <span className='text-[10px] text-[#909090]'>Name</span>
                                 <input
                                     type={'text'}
-                                    //defaultValue={queryResponseData?.data?.data?.name}
+                                    required
                                     className='text-[#113B75] py-1 font-semibold outline-none w-full'
                                     placeholder='Micheal Kors'
                                     onChange={onChangeNameHandler}
                                 />
                             </div>
                             {/* Phone number with country code */}
-                            <div className='w-1/4  bg-white rounded-lg p-2 text-xs my-4'>
+                            <div className= {`${person.phone && !validatePhoneNumberString(person.phone)
+                                ? 'w-1/4 bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
+                                : 'w-1/4 bg-white rounded-lg p-2 text-xs my-4'}`}>
                                 <span className='text-[10px] text-[#909090]'>Phone Number</span>
                                 <input
                                     type={'text'}
-                                    //defaultValue={queryResponseData?.data?.data?.phone} 
+                                    required
                                     className='text-[#113B75] py-1 font-semibold outline-none w-full'
                                     placeholder='+1'
                                     onChange={onChangePhoneNumberHandler}
                                 />
                             </div>
-                            <div className='w-1/4 bg-white rounded-lg p-2 text-xs my-4'>
+                            <div className={`${person.email && !validateEmail(person.email) 
+                            ? 'w-1/4 bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
+                            : 'w-1/4 bg-white rounded-lg p-2 text-xs my-4'}`}>
                                 <span className='text-[10px] text-[#909090]'>email</span>
                                 <input
                                     type={'text'}
-                                    //defaultValue={queryResponseData?.data?.data?.phone} 
+                                    required
                                     className='text-[#113B75] py-1 font-semibold outline-none w-full'
                                     placeholder='kors@gmail.com'
                                     onChange={onChangeEmailHandler}
@@ -314,7 +329,13 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                 value={"Send Request"}
                                 onClick={onSubmitMultiCityFlights}
                                 readOnly
-                                className='bg-[#113B75] text-white rounded-lg p-3.5 px-6 text-center w-fit mt-4 text-xs'
+                                disabled={disableButton()}
+                                className='bg-[#113B75] 
+                                text-white 
+                                rounded-lg p-3.5 
+                                px-6 text-center 
+                                w-fit mt-4 text-xs
+                                disabled:bg-[#EFF0F6]'
                             />
                         </div>
                     </div>

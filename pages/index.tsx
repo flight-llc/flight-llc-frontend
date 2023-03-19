@@ -166,14 +166,23 @@ export async function getServerSideProps(){
     httpsAgent: httpsAgent,
   }).catch(err => err);
 
-  const {data} = await response.data;
-  const {data : flightLocationsData} = await flightLocations.data;
-  const {data : averageUserRatingsData} = await averageRating.data;
+  if(response.data?.code ===200 && flightLocations.data?.code === 200 && averageRating.data.code === 200){
+    const {data} = await response.data;
+    const {data : flightLocationsData} = await flightLocations.data;
+    const {data : averageUserRatingsData} = await averageRating.data;
+    return{
+      props : {
+        data,
+        flightLocationsData,
+        averageUserRatingsData
+      }
+    };
+  }
   return{
-    props : {
-      data,
-      flightLocationsData,
-      averageUserRatingsData
+    props:{
+      data : [],
+      flightLocations : [],
+      averageRating : []
     }
   };
 }

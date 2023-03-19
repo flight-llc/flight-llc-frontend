@@ -7,16 +7,19 @@ import { useMutation } from 'react-query';
 import { ContactUsObjectInterface } from '@/utils/types';
 import axios from 'axios';
 import { Loader } from '../Loader/Loader';
-import { validateEmail, validatePhoneNumberString } from '@/utils/helpers';
+import { showToast, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 import https from 'https';
 
 
 const httpsAgent = new https.Agent({
     rejectUnauthorized: false,
-  });
+});
 
+type props = {
+    setTimer ?: any
+}
 
-export const ContactUs: FC = () => {
+export const ContactUs: FC<props> = ({setTimer}) => {
     const [contactDetails, setContactDetails] = useState<ContactUsObjectInterface>({
         name : '',
         message : '',
@@ -26,26 +29,34 @@ export const ContactUs: FC = () => {
     });
     
     const mutation = useMutation(
-        (contactDetails : any) => {
-            return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}web/contact-us/create`, contactDetails,{
-               headers:{
-                'Content-Type' : 'application/json',
-                'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
-               },
-               httpsAgent: httpsAgent,
-            }).catch(err => err);
+        {
+            mutationFn : (contactDetails : any) => {
+                return axios.post(`${process.env.NEXT_PUBLIC_BACKEND_HOST}web/contact-us/create`, contactDetails,{
+                   headers:{
+                    'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${process.env.NEXT_PUBLIC_USER_TOKEN}`
+                   },
+                   httpsAgent: httpsAgent,
+                }).catch(err => err);
+            },
+            onSuccess : data => {
+                setTimer(0);
+                showToast({type : 'success',message : 'Request Sent'});
+            },
+            onError : err => {
+                setTimer(0);
+                showToast({type : 'success',message : 'Request Not Sent'});
+                console.log(err);
+            }
         }
     );
     const {isSuccess , isLoading, isError, mutate} = mutation;
-    const [error, setError] = useState({email :{msg : '', isError : false}, phone : {msg : '', isError : false}});
+
+
     const {log} = console;
-    const onChangeEmailHandler = ({target} : React.ChangeEvent<HTMLInputElement>) : void => {
+    const onChangeEmailHandler = ({target} : React.ChangeEvent<HTMLInputElement>) => {
         const {value} = target;
         setContactDetails({...contactDetails, email : value});
-        // if(validateEmail(value)){
-        //     setContactDetails({...contactDetails, email : value}); 
-        // }
-       //setError({...error, email : {msg :'Invalid Email Format',isError : true}});
     }
 
     const onChangeNameHandler = ({target} : React.ChangeEvent<HTMLInputElement>) : void => {
@@ -56,8 +67,7 @@ export const ContactUs: FC = () => {
     const onChangePhoneNumberHandler = ({target} : React.ChangeEvent<HTMLInputElement>) : void => {
         const { value } = target;
         setContactDetails({...contactDetails, phone: value});
-        //if(validatePhoneNumberString(value))setContactDetails({...contactDetails, phone: value})
-        //setError({...error, phone : {msg :'Numbers Required',isError : true}})
+        console.log(validatePhoneNumberString(value));
     }
 
     const onChangeMessageHandler = ({target}: React.ChangeEvent<HTMLTextAreaElement>) : void => {
@@ -72,10 +82,27 @@ export const ContactUs: FC = () => {
 
     const onSubmitFormHandler = async (event : React.SyntheticEvent<HTMLFormElement>) : Promise<void> => {
         event.preventDefault();
+        setTimer(1);
         const {name, message, email, phone, smsQuote} = contactDetails
         mutate({name,message,email,phone,smsQuote});
         if(isSuccess)setContactDetails({...contactDetails, name : '', message:'', email : '', phone:'', smsQuote : false});
     }
+
+    const disableButton = () => {
+        const {name, email, phone, message} = contactDetails;
+        if(!email && !phone && !name && !phone) return false;
+
+        if(!validateEmail(email) || 
+        !validatePhoneNumberString(phone) ||
+        !message ||
+        !name)
+        return true;
+
+        return false;
+    }
+    React.useEffect(() => {
+        console.log({contactDetails});
+    },[contactDetails]);
     return (
         <>
         <div className="w-full bg-white text-black flex justify-center" id='ContactUs'>
@@ -99,15 +126,14 @@ export const ContactUs: FC = () => {
                         className="w-1/2 my-12" 
                         onSubmit={onSubmitFormHandler}>
                             <input type="email"
-                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4"
-                                // className={!error.email.isError 
-                                // ? "w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4"
-                                // :"w-full outline-none border text-sm border-red-500 p-2.5 mb-0"}
+                                className={contactDetails.email && !validateEmail(contactDetails.email) 
+                                ?"w-full outline-none border text-sm border-red-500 p-2.5 mb-4"
+                                :"w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4"
+                                }
                                 placeholder="Email" 
                                 required
                                 value={contactDetails.email}
                                 onChange={onChangeEmailHandler}/>
-                                {/* <span className={!error.email.isError ? 'invisible' : 'visible text-[11px] text-red-500'}>{error.email.msg}</span> */}
                             <br />
                             <input type="text"
                                 placeholder="Your name"
@@ -119,8 +145,12 @@ export const ContactUs: FC = () => {
                             <input
                                 type="text"
                                 placeholder="Phone number"
-                                className="w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4" 
+                                className={contactDetails.phone && !validatePhoneNumberString(contactDetails.phone) 
+                                    ?"w-full outline-none border text-sm border-red-500 p-2.5 mb-4"
+                                    : "w-full outline-none border text-sm border-[#A1B0CC] p-2.5 mb-4"
+                                } 
                                 required
+                                maxLength={20}
                                 value={contactDetails.phone}
                                 onChange={onChangePhoneNumberHandler}/>
                             <br />
@@ -144,7 +174,12 @@ export const ContactUs: FC = () => {
                             <input
                                 type="Submit"
                                 defaultValue="Contact us"
-                                className="w-full outline-none capitalize bg-[#0C68BE] cursor-pointer text-white p-2.5 mb-4" />
+                                disabled={disableButton()}
+                                className="w-full 
+                                outline-none capitalize 
+                                bg-[#0C68BE] cursor-pointer 
+                                text-white p-2.5 mb-4
+                                disabled:bg-[#EFF0F6]" />
                         </form>
                     </section>
 
@@ -184,7 +219,6 @@ export const ContactUs: FC = () => {
                 Fare and/or tax difference may apply.<br/>
             </p>
         </div>
-        {/* {isLoading && <Loader/>} */}
         </>
     );
 }

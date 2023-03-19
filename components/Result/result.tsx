@@ -11,7 +11,7 @@ import { UserExperienceRatings } from '../Home/user-ratings-component';
 import { useMutation, useQuery } from 'react-query';
 import axios, { AxiosError } from 'axios';
 import { Loader } from '../Loader/Loader';
-import { getParam, showToast } from '@/utils/helpers';
+import { getParam, showToast, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 import { NextRouter, useRouter } from 'next/router';
 import moment from 'moment';
 
@@ -80,25 +80,21 @@ const Result :FC<Props> = ({average, data}) => {
     );
     const onChangeNameHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
         const {value : name} = target;
-        console.log(name);
         setDetails({...details, name});
     } 
 
     const onChangeEmailHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
         const {value :email} = target;
-        console.log(email);
         setDetails({...details, email});
     } 
 
     const onChangePhoneNumberHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
         const {value : phone} = target;
-        console.log(phone);
         setDetails({...details, phone});
     } 
 
     const onChangeSmsPriceQuotesHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
         const {checked} = target;
-        console.log(checked);
         setDetails({...details, smsPriceQuote : checked});
     } 
 
@@ -112,7 +108,18 @@ const Result :FC<Props> = ({average, data}) => {
             uuid: query.uuid,
             smsPriceQuote
         });
-        //console.log({mutationResponse});
+    }
+
+    const disableButton = () => {
+        const {name, email, phone} = details;
+        if(!email && !phone && !name && !phone) return false;
+
+        if(!validateEmail(email) || 
+        !validatePhoneNumberString(phone) ||
+        !name)
+        return true;
+
+        return false;
     }
     return (
         <>
@@ -161,7 +168,10 @@ const Result :FC<Props> = ({average, data}) => {
                             />
                         </div>
                         {/* Phone number with country code */}
-                        <div className='bg-white rounded-lg p-2 text-xs my-4'>
+
+                        <div className={`${details.phone && !validatePhoneNumberString(details.phone)
+                        ? 'bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
+                        : 'bg-white rounded-lg p-2 text-xs my-4'}`}>
                             <span className='text-[10px] text-[#909090]'>Phone Number</span>
                             <input 
                             type={'text'}
@@ -169,9 +179,6 @@ const Result :FC<Props> = ({average, data}) => {
                             className='text-[#113B75] py-1 font-semibold outline-none w-full'
                             placeholder='+1'
                             onChange={onChangePhoneNumberHandler}/>
-                            {/* <p className='text-[#113B75] pb-1 bg-[#eee] rounded-md py-0.5 px-1 w-fit'>
-                                <span>+1-</span>
-                            </p> */}
                         </div>
 
                         <div className="w-full flex justify-start gap-2">
@@ -202,13 +209,6 @@ const Result :FC<Props> = ({average, data}) => {
                                 <p className='text-[#909090] text-xs text-center'>Departure</p>
                                 <p className='text-[#113B75] font-semibold py-1'>
                                     {moment(new Date(queryResponseData?.data?.data?.departDate)).format('DD/MM')}
-                                    {/* {`${new Date(queryResponseData?.data?.data?.departDate).getDay() < 10 
-                                        ? `0${new Date(queryResponseData?.data?.data?.departDate).getDay()}` 
-                                        : `${new Date(queryResponseData?.data?.data?.departDate).getDay()}`}/
-                                        ${new Date(queryResponseData?.data?.data?.departDate).getMonth() < 10 
-                                        ? `0${new Date(queryResponseData?.data?.data?.departDate).getMonth()}` 
-                                        : `${new Date(queryResponseData?.data?.data?.departDate).getMonth()}`}`
-                                    } */}
                                 </p>
                             </div>
                             {/* return date */}
@@ -217,13 +217,6 @@ const Result :FC<Props> = ({average, data}) => {
                                     <p className='text-[#909090] text-xs text-center'>Return</p>
                                     <p className='text-[#113B75] font-semibold py-1'>
                                     {moment(new Date(queryResponseData?.data?.data?.returnDate)).format("DD/MM")}
-                                    {/* {`${new Date(queryResponseData?.data?.data?.returnDate).getDay() < 10 
-                                        ? `0${new Date(queryResponseData?.data?.data?.returnDate).getDay()}` 
-                                        : `${new Date(queryResponseData?.data?.data?.returnDate).getDay()}`}/
-                                        ${new Date(queryResponseData?.data?.data?.returnDate).getMonth() < 10 
-                                        ? `0${new Date(queryResponseData?.data?.data?.returnDate).getMonth()}` 
-                                        : `${new Date(queryResponseData?.data?.data?.returnDate).getMonth()}`}`
-                                    } */}
                                     </p>
                                 </div>
                             }
@@ -234,8 +227,9 @@ const Result :FC<Props> = ({average, data}) => {
                                 <p className='text-[#113B75] font-semibold py-1'>{(queryResponseData?.data?.data?.noOfPersons || '')}</p>
                             </div>
                         </div>
-                         {/* passenger Email */}
-                        <div className='bg-white rounded-lg p-2 mt-6 text-xs w-full'>
+                        <div  className={`${details.email && !validateEmail(details.email)
+                        ? 'bg-white rounded-lg p-2 mt-6 text-xs w-full border border-red-500'
+                        : 'bg-white rounded-lg p-2 mt-6 text-xs w-full'}`}>
                             <span className='text-[10px] text-[#909090]'>Email</span>
                             <input 
                             type={'email'} 
@@ -243,13 +237,16 @@ const Result :FC<Props> = ({average, data}) => {
                             className='text-[#113B75] py-1 font-semibold outline-none w-full'
                             placeholder='Korsmichaaelfk123@gmail.com'
                             onChange={onChangeEmailHandler}/>
-                            {/* <p className='text-[#113B75] py-1 font-semibold'>Korsmichaaelfk123@gmail.com</p> */}
                         </div>
-                        <div 
-                        className='bg-[#113B75] text-white rounded-lg p-3.5 text-center mt-4 cursor-pointer text-sm'
-                        onClick={sendPatchRequestForFlightBooked}>
-                            <span>Send Request</span>
-                        </div>
+                        <input 
+                            type={'submit'}
+                            value="Send Request"
+                            disabled={disableButton()}
+                            className='bg-[#113B75] 
+                            text-white rounded-lg p-3.5 
+                            text-center mt-4 cursor-pointer 
+                            text-sm disabled:bg-[#EFF0F6]'
+                            onClick={sendPatchRequestForFlightBooked}/>
                     </div>
                 </div>
                 <div className='basis-2/5'>

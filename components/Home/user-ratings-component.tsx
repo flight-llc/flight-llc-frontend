@@ -27,7 +27,7 @@ export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {comments && comments.rows.map((data: ReviewRowType, i: number) =>
+          {comments && comments?.rows?.map((data: ReviewRowType, i: number) =>
             <SwiperSlide key={i}>
               <div className="flex justify-around m-12">
                 <div className="text-xs w-full text-start">

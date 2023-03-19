@@ -79,7 +79,7 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
   }
   
   export function validatePhoneNumberString(numberString: string): boolean {
-    const pattern = /\d{4,}/g;
+    const pattern = /^[\+][0-9]{10,20}/g;
     return pattern.test(numberString);
   }
 

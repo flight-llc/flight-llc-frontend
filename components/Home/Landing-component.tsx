@@ -425,7 +425,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                     <AboutUs />
 
                     {/* contact us */}
-                    <ContactUs />
+                    <ContactUs setTimer={setTimer}/>
 
                     {/* Footer */}
                     <Footer />
