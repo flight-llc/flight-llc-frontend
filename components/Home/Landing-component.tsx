@@ -221,10 +221,10 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             </div>
 
                             {/* Travel info */}
-                            <div className="flex justify-center">
+                            <div className="w-full flex justify-center">
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e) 
-                                    :e.preventDefault()} className="mx-auto W-[96%]">
-                                    <div className="mt-12 w-full bg-white border border-[#eee] rounded-lg p-4">
+                                    :e.preventDefault()} className="w-full">
+                                    <div className="mt-12 w-[95%] bg-white border border-[#eee] rounded-lg p-4">
                                         <div className="border-b border-[#eee] flex justify-center items-center pb-3">
                                             <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
                                                 <input type="radio"
@@ -251,18 +251,15 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                             </div>
                                         </div>
                                         {/* travel form */}
-                                        <div className="flex pt-2">
-
-                                            <div className="basis-full flex justify-between items-center gap-8">
-                                                <div className="flex flex-col gap-2 text-xs">
+                                        <div className="pt-2 basis-full flex justify-between items-center gap-4">
+                                                <div className="flex flex-col basis-1/4 gap-2 text-xs">
                                                     <div className="font-semibold flex gap-1 items-center">
                                                         <GiAirplaneDeparture className="text-base" />
                                                         <p>From</p>
                                                     </div>
                                                     <div className="">
                                                         <Select 
-                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
-                                                            style={{width : 150}}  
+                                                            className=" outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
                                                             options={locations ? locations && locations.map((data: any, _: number) => {
                                                             return {
                                                                 label: `${data.city} (${data.IATA})`,
@@ -271,24 +268,18 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             }) : []}
                                                             values={[]} 
                                                             onChange={(values : any) => onChangeSelectFrom(values[0]?.value)} 
-                                                        />                                                        {/* <select
-                                                            onChange={onChangeSelectFrom}
-                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
-                                                            <option value="" className="text-[#ACB0B9]">Flight from?</option>
-                                                            {locations && locations.map((data: any, _: number) =>
-                                                                <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
-                                                            )}
-                                                        </select> */}
+                                                        />
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-col gap-2 text-xs">
+                                                <div className="flex flex-col basis-1/4 gap-2 text-xs">
                                                     <div className="font-semibold flex gap-1 items-center">
                                                         <GiAirplaneArrival className="text-base" />
                                                         <p>To</p>
                                                     </div>
                                                     <div className="">
-                                                        <Select className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2" style={{width : 150}}  options={locations ? locations && locations.map((data: any, _: number) => {
+                                                        <Select className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
+                                                        options={locations ? locations && locations.map((data: any, _: number) => {
                                                             return {
                                                                 label: `${data.city} (${data.IATA})`,
                                                                 value: JSON.stringify(data),
@@ -308,7 +299,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-col gap-2 text-xs ">
+                                                <div className="flex flex-col basis-1/4 gap-2 text-xs ">
                                                     <div className="font-semibold flex flex-row gap-2 items-center">
                                                         <RxCalendar className="text-base" />
                                                         <p>Depart</p>
@@ -317,13 +308,13 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <input
                                                             type={"date"}
                                                             onChange={onChangeDepartureDate}
-                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2"
+                                                            className="w-full outline-none focus:border-b focus:border-[#113B75] py-2"
                                                         />
                                                     </div>
                                                 </div>
 
                                                 {flightType.roundTrip &&
-                                                    <div className="flex flex-col gap-2 text-xs">
+                                                    <div className="flex flex-col basis-1/4 gap-2 text-xs">
                                                         <div className="font-semibold flex gap-2 items-center">
                                                             <RxCalendar className="text-sm" />
                                                             <p>Return</p>
@@ -332,39 +323,44 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             <input
                                                                 type={"date"}
                                                                 onChange={onChangeReturnDate}
-                                                                className="outline-none focus:border-b-2 focus:border-[#113B75] py-2"
+                                                                className="w-full outline-none focus:border-b-2 focus:border-[#113B75] py-2"
                                                             />
                                                         </div>
                                                     </div>
                                                 }
 
-                                                <div className="flex flex-col gap-2 text-xs px-4">
+                                                <div className="flex flex-col basis-1/4 gap-2 text-xs">
                                                     <div className="font-semibold flex gap-1 items-center">
                                                         <MdOutlineAirlineSeatReclineExtra className="text-lg" />
                                                         <p>cabin&nbsp;class&nbsp;travelers</p>
                                                     </div>
                                                     <div className="flex flex-row items-center gap-1">
-                                                        <input
-                                                            type={"text"}
-                                                            className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
-                                                            defaultValue={1}
-                                                            onChange={onChangeNumberOfPersons} />
-                                                        <Select 
-                                                            className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
-                                                            style={{width : 150}}  
-                                                            options={[
-                                                                { text:'Premium Economy', value: 'PremiumEconomy' },
-                                                                { text:'Business', value: 'Business' },
-                                                                { text:'First Class', value: 'FirstClass' }
-                                                            ].map((data: any, _: number) => {
-                                                                return {
-                                                                    label: `${data.text}`,
-                                                                    value: data.value,
-                                                                }
-                                                            })} 
-                                                            values={[]}
-                                                            onChange={(values : any) => onChangeSelectCabin(values[0]?.value)} 
-                                                        />
+                                                       <div className="basis-[10%]">
+                                                            <input
+                                                                type={"text"}
+                                                                className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
+                                                                defaultValue={1}
+                                                                onChange={onChangeNumberOfPersons} 
+                                                            />
+                                                       </div>
+
+                                                        <div className="basis-[92%]">
+                                                            <Select 
+                                                                className="py-2 pr-2"  
+                                                                options={[
+                                                                    { text:'Premium Economy', value: 'PremiumEconomy' },
+                                                                    { text:'Business', value: 'Business' },
+                                                                    { text:'First Class', value: 'FirstClass' }
+                                                                ].map((data: any, _: number) => {
+                                                                    return {
+                                                                        label: `${data.text}`,
+                                                                        value: data.value,
+                                                                    }
+                                                                })} 
+                                                                values={[]}
+                                                                onChange={(values : any) => onChangeSelectCabin(values[0]?.value)} 
+                                                            />
+                                                        </div>
                                                         {/* <select
                                                             onChange={onChangeSelectCabin}
                                                             className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
@@ -383,13 +379,11 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                     </div>
                                                 }
                                             </div>
-
-                                        </div>
                                     </div>
 
                                     <div className=" w-full flex flex-column ">
                                         {flightType.multiCity && 
-                                        <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={(e) => {
+                                        <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={(e: any) => {
                                             console.log('set timer func', e);
                                             setTimer(1);
                                         }} />}
