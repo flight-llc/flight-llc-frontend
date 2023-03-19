@@ -76,15 +76,16 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                         pathname: '/result',
                         query: `uuid=${responseData.data.flights[0].uuid}`
                     });
+                    setTimer(0);
                 } 
             }
             else {
+                setTimer(0);
                 if (responseData && !responseData['status']) {
                     return showToast({ message: responseData['message'] || 'Trip could not be found, please try again later.' , type: 'error' });
                 }
                 showToast({ message: 'Failed to find trip information, please try again later.' , type: 'error' });
             }
-            setTimer(0);
         },
         onError : error => {
             setTimer(0);
@@ -189,7 +190,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     }
   
     return (
-        (isLoading) ?
+        (timer > 0) ?
             <>
                 <Loader
                     fromIATA={bookFlight.fromIATA}
@@ -388,7 +389,10 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
                                     <div className=" w-full flex flex-column ">
                                         {flightType.multiCity && 
-                                        <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={setTimer}/>}
+                                        <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={(e) => {
+                                            console.log('set timer func', e);
+                                            setTimer(1);
+                                        }} />}
                                     </div>
                                 </form>
                             </div>
