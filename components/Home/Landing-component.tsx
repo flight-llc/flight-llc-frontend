@@ -119,33 +119,18 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         setFlightType({ ...flightType, multiCity: checked, roundTrip: false, oneWay: false });
     }
 
-    // const onChangeSelectFrom = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const { value } = target;
-    //     const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value);
-    //     console.log(fromLocation, fromRegion);
-    //     setBookFlight({ ...bookFlight, fromIATA, fromLocation, fromRegion });
-    // }
-
     const onChangeSelectFrom = (value: any) => {
-        console.log('value', value);
-        // const { value } = target;
-        const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value.value);
-        // console.log(fromLocation, fromRegion);
-        setBookFlight({ ...bookFlight, fromIATA, fromLocation, fromRegion });
+        if(value){
+            const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value);
+            setBookFlight({ ...bookFlight, fromIATA, fromLocation, fromRegion });
+        }
     }
 
-    // const onChangeSelectTo = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const { value } = target;
-    //     const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value);
-    //     console.log(toLocation, toRegion);
-    //     setBookFlight({ ...bookFlight, toIATA, toLocation, toRegion });
-    // }
-
     const onChangeSelectTo = (value : any) => {
-        // const { value } = target;
-        const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value.value);
-        // console.log(toLocation, toRegion);
-        setBookFlight({ ...bookFlight, toIATA, toLocation, toRegion });
+        if(value){
+            const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value);
+            setBookFlight({ ...bookFlight, toIATA, toLocation, toRegion });
+        }
     }
 
     const onChangeDepartureDate = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -157,11 +142,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         const { value: returnDate } = target;
         setBookFlight({ ...bookFlight, returnDate });
     }
-
-    // const onChangeSelectCabin = ({ target }: React.ChangeEvent<HTMLSelectElement>) => {
-    //     const { value: cabinClass } = target;
-    //     setBookFlight({ ...bookFlight, cabinClass });
-    // }
 
     const onChangeSelectCabin = (target: any) => {
         setBookFlight({ ...bookFlight, ...{ cabinClass: target } });
@@ -179,10 +159,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         const loaderTimer = 1;
         setTimer(loaderTimer);
 
-        // setTimeout(() => {
-        //     // handle request timeout
-        //     setTimer(0);
-        // }, loaderTimer);
         const {
             fromIATA,
             fromLocation,
@@ -293,12 +269,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             }
                                                             }) : []}
                                                             values={[]} 
-                                                            onChange={(values) => {
-                                                            // this.setValues(values)
-                                                            onChangeSelectFrom(values[0])
-                                                            }} 
-                                                        />
-                                                        {/* <select
+                                                            onChange={(values : any) => onChangeSelectFrom(values[0]?.value)} 
+                                                        />                                                        {/* <select
                                                             onChange={onChangeSelectFrom}
                                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
                                                             <option value="" className="text-[#ACB0B9]">Flight from?</option>
@@ -322,10 +294,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             }
                                                         }) : []} 
                                                         values={[]} 
-                                                        onChange={(values) => {
-                                                            // this.setValues(values)
-                                                            onChangeSelectTo(values[0])
-                                                        }} />
+                                                        onChange={(values : any) => onChangeSelectTo(values[0]?.value)} />
 
                                                         {/* <select
                                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
@@ -380,18 +349,20 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             defaultValue={1}
                                                             onChange={onChangeNumberOfPersons} />
                                                         <Select 
-                                                            className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  style={{width : 150}}  
-                                                            options={[{ text:'Premium Economy', value: 'PremiumEconomy' },{ text:'Business', value: 'Business' },{ text:'First Class', value: 'FirstClass' }].map((data: any, _: number) => {
+                                                            className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
+                                                            style={{width : 150}}  
+                                                            options={[
+                                                                { text:'Premium Economy', value: 'PremiumEconomy' },
+                                                                { text:'Business', value: 'Business' },
+                                                                { text:'First Class', value: 'FirstClass' }
+                                                            ].map((data: any, _: number) => {
                                                                 return {
                                                                     label: `${data.text}`,
                                                                     value: data.value,
                                                                 }
                                                             })} 
-                                                            onChange={(values) => {
-                                                                console.log('values', values);
-                                                            // this.setValues(values)
-                                                            onChangeSelectCabin(values[0].value)
-                                                            }} 
+                                                            values={[]}
+                                                            onChange={(values : any) => onChangeSelectCabin(values[0]?.value)} 
                                                         />
                                                         {/* <select
                                                             onChange={onChangeSelectCabin}

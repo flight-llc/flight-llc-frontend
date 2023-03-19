@@ -2307,7 +2307,7 @@ react-dom@18.2.0:
 
 react-dropdown-select@^4.9.3:
   version "4.9.3"
-  resolved "https://registry.npmjs.org/react-dropdown-select/-/react-dropdown-select-4.9.3.tgz"
+  resolved "https://registry.yarnpkg.com/react-dropdown-select/-/react-dropdown-select-4.9.3.tgz#505bc336f961809fb30218961970e97398d42011"
   integrity sha512-QSvt2v3XSLHSiebC3qxlbNzLFP5NSv+tagxlOLRjeOLEqlBD4qZYZVfGO9JPty6l4XEpSwSfyuUp9ksQajURGg==
   dependencies:
     "@emotion/react" "11.8.1"
