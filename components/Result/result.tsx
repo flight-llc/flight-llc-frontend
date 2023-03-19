@@ -129,8 +129,8 @@ const Result :FC<Props> = ({average, data}) => {
                     <div className='basis-1/2 p-8'>
                         <p className='text-[#909090] text-xs py-2'>From</p>
                         <p className='text-xl text-[#113B75] pb-2'>
-                            {queryResponseData?.data?.data?.fromLocationDTO.city}&nbsp;
-                            {`(${queryResponseData?.data?.data?.fromLocationDTO.IATA})`}
+                            {(queryResponseData?.data?.data?.fromLocationDTO.city || '')}&nbsp;
+                            {`(${(queryResponseData?.data?.data?.fromLocationDTO.IATA || '')})`}
                         </p>
 
                         <div className='w-full flex gap-2'>
@@ -144,8 +144,8 @@ const Result :FC<Props> = ({average, data}) => {
                         <div className=''>
                             <p className='text-[#909090] text-xs pb-2'>To</p>
                             <p className='text-xl text-[#113B75] pb-2'>
-                            {queryResponseData?.data?.data?.toLocationDTO.city}&nbsp;
-                            {`(${queryResponseData?.data?.data?.toLocationDTO.IATA})`}
+                            {(queryResponseData?.data?.data?.toLocationDTO.city || '')}&nbsp;
+                            {`(${(queryResponseData?.data?.data?.toLocationDTO.IATA || '')})`}
                             </p>
                         </div>
                         <div className='bg-[#E7E7E7] h-px w-1/2 my-2'/>
@@ -154,7 +154,7 @@ const Result :FC<Props> = ({average, data}) => {
                             <span className='text-[10px] text-[#909090]'>Name</span>
                             <input 
                             type={'text'} 
-                            defaultValue={queryResponseData?.data?.data?.name}
+                            defaultValue={(queryResponseData?.data?.data?.name || '')}
                             className='text-[#113B75] py-1 font-semibold outline-none w-full'
                             placeholder='Micheal Kors'
                             onChange={onChangeNameHandler}
@@ -165,7 +165,7 @@ const Result :FC<Props> = ({average, data}) => {
                             <span className='text-[10px] text-[#909090]'>Phone Number</span>
                             <input 
                             type={'text'}
-                            defaultValue={queryResponseData?.data?.data?.phone} 
+                            defaultValue={(queryResponseData?.data?.data?.phone || '')} 
                             className='text-[#113B75] py-1 font-semibold outline-none w-full'
                             placeholder='+1'
                             onChange={onChangePhoneNumberHandler}/>
@@ -187,13 +187,13 @@ const Result :FC<Props> = ({average, data}) => {
 
                     <div className='basis-1/2 p-8'>
                         <div className='flex text-[#113B75] font-bold justify-center pb-4'>
-                            <p className='text-4xl'>${queryResponseData?.data?.data?.totalCost}</p>
+                            <p className='text-4xl'>${(queryResponseData?.data?.data?.totalCost || '-')}</p>
                             <p className='text-sm'>&nbsp;*</p>
                         </div>
                         
                         {/* seat type */}
                         <div className='py-2'>       
-                            <p className='text-[#909090] text-xs text-center'>{queryResponseData?.data?.data?.cabinClass}</p>
+                            <p className='text-[#909090] text-xs text-center'>{(queryResponseData?.data?.data?.cabinClass || '')}</p>
                             <div className='bg-[#E7E7E7] h-px w-full my-2'/>
                         </div>  
                         <div className='flex justify-between items-center'>
@@ -231,7 +231,7 @@ const Result :FC<Props> = ({average, data}) => {
                             {/* number of booked passengers for flight*/}
                             <div className='w-fit text-center'>
                                 <p className='text-[#909090] text-xs text-center'>Passengers</p>
-                                <p className='text-[#113B75] font-semibold py-1'>{queryResponseData?.data?.data?.noOfPersons}</p>
+                                <p className='text-[#113B75] font-semibold py-1'>{(queryResponseData?.data?.data?.noOfPersons || '')}</p>
                             </div>
                         </div>
                          {/* passenger Email */}
@@ -239,7 +239,7 @@ const Result :FC<Props> = ({average, data}) => {
                             <span className='text-[10px] text-[#909090]'>Email</span>
                             <input 
                             type={'email'} 
-                            defaultValue={queryResponseData?.data?.data?.email}
+                            defaultValue={(queryResponseData?.data?.data?.email || '')}
                             className='text-[#113B75] py-1 font-semibold outline-none w-full'
                             placeholder='Korsmichaaelfk123@gmail.com'
                             onChange={onChangeEmailHandler}/>

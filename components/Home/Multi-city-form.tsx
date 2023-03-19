@@ -4,7 +4,7 @@ import { MdOutlineAirlineSeatReclineExtra } from 'react-icons/md';
 import { RxCalendar } from 'react-icons/rx';
 import Image from 'next/image';
 import Close from '@/public/Close.svg';
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { IBookFlightPayload } from '@/utils/types';
 import axios from 'axios';
 import https from 'https';
@@ -59,7 +59,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
         setValue,
         getValues,
         watch,
-        reset
+        reset,
     } = useForm<any>();
     //const watchAllInputFields = watch();
     const { fields, append , remove} = useFieldArray<IBookFlightPayload>({
@@ -96,6 +96,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                 }
                 showToast({ message: 'Failed to find trip information, please try again later.' , type: 'error' });
             }
+            setTimer(0);
         },
         onError : error => {
             showToast({ message: 'Flight Booking failed, please try again.', type: 'error'});
@@ -124,14 +125,15 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
         setPerson({ ...person, phone: value});
     }
       const onSubmitMultiCityFlights = () => {
-        const loaderTimer = 5000;
+        const loaderTimer = 1;
         setTimer(loaderTimer);
 
-        setTimeout(() => {
-            // handle request timeout
-            setTimer(0);
-        }, loaderTimer);
+        // setTimeout(() => {
+        //     // handle request timeout
+        //     setTimer(0);
+        // }, loaderTimer);
 
+        console.log('getValues()', getValues());
         const backendPayload = getValues().flights?.map((val : Partial<IBookFlightPayload>) => {
             const fromJsonObj = JSON.parse(val.fromIATA);
             const toJsonObj = JSON.parse(val.toIATA);
@@ -174,8 +176,14 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                                         <p>From</p>
                                     </div>
                                     <div className="">
+                                        
+                                    <Controller
+                                    control={control}
+                                    name="flights"
+                                    defaultValue={[]}
+                                    render={({ field: { value, onChange } }) => (
                                         <Select 
-                                            {...register(`flights.${i}.fromIATA`,{ required: true})}
+                                            // {...register(`flights.${i}.fromIATA`,{ required: true})}
                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
                                             style={{width : 150}}  
                                             options={locations ? locations && locations.map((data: any, _: number) => {
@@ -185,11 +193,28 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                                             }
                                             }) : []}
                                             values={[]} 
-                                            onChange={(values) => {
+                                            onChange={(value) => {
+                                                console.log('values', value);
+                                                let values: any[] = getValues().flights || [];
+                                                console.log('values', values);
+                                                values.push(value[0]);
+                                                onChange(values);
                                             // this.setValues(values)
                                             // onChangeSelectFrom(values[0])
                                             }} 
                                         />
+                                        // <Multiselect
+                                        //   options={rootCauseAnalysisCategorys}
+                                        //   isObject={false}
+                                        //   showCheckbox={true}
+                                        //   hidePlaceholder={true}
+                                        //   closeOnSelect={false}
+                                        //   onSelect={onChange}
+                                        //   onRemove={onChange}
+                                        //   selectedValues={value}
+                                        // />
+                                      )}
+                                    />
                                         {/* <select
                                             //onChange={onChangeSelectFrom}
                                             {...register(`flights.${i}.fromIATA`,{ required: true})}
