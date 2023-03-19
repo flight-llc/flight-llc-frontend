@@ -84,8 +84,10 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 }
                 showToast({ message: 'Failed to find trip information, please try again later.' , type: 'error' });
             }
+            setTimer(0);
         },
         onError : error => {
+            setTimer(0);
             showToast({ message: 'Flight Booking failed, please try again.', type: 'error'});
             console.log(error);
         }
@@ -128,7 +130,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         console.log('value', value);
         // const { value } = target;
         const { IATA: fromIATA, location: fromLocation, region: fromRegion } = JSON.parse(value.value);
-        console.log(fromLocation, fromRegion);
+        // console.log(fromLocation, fromRegion);
         setBookFlight({ ...bookFlight, fromIATA, fromLocation, fromRegion });
     }
 
@@ -142,7 +144,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     const onChangeSelectTo = (value : any) => {
         // const { value } = target;
         const { IATA: toIATA, location: toLocation, region: toRegion } = JSON.parse(value.value);
-        console.log(toLocation, toRegion);
+        // console.log(toLocation, toRegion);
         setBookFlight({ ...bookFlight, toIATA, toLocation, toRegion });
     }
 
@@ -162,7 +164,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     // }
 
     const onChangeSelectCabin = (target: any) => {
-        const { value: cabinClass } = target;
         setBookFlight({ ...bookFlight, ...{ cabinClass: target } });
     }
 
@@ -175,13 +176,13 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     async (event: React.SyntheticEvent<HTMLFormElement>)
     : Promise<void> => {
         event.preventDefault();
-        const loaderTimer = 5000;
+        const loaderTimer = 1;
         setTimer(loaderTimer);
 
-        setTimeout(() => {
-            // handle request timeout
-            setTimer(0);
-        }, loaderTimer);
+        // setTimeout(() => {
+        //     // handle request timeout
+        //     setTimer(0);
+        // }, loaderTimer);
         const {
             fromIATA,
             fromLocation,

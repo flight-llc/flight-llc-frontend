@@ -12,6 +12,7 @@ import {NextRouter, useRouter} from 'next/router';
 import { Loader } from '../Loader/Loader';
 import { useMutation } from 'react-query';
 import { showToast } from '@/utils/helpers';
+import Select from "react-dropdown-select";
 //import { bookFlightAction } from '@/utils/helpers';
 
 type props ={
@@ -154,7 +155,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
         mutate(backendPayload);
 
     }
-    useEffect(() => {
+    useEffect(() => {   
         const subscription = watch((value, { name, type }) => console.log(value, name, type));
         return () => subscription.unsubscribe();
     },[watch]);
@@ -173,7 +174,23 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                                         <p>From</p>
                                     </div>
                                     <div className="">
-                                        <select
+                                        <Select 
+                                            {...register(`flights.${i}.fromIATA`,{ required: true})}
+                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
+                                            style={{width : 150}}  
+                                            options={locations ? locations && locations.map((data: any, _: number) => {
+                                            return {
+                                                label: `${data.city} (${data.IATA})`,
+                                                value: JSON.stringify(data),
+                                            }
+                                            }) : []}
+                                            values={[]} 
+                                            onChange={(values) => {
+                                            // this.setValues(values)
+                                            // onChangeSelectFrom(values[0])
+                                            }} 
+                                        />
+                                        {/* <select
                                             //onChange={onChangeSelectFrom}
                                             {...register(`flights.${i}.fromIATA`,{ required: true})}
                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
@@ -181,7 +198,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                                             {locations && locations.map((data: any, _: number) =>
                                                 <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
                                             )}
-                                        </select>
+                                        </select> */}
                                     </div>
                                 </div>
 
@@ -191,8 +208,23 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                                         <p>To</p>
                                     </div>
                                     <div className="">
-
-                                        <select
+                                        <Select 
+                                            {...register(`flights.${i}.toIATA`,{ required: true})}
+                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
+                                            style={{width : 150}}  
+                                            options={locations ? locations && locations.map((data: any, _: number) => {
+                                            return {
+                                                label: `${data.city} (${data.IATA})`,
+                                                value: JSON.stringify(data),
+                                            }
+                                            }) : []}
+                                            values={[]} 
+                                            onChange={(values) => {
+                                            // this.setValues(values)
+                                            // onChangeSelectFrom(values[0])
+                                            }} 
+                                        />
+                                        {/* <select
                                             className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
                                             {...register(`flights.${i}.toIATA`,{ required: true})}
                                         //onChange={onChangeSelectTo}
@@ -201,7 +233,7 @@ export const MultiCityForm: FC<props> = ({bookFlight, locations, setTimer}) => {
                                             {locations && locations.map((data: any, _: number) =>
                                                 <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
                                             )}
-                                        </select>
+                                        </select> */}
                                     </div>
                                 </div>
 
