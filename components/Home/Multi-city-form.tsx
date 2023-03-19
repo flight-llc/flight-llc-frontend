@@ -174,17 +174,17 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                     <div className='max-h-[17rem] overflow-y-auto mt-4 rounded-lg'>
                         {fields && fields.map((data: any, i: number) =>
                             <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
-                                <div className="w-full flex p-3 bg-white mb-3 rounded-lg">
-                                    <section className="basis-full flex justify-between items-center gap-section">
-                                        <div className="flex flex-col gap-2 text-xs">
+                                <div className="w-[95%] flex p-3 bg-white mb-3 rounded-lg">
+                                    <section className="basis-full px-4 flex justify-between items-center gap-4">
+                                        <div className="flex  flex-col basis-1/4 gap-2 text-xs">
                                             <div className="font-semibold flex gap-1 items-center">
-                                                <GiAirplaneDeparture className="text-base" />
+                                                <GiAirplaneDeparture className="text-base"/>
                                                 <p>From</p>
                                             </div>
                                             <div className="">
                                                 <Select
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
-                                                    style={{ width: 150 }}
+                                                    placeholder='Flight From?'
+                                                    style={{border : 'none', padding : '0.5rem 0'}}
                                                     options={locations ? locations && locations.map((data: any, _: number) => {
                                                         return {
                                                             label: `${data.city} (${data.IATA})`,
@@ -199,15 +199,16 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col gap-2 text-xs">
+                                        <div className="flex flex-col basis-1/4 gap-2 text-xs">
                                             <div className="font-semibold flex gap-1 items-center">
                                                 <GiAirplaneArrival className="text-base" />
                                                 <p>To</p>
                                             </div>
                                             <div className="">
                                                 <Select
+                                                    placeholder='Where To?'
+                                                    style={{border : 'none', padding : '0.5rem 0'}}
                                                     className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
-                                                    style={{ width: 150 }}
                                                     options={locations ? locations && locations.map((data: any, _: number) => {
                                                         return {
                                                             label: `${data.city} (${data.IATA})`,
@@ -220,7 +221,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col gap-2 text-xs ">
+                                        <div className="flex flex-col basis-1/4 gap-2 text-xs ">
                                             <div className="font-semibold flex flex-row gap-2 items-center">
                                                 <RxCalendar className="text-base" />
                                                 <p>Depart</p>
@@ -229,47 +230,42 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 <input
                                                     type={"date"}
                                                     {...register(`flights.${i}.departDate`, { required: true })}
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2"
+                                                    className="w-full outline-none focus:border-b focus:border-[#113B75] py-2"
                                                 />
                                             </div>
                                         </div>
 
-                                        <div className="flex flex-col gap-2 text-xs px-4">
+                                        <div className="flex flex-col basis-1/4 gap-2 text-xs px-4">
                                             <div className="font-semibold flex gap-1 items-center">
                                                 <MdOutlineAirlineSeatReclineExtra className="text-lg" />
                                                 <p>cabin&nbsp;class&nbsp;travelers</p>
                                             </div>
                                             <div className="flex flex-row items-center gap-1">
-                                                <input
-                                                    type={"text"}
-                                                    {...register(`flights.${i}.noOfPersons`, { required: true })}
-                                                    className="outline-none focus:border-b w-4 focus:border-[#113B75] px-1 py-2"
-                                                    defaultValue={1}
-                                                />
-                                                <Select
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
-                                                    style={{ width: '100%' }}
-                                                    options={[
-                                                        { text: 'Premium Economy', value: 'PremiumEconomy' },
-                                                        { text: 'Business', value: 'Business' },
-                                                        { text: 'First Class', value: 'FirstClass' }
-                                                    ].map((data: any, _: number) => {
-                                                        return {
-                                                            label: `${data.text}`,
-                                                            value: data.value,
-                                                        }
-                                                    })}
-                                                    values={[]}
-                                                    onChange={(values: any) => setValue(`flights.${i}.cabinClass`, values[0]?.value)}
-                                                />
-                                                {/* <select
-                                            //onChange={onChangeSelectCabin}
-                                            {...register(`flights.${i}.cabinClass`,{ required: true})}
-                                            className="w-full outline-none focus:border-b focus:border-[#113B75] py-2 pr-2">
-                                            <option value="PremiumEconomy" className="text-[#ACB0B9]">Premium Economy</option>
-                                            <option value="Business" className="text-[#ACB0B9]">Business</option>
-                                            <option value="FirstClass" className="text-[#ACB0B9]">First Class</option>
-                                        </select> */}
+                                                <div className='basis-4'>
+                                                    <input
+                                                        type={"text"}
+                                                        {...register(`flights.${i}.noOfPersons`, { required: true })}
+                                                        className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
+                                                        defaultValue={1}
+                                                    />
+                                                </div>
+                                                <div className='basis-[92%]'>
+                                                    <Select
+                                                        style={{border : 'none', padding : '0.5rem 0'}}
+                                                        options={[
+                                                            { text: 'Premium Economy', value: 'PremiumEconomy' },
+                                                            { text: 'Business', value: 'Business' },
+                                                            { text: 'First Class', value: 'FirstClass' }
+                                                        ].map((data: any, _: number) => {
+                                                            return {
+                                                                label: `${data.text}`,
+                                                                value: data.value,
+                                                            }
+                                                        })}
+                                                        values={[]}
+                                                        onChange={(values: any) => setValue(`flights.${i}.cabinClass`, values[0]?.value)}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </section>

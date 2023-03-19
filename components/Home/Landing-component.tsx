@@ -105,6 +105,19 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
     const [timer, setTimer] = useState(0);
 
+    const style = {
+        control: (base : any) => ({
+            ...base,
+            border: '0 !important',
+            // This line disable the blue border
+            boxShadow: '0 !important',
+            '&:hover': {
+                border: '0 !important'
+            }
+         })
+         
+    }
+
     const onChangeOneWay = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
         const { checked } = target;
         setFlightType({ ...flightType, oneWay: checked, roundTrip: false, multiCity: false });
@@ -251,7 +264,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                             </div>
                                         </div>
                                         {/* travel form */}
-                                        <div className="pt-2 basis-full flex justify-between items-center gap-4">
+                                        <div className="pt-2 px-4 basis-full flex justify-between items-center gap-4">
                                                 <div className="flex flex-col basis-1/4 gap-2 text-xs">
                                                     <div className="font-semibold flex gap-1 items-center">
                                                         <GiAirplaneDeparture className="text-base" />
@@ -259,7 +272,9 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                     </div>
                                                     <div className="">
                                                         <Select 
-                                                            className=" outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
+                                                            placeholder="Flight From?"
+                                                            style={{border : 'none', padding:'0.5rem 0'}}
+                                                            //className=" outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
                                                             options={locations ? locations && locations.map((data: any, _: number) => {
                                                             return {
                                                                 label: `${data.city} (${data.IATA})`,
@@ -278,7 +293,10 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <p>To</p>
                                                     </div>
                                                     <div className="">
-                                                        <Select className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
+                                                        <Select
+                                                        placeholder="Where To?"
+                                                        style={{border : 'none', padding:'0.5rem 0'}}
+                                                        className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"  
                                                         options={locations ? locations && locations.map((data: any, _: number) => {
                                                             return {
                                                                 label: `${data.city} (${data.IATA})`,
@@ -287,15 +305,6 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         }) : []} 
                                                         values={[]} 
                                                         onChange={(values : any) => onChangeSelectTo(values[0]?.value)} />
-
-                                                        {/* <select
-                                                            className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
-                                                            onChange={onChangeSelectTo}>
-                                                            <option value="" className="text-[#ACB0B9]">Where To?</option>
-                                                            {locations && locations.map((data: any, _: number) =>
-                                                                <option key={_} value={JSON.stringify(data)} className="text-[#ACB0B9]">{data.city}&nbsp;{`(${data.IATA})`}</option>
-                                                            )}
-                                                        </select> */}
                                                     </div>
                                                 </div>
 
@@ -335,7 +344,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <p>cabin&nbsp;class&nbsp;travelers</p>
                                                     </div>
                                                     <div className="flex flex-row items-center gap-1">
-                                                       <div className="basis-[10%]">
+                                                       <div className="basis-4">
                                                             <input
                                                                 type={"text"}
                                                                 className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
@@ -346,7 +355,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
                                                         <div className="basis-[92%]">
                                                             <Select 
-                                                                className="py-2 pr-2"  
+                                                                 placeholder="Premium Economy"
+                                                                 style={{border : 'none'}}
                                                                 options={[
                                                                     { text:'Premium Economy', value: 'PremiumEconomy' },
                                                                     { text:'Business', value: 'Business' },
