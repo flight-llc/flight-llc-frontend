@@ -13,6 +13,7 @@ import { Loader } from '../Loader/Loader';
 import { useMutation } from 'react-query';
 import { showToast, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 import Select from 'react-dropdown-select';
+import { ReactDropDownSelectStyled } from '@/pages/_app';
 //import { bookFlightAction } from '@/utils/helpers';
 
 type props = {
@@ -182,9 +183,10 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 <p>From</p>
                                             </div>
                                             <div className="">
-                                                <Select
+                                                <ReactDropDownSelectStyled
                                                     placeholder='Flight From?'
-                                                    style={{border : 'none', padding : '0.5rem 0'}}
+                                                    dropdownPosition='top'
+                                                    required
                                                     options={locations ? locations && locations.map((data: any, _: number) => {
                                                         return {
                                                             label: `${data.city} (${data.IATA})`,
@@ -192,9 +194,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                         }
                                                     }) : []}
                                                     values={[]}
-                                                    onChange={(value: any) => {
-                                                        setValue(`flights.${i}.fromIATA`, value[0]?.value);
-                                                    }}
+                                                    onChange={(value: any) => setValue(`flights.${i}.fromIATA`, value[0]?.value)}
                                                 />
                                             </div>
                                         </div>
@@ -205,9 +205,10 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 <p>To</p>
                                             </div>
                                             <div className="">
-                                                <Select
+                                                <ReactDropDownSelectStyled
                                                     placeholder='Where To?'
-                                                    style={{border : 'none', padding : '0.5rem 0'}}
+                                                    dropdownPosition='top'
+                                                    required
                                                     className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
                                                     options={locations ? locations && locations.map((data: any, _: number) => {
                                                         return {
@@ -230,7 +231,10 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 <input
                                                     type={"date"}
                                                     {...register(`flights.${i}.departDate`, { required: true })}
-                                                    className="w-full outline-none focus:border-b focus:border-[#113B75] py-2"
+                                                    required
+                                                    className="w-full outline-none 
+                                                    hover:border-b hover:border-[#113B75] py-2 
+                                                    focus:border-b focus:border-[#113B75] py-2"
                                                 />
                                             </div>
                                         </div>
@@ -245,13 +249,16 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                     <input
                                                         type={"text"}
                                                         {...register(`flights.${i}.noOfPersons`, { required: true })}
-                                                        className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
+                                                        className="outline-none 
+                                                        focus:border-b w-full focus:border-[#113B75] px-1 py-2"
+                                                        required
+                                                        placeholder='1'
                                                         defaultValue={1}
                                                     />
                                                 </div>
                                                 <div className='basis-[92%]'>
-                                                    <Select
-                                                        style={{border : 'none', padding : '0.5rem 0'}}
+                                                    <ReactDropDownSelectStyled
+                                                        dropdownPosition='top'
                                                         options={[
                                                             { text: 'Premium Economy', value: 'PremiumEconomy' },
                                                             { text: 'Business', value: 'Business' },
@@ -262,6 +269,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                                 value: data.value,
                                                             }
                                                         })}
+                                                        required
                                                         values={[]}
                                                         onChange={(values: any) => setValue(`flights.${i}.cabinClass`, values[0]?.value)}
                                                     />
@@ -283,7 +291,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                     </div>
 
 
-                    <div className='flex flex-column gap-2'>
+                    <div className='w-[95%] flex flex-column gap-2'>
                         <div className='w-full flex justify-between items-center gap-4'>
                             <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
                                 <span className='text-[10px] text-[#909090]'>Name</span>

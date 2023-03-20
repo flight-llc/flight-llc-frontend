@@ -166,7 +166,7 @@ export async function getServerSideProps(){
     httpsAgent: httpsAgent,
   }).catch(err => err);
 
-  if(response.data?.code ===200 && flightLocations.data?.code === 200 && averageRating.data.code === 200){
+  //if(response.data?.code ===200 && flightLocations.data?.code === 200 && averageRating.data.code === 200){
     const {data} = await response.data;
     const {data : flightLocationsData} = await flightLocations.data;
     const {data : averageUserRatingsData} = await averageRating.data;
@@ -177,12 +177,12 @@ export async function getServerSideProps(){
         averageUserRatingsData
       }
     };
-  }
-  return{
-    props:{
-      data : [],
-      flightLocations : [],
-      averageRating : []
-    }
-  };
+  //}
+  // return{
+  //   props:{
+  //     data : [],
+  //     flightLocations : [],
+  //     averageRating : []
+  //   }
+  // };
 }
