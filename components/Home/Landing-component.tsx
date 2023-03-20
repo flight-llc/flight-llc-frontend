@@ -212,7 +212,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
             </>
             :
             <>
-                <div className="min-h-[120vh] relative block">
+                <div className={flightType.multiCity ? "min-h-[150vh] relative block" : "min-h-[100vh] relative block"}>
                     <Image
                         src={home_img_1}
                         alt="flight seat"
@@ -393,7 +393,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                             <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={(e: any) => {
                                                 console.log('set timer func', e);
                                                 setTimer(1);
-                                            }} />}
+                                        }} />}
                                     </div>
                                 </form>
                             </div>

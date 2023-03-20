@@ -169,195 +169,195 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
 
     return (
         <>
-            {
-                <div className='w-full'>
-                    {/* <form onSubmit={onSubmitMultiCityFlights}> */}
-                    <div className='max-h-[17rem] overflow-y-auto mt-4 rounded-lg'>
-                        {fields && fields.map((data: any, i: number) =>
-                            <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
-                                <div className="w-[95%] flex p-3 bg-white mb-3 rounded-lg">
-                                    <section className="basis-full px-4 flex justify-between items-center gap-4">
-                                        <div className="flex  flex-col basis-1/4 gap-2 text-xs">
-                                            <div className="font-semibold flex gap-1 items-center">
-                                                <GiAirplaneDeparture className="text-base"/>
-                                                <p>From</p>
-                                            </div>
-                                            <div className="">
-                                                <ReactDropDownSelectStyled
-                                                    placeholder='Flight From?'
-                                                    dropdownPosition='top'
-                                                    required
-                                                    options={locations ? locations && locations.map((data: any, _: number) => {
-                                                        return {
-                                                            label: `${data.city} (${data.IATA})`,
-                                                            value: JSON.stringify(data),
-                                                        }
-                                                    }) : []}
-                                                    values={[]}
-                                                    onChange={(value: any) => setValue(`flights.${i}.fromIATA`, value[0]?.value)}
-                                                />
-                                            </div>
+            
+            <div className='w-full'>
+                {/* <form onSubmit={onSubmitMultiCityFlights}> */}
+                <div className='max-h-[17rem] overflow-y-auto mt-4 rounded-lg'>
+                    {fields && fields.map((data: any, i: number) =>
+                        <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
+                            <div className="w-[95%] flex p-3 bg-white mb-3 rounded-lg">
+                                <section className="basis-full px-4 flex justify-between items-center gap-4">
+                                    <div className="flex  flex-col basis-1/4 gap-2 text-xs">
+                                        <div className="font-semibold flex gap-1 items-center">
+                                            <GiAirplaneDeparture className="text-base"/>
+                                            <p>From</p>
                                         </div>
-
-                                        <div className="flex flex-col basis-1/4 gap-2 text-xs">
-                                            <div className="font-semibold flex gap-1 items-center">
-                                                <GiAirplaneArrival className="text-base" />
-                                                <p>To</p>
-                                            </div>
-                                            <div className="">
-                                                <ReactDropDownSelectStyled
-                                                    placeholder='Where To?'
-                                                    dropdownPosition='top'
-                                                    required
-                                                    className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
-                                                    options={locations ? locations && locations.map((data: any, _: number) => {
-                                                        return {
-                                                            label: `${data.city} (${data.IATA})`,
-                                                            value: JSON.stringify(data),
-                                                        }
-                                                    }) : []}
-                                                    values={[]}
-                                                    onChange={(value: any) => setValue(`flights.${i}.toIATA`, value[0].value)}
-                                                />
-                                            </div>
+                                        <div className="">
+                                            <ReactDropDownSelectStyled
+                                                placeholder='Flight From?'
+                                                dropdownPosition='top'
+                                                required
+                                                options={locations ? locations && locations.map((data: any, _: number) => {
+                                                    return {
+                                                        label: `${data.city} (${data.IATA})`,
+                                                        value: JSON.stringify(data),
+                                                    }
+                                                }) : []}
+                                                values={[]}
+                                                onChange={(value: any) => setValue(`flights.${i}.fromIATA`, value[0]?.value)}
+                                            />
                                         </div>
+                                    </div>
 
-                                        <div className="flex flex-col basis-1/4 gap-2 text-xs ">
-                                            <div className="font-semibold flex flex-row gap-2 items-center">
-                                                <RxCalendar className="text-base" />
-                                                <p>Depart</p>
-                                            </div>
-                                            <div className="">
+                                    <div className="flex flex-col basis-1/4 gap-2 text-xs">
+                                        <div className="font-semibold flex gap-1 items-center">
+                                            <GiAirplaneArrival className="text-base" />
+                                            <p>To</p>
+                                        </div>
+                                        <div className="">
+                                            <ReactDropDownSelectStyled
+                                                placeholder='Where To?'
+                                                dropdownPosition='top'
+                                                required
+                                                className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
+                                                options={locations ? locations && locations.map((data: any, _: number) => {
+                                                    return {
+                                                        label: `${data.city} (${data.IATA})`,
+                                                        value: JSON.stringify(data),
+                                                    }
+                                                }) : []}
+                                                values={[]}
+                                                onChange={(value: any) => setValue(`flights.${i}.toIATA`, value[0].value)}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col basis-1/4 gap-2 text-xs ">
+                                        <div className="font-semibold flex flex-row gap-2 items-center">
+                                            <RxCalendar className="text-base" />
+                                            <p>Depart</p>
+                                        </div>
+                                        <div className="">
+                                            <input
+                                                type={"date"}
+                                                {...register(`flights.${i}.departDate`, { required: true })}
+                                                required
+                                                className="w-full outline-none 
+                                                hover:border-b hover:border-[#113B75] py-2 
+                                                focus:border-b focus:border-[#113B75] py-2"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex flex-col basis-1/4 gap-2 text-xs px-4">
+                                        <div className="font-semibold flex gap-1 items-center">
+                                            <MdOutlineAirlineSeatReclineExtra className="text-lg" />
+                                            <p>cabin&nbsp;class&nbsp;travelers</p>
+                                        </div>
+                                        <div className="flex flex-row items-center gap-1">
+                                            <div className='basis-4'>
                                                 <input
-                                                    type={"date"}
-                                                    {...register(`flights.${i}.departDate`, { required: true })}
+                                                    type={"text"}
+                                                    {...register(`flights.${i}.noOfPersons`, { required: true })}
+                                                    className="outline-none 
+                                                    focus:border-b w-full focus:border-[#113B75] px-1 py-2"
                                                     required
-                                                    className="w-full outline-none 
-                                                    hover:border-b hover:border-[#113B75] py-2 
-                                                    focus:border-b focus:border-[#113B75] py-2"
+                                                    placeholder='1'
+                                                    defaultValue={1}
+                                                />
+                                            </div>
+                                            <div className='basis-[92%]'>
+                                                <ReactDropDownSelectStyled
+                                                    dropdownPosition='top'
+                                                    options={[
+                                                        { text: 'Premium Economy', value: 'PremiumEconomy' },
+                                                        { text: 'Business', value: 'Business' },
+                                                        { text: 'First Class', value: 'FirstClass' }
+                                                    ].map((data: any, _: number) => {
+                                                        return {
+                                                            label: `${data.text}`,
+                                                            value: data.value,
+                                                        }
+                                                    })}
+                                                    required
+                                                    values={[]}
+                                                    onChange={(values: any) => setValue(`flights.${i}.cabinClass`, values[0]?.value)}
                                                 />
                                             </div>
                                         </div>
-
-                                        <div className="flex flex-col basis-1/4 gap-2 text-xs px-4">
-                                            <div className="font-semibold flex gap-1 items-center">
-                                                <MdOutlineAirlineSeatReclineExtra className="text-lg" />
-                                                <p>cabin&nbsp;class&nbsp;travelers</p>
-                                            </div>
-                                            <div className="flex flex-row items-center gap-1">
-                                                <div className='basis-4'>
-                                                    <input
-                                                        type={"text"}
-                                                        {...register(`flights.${i}.noOfPersons`, { required: true })}
-                                                        className="outline-none 
-                                                        focus:border-b w-full focus:border-[#113B75] px-1 py-2"
-                                                        required
-                                                        placeholder='1'
-                                                        defaultValue={1}
-                                                    />
-                                                </div>
-                                                <div className='basis-[92%]'>
-                                                    <ReactDropDownSelectStyled
-                                                        dropdownPosition='top'
-                                                        options={[
-                                                            { text: 'Premium Economy', value: 'PremiumEconomy' },
-                                                            { text: 'Business', value: 'Business' },
-                                                            { text: 'First Class', value: 'FirstClass' }
-                                                        ].map((data: any, _: number) => {
-                                                            return {
-                                                                label: `${data.text}`,
-                                                                value: data.value,
-                                                            }
-                                                        })}
-                                                        required
-                                                        values={[]}
-                                                        onChange={(values: any) => setValue(`flights.${i}.cabinClass`, values[0]?.value)}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                                <section className='' onClick={() => remove(i)}>
-                                    <Image
-                                        src={Close}
-                                        alt=""
-                                        width={15}
-                                        height={15}
-                                    />
+                                    </div>
                                 </section>
                             </div>
-                        )}
-                    </div>
+                            <section className='' onClick={() => remove(i)}>
+                                <Image
+                                    src={Close}
+                                    alt=""
+                                    width={15}
+                                    height={15}
+                                />
+                            </section>
+                        </div>
+                    )}
+                </div>
 
 
-                    <div className='w-[95%] flex flex-column gap-2'>
-                        <div className='w-full flex justify-between items-center gap-4'>
-                            <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
-                                <span className='text-[10px] text-[#909090]'>Name</span>
-                                <input
-                                    type={'text'}
-                                    required
-                                    className='text-[#113B75] py-1 font-semibold outline-none w-full'
-                                    placeholder='Micheal Kors'
-                                    onChange={onChangeNameHandler}
-                                />
-                            </div>
-                            {/* Phone number with country code */}
-                            <div className= {`${person.phone && !validatePhoneNumberString(person.phone)
-                                ? 'w-1/4 bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
-                                : 'w-1/4 bg-white rounded-lg p-2 text-xs my-4'}`}>
-                                <span className='text-[10px] text-[#909090]'>Phone Number</span>
-                                <input
-                                    type={'text'}
-                                    required
-                                    className='text-[#113B75] py-1 font-semibold outline-none w-full'
-                                    placeholder='+1'
-                                    onChange={onChangePhoneNumberHandler}
-                                />
-                            </div>
-                            <div className={`${person.email && !validateEmail(person.email) 
-                            ? 'w-1/4 bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
-                            : 'w-1/4 bg-white rounded-lg p-2 text-xs my-4'}`}>
-                                <span className='text-[10px] text-[#909090]'>email</span>
-                                <input
-                                    type={'text'}
-                                    required
-                                    className='text-[#113B75] py-1 font-semibold outline-none w-full'
-                                    placeholder='kors@gmail.com'
-                                    onChange={onChangeEmailHandler}
-                                />
-                            </div>
+                <div className='w-[95%] flex flex-column gap-2 mt-2'>
+                    <div className='w-full flex justify-between items-center gap-4'>
+                        <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
+                            <span className='text-[10px] text-[#909090]'>Name</span>
                             <input
-                                type={'submit'}
-                                value={"Send Request"}
-                                onClick={onSubmitMultiCityFlights}
-                                readOnly
-                                disabled={disableButton()}
-                                className='bg-[#113B75] 
-                                text-white 
-                                rounded-lg p-3.5 
-                                px-6 text-center 
-                                w-fit mt-4 text-xs
-                                disabled:bg-[#EFF0F6]'
+                                type={'text'}
+                                required
+                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                placeholder='Micheal Kors'
+                                onChange={onChangeNameHandler}
                             />
                         </div>
+                        {/* Phone number with country code */}
+                        <div className= {`${person.phone && !validatePhoneNumberString(person.phone)
+                            ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
+                            : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`}>
+                            <span className='text-[10px] text-[#909090]'>Phone Number</span>
+                            <input
+                                type={'text'}
+                                required
+                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                placeholder='+1'
+                                onChange={onChangePhoneNumberHandler}
+                            />
+                        </div>
+                        <div className={`${person.email && !validateEmail(person.email) 
+                        ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
+                        : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`}>
+                            <span className='text-[10px] text-[#909090]'>email</span>
+                            <input
+                                type={'text'}
+                                required
+                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                placeholder='kors@gmail.com'
+                                onChange={onChangeEmailHandler}
+                            />
+                        </div>
+                        <input
+                            type={'submit'}
+                            value={"Send Request"}
+                            onClick={onSubmitMultiCityFlights}
+                            readOnly
+                            disabled={disableButton()}
+                            className='bg-[#113B75] 
+                            text-white 
+                            rounded-lg p-3.5 
+                            px-6 text-center 
+                            w-fit text-xs
+                            disabled:bg-[#EFF0F6]'
+                        />
                     </div>
-                    <div className='w-fit'>
-                        <button
-                            onClick={appendFlight}
-                            className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center mt-4 text-xs'>
-                            Add Flight
-                        </button>
-                        <button
-                            onClick={() => setValue('flights', [])}
-                            className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center mt-4 text-xs'>
-                            Clear all
-                        </button>
-                    </div>
-                    {/* </form> */}
                 </div>
-            }</>
+                <div className='w-fit mt-2'>
+                    <button
+                        onClick={appendFlight}
+                        className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
+                        Add Flight
+                    </button>
+                    <button
+                        onClick={() => setValue('flights', [])}
+                        className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
+                        Clear all
+                    </button>
+                </div>
+                {/* </form> */}
+            </div>
+        </>
     );
 }
 
