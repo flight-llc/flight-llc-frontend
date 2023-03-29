@@ -13,7 +13,7 @@ export const ReadMore :FC<Props> = ({ children }) => {
   };
   return (
     <p className="text text-black text-xs pt-2 text-start">
-      {isReadMore ? text.slice(0, 150) : text}
+      {isReadMore ? text.slice(0, 120) : text}
       <span onClick={toggleReadMore} className="read-or-hide">
         {isReadMore ? "...read more" : " show less"}
       </span>

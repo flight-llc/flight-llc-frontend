@@ -103,9 +103,11 @@ const SpecialOffer: SpecialOffersInterface[] = [
     }
 ];
 export const SpecialOffers: FC<props> = ({ offers }) => {
+
     const [isReadMore, setIsReadMore] = useState<boolean>(true);
+
     return (
-        <div className="my-4" id="deal">
+        <div className="my-4 p-12" id="deal">
             <Swiper
                 slidesPerView={3}
                 spaceBetween={20}
@@ -123,28 +125,30 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                         slidesPerView: 2,
                         spaceBetween: 10
                     },
-                    992:{
-                        slidesPerView : 2.5,
-                        spaceBetween:10
+                    992: {
+                        slidesPerView: 2.5,
+                        spaceBetween: 10
                     },
-                    1200:{
-                        slidesPerView : 3,
-                        spaceBetween:10
+                    1200: {
+                        slidesPerView: 3,
+                        spaceBetween: 10
                     }
                 }}
                 className="mySwiper"
+                style={{padding : '0 2rem'}}
             >
                 {SpecialOffer && SpecialOffer.map((data: any, i: number) =>
-                    <SwiperSlide key={i} >
-                        <div className="max-w-sm bg-[#F1F1F2] rounded-3xl">
+                    <SwiperSlide key={i}>
+                      <div className="">
+                        <div className="bg-[#F1F1F2] rounded-3xl">
                             {/* <a href="#"> */}
                             <div className="w-full h-[15rem] rounded-t-3xl">
                                 {/* <object data={data.image} className="rounded-t-lg"></object> */}
                                 <Image
-                                    src={data.image}
-                                    alt={data.name}
-                                    //fill 
-                                    className="rounded-t-3xl w-full h-[15rem]" />
+                                src={data.image}
+                                alt={data.name}
+                                //fill 
+                                className="rounded-t-3xl w-full h-[15rem]" />
                             </div>
                             {/* </a> className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" */}
                             <div className="px-4 py-2">
@@ -171,6 +175,7 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                                 </div>
                             </div>
                         </div>
+                      </div>
                     </SwiperSlide>
                 )}
 

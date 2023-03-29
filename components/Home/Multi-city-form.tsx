@@ -343,7 +343,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                         />
                     </div>
                 </div>
-                <div className='w-fit mt-2'>
+                <div className='w-fit mt-4'>
                     <button
                         onClick={appendFlight}
                         className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>

@@ -212,7 +212,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
             </>
             :
             <>
-                <div className={flightType.multiCity ? "min-h-[150vh] relative block" : "min-h-[100vh] relative block"}>
+                <div className={flightType.multiCity ? "min-h-[150vh] relative block" : "min-h-[120vh] relative block"}>
                     <Image
                         src={home_img_1}
                         alt="flight seat"
@@ -410,7 +410,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
                     {/* special offers */}
                     <div className="w-full p-4 flex justify-center">
-                        <div className="w-4/5 h-auto pt-16 pb-8">
+                        <div className="w-10/12 h-auto pt-16 pb-8">
                             <p className="text-xl font-semibold text-[#2C53B8] text-center">
                                 <h1 className="text-4xl text-center capitalize bg-gradient-to-r from-[#3070CC] to-[#134997]">Special offers</h1>
                                 <p className="text-center text-sm font-normal text-black py-4">Don&apos;t Miss Out on Our Deals on Business Class Flights&#33;</p>
