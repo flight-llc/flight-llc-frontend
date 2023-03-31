@@ -68,7 +68,7 @@ export const NavBar:FC<props> = ({textColor}) => {
                 </button>
 
                 <div id="dropdown" className="absolute hidden divide-y divide-gray-100 w-fit"
-                style={{top : '8%', right : '6.5%'}}>
+                style={{top : '8%', right : '5.5%'}}>
                     <ul 
                     className={`py-2 text-xs text-center ${textColor}`} 
                     aria-labelledby="dropdownHoverButton">

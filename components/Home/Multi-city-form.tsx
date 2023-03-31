@@ -172,7 +172,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
             
             <div className='w-full'>
                 {/* <form onSubmit={onSubmitMultiCityFlights}> */}
-                <div className='max-h-[17rem] overflow-y-auto mt-4 rounded-lg'>
+                <div className='h-[12rem] overflow-y-auto mt-4 rounded-lg'>
                     {fields && fields.map((data: any, i: number) =>
                         <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
                             <div className="w-[95%] flex p-3 bg-white mb-3 rounded-lg">
