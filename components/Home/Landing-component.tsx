@@ -212,7 +212,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
             </>
             :
             <>
-                <div className={flightType.multiCity ? "min-h-[150vh] relative block" : "min-h-[120vh] relative block"}>
+                <div className={flightType.multiCity ? "w-full min-h-[150vh] relative block" : "w-full min-h-[120vh] relative block"}>
                     <Image
                         src={home_img_1}
                         alt="flight seat"
