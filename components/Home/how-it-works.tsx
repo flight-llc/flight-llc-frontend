@@ -6,6 +6,7 @@ import { FC } from "react";
 
 export const HowItWorks: FC = () => {
     return (
+        //overlap-group7
         <div className="overlap-group7">
             <div className="how-it-works-1 text-5xl pl-4" id="HowItWorks">How It Works</div>
             <div className="group-1176 nunitosans-normal-white-14-5px text-center">

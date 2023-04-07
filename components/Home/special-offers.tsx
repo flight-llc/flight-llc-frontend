@@ -123,11 +123,7 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                     // when window width is >= 640px
                     640: {
                         slidesPerView: 2,
-                        spaceBetween: 10
-                    },
-                    992: {
-                        slidesPerView: 2.5,
-                        spaceBetween: 10
+                        spaceBetween: 20
                     },
                     1200: {
                         slidesPerView: 3,

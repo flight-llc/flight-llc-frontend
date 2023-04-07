@@ -15,8 +15,8 @@ export const PrivacyPolicy: FC<props> = ({policy}) => {
     <div id="bg-cloud" className="w-full p-4 flex justify-center">
       <div className="w-4/5 h-auto py-16">
         <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">
-          <span className="text-[#6E7491]">Privacy Policy</span></p>
-          <div dangerouslySetInnerHTML={{ __html: policy?.data?.textContent}} />
+          <span className="text-[#6E7491] py-2">Privacy Policy</span></p>
+          <div className="text-justify" dangerouslySetInnerHTML={{ __html: policy?.data?.textContent}} />
       </div>
     </div>
 

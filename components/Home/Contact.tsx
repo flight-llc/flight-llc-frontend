@@ -106,7 +106,7 @@ export const ContactUs: FC<props> = ({setTimer}) => {
     return (
         <>
         <div className="w-full bg-white text-black flex justify-center" id='ContactUs'>
-            <div className="w-3/5 my-8">
+            <div className="lg:w-3/5 my-8">
                 <p className="text-center uppercase text-[#6E7491] text-lg font-semibold my-8">Contact us</p>
 
                 <div className="text-[#6E7491] text-center text-sm py-8">
@@ -123,7 +123,7 @@ export const ContactUs: FC<props> = ({setTimer}) => {
                     <section className="w-full flex justify-center">
                         <form 
                         id="contact-form" 
-                        className="w-1/2 my-12" 
+                        className="md:w-3/5 lg:w-[55%] xl:w-1/2 my-12" 
                         onSubmit={onSubmitFormHandler}>
                             <input type="email"
                                 className={contactDetails.email && !validateEmail(contactDetails.email) 

@@ -26,6 +26,26 @@ export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
             navigation={true}
             modules={[Navigation]}
             className="mySwiper"
+            breakpoints={{
+              // when window width is >= 480px
+              480: {
+                  slidesPerView: 1.5,
+                  spaceBetween: 10
+              },
+              // when window width is >= 640px
+              640: {
+                  slidesPerView: 2,
+                  spaceBetween: 10
+              },
+              992: {
+                  slidesPerView: 2,
+                  spaceBetween: 10
+              },
+              1200: {
+                  slidesPerView: 3,
+                  spaceBetween: 10
+              }
+          }}
           >
             {comments && comments?.rows?.map((data: ReviewRowType, i: number) =>
               <SwiperSlide key={i}>

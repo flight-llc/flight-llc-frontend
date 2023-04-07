@@ -70,7 +70,7 @@ export const NavBar:FC<props> = ({textColor}) => {
                 <div id="dropdown" className="absolute hidden divide-y divide-gray-100 w-fit"
                 style={{top : '8%', right : '5.5%'}}>
                     <ul 
-                    className={`py-2 text-xs text-center ${textColor}`} 
+                    className={`py-6 text-xs text-center ${textColor}`} 
                     aria-labelledby="dropdownHoverButton">
                     <Link href={'/#AboutUs'}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">About</p>
