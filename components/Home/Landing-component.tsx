@@ -234,166 +234,168 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             </div>
 
                             {/* Travel info */}
-                            <div className="w-full flex justify-center">
+                            <div className="w-full">
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e)
-                                    : e.preventDefault()} className="w-full">
-                                    <div className="mt-12 w-[95%] bg-white border border-[#eee] rounded-lg p-4">
-                                        <div className="border-b border-[#eee] flex justify-center items-center pb-3">
-                                            <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
-                                                <input type="radio"
-                                                    defaultChecked
-                                                    id="html"
-                                                    name="fav_language"
-                                                    defaultValue="one Way"
-                                                    onChange={onChangeOneWay} />
-                                                <label htmlFor="html">one&nbsp;way</label>
-                                                <input
-                                                    type="radio"
-                                                    id="html"
-                                                    name="fav_language"
-                                                    defaultValue="Round Trip"
-                                                    onChange={onChangeRoundTrip} />
-                                                <label htmlFor="html">round&nbsp;trip</label>
-                                                <input
-                                                    type="radio"
-                                                    id="html"
-                                                    name="fav_language"
-                                                    defaultValue="Multi city"
-                                                    onChange={onChangeMulti} />
-                                                <label htmlFor="html">multi&nbsp;city</label>
-                                            </div>
-                                        </div>
-                                        {/* travel form */}
-                                        <div className="pt-2 px-4 basis-full flex justify-between items-center gap-4">
-                                            <div className="flex flex-col basis-1/4 gap-2 text-xs">
-                                                <div className="font-semibold flex gap-1 items-center">
-                                                    <GiAirplaneDeparture className="text-base" />
-                                                    <p>From</p>
-                                                </div>
-                                                <div className="">
-                                                    <ReactDropDownSelectStyled
-                                                        required
-                                                        placeholder="Flight From?"
-                                                        options={locations ? locations && locations.map((data: any, _: number) => {
-                                                            return {
-                                                                label: `${data.city} (${data.IATA})`,
-                                                                value: JSON.stringify(data),
-                                                            }
-                                                        }) : []}
-                                                        values={[]}
-                                                        onChange={(values: any) => onChangeSelectFrom(values[0]?.value)}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-col basis-1/4 gap-2 text-xs">
-                                                <div className="font-semibold flex gap-1 items-center">
-                                                    <GiAirplaneArrival className="text-base" />
-                                                    <p>To</p>
-                                                </div>
-                                                <div className="">
-                                                    <ReactDropDownSelectStyled
-                                                        placeholder="Where To?"
-                                                        options={locations ? locations && locations.map((data: any, _: number) => {
-                                                            return {
-                                                                label: `${data.city} (${data.IATA})`,
-                                                                value: JSON.stringify(data),
-                                                            }
-                                                        }) : []}
-                                                        values={[]}
-                                                        onChange={(values: any) => onChangeSelectTo(values[0]?.value)} />
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-col basis-1/4 gap-2 text-xs ">
-                                                <div className="font-semibold flex flex-row gap-2 items-center">
-                                                    <RxCalendar className="text-base" />
-                                                    <p>Depart</p>
-                                                </div>
-                                                <div className="">
+                                    : e.preventDefault()} className="w-full flex justify-center">
+                                    <div className="lg:w-[90%] xl:w-[80%]">
+                                        <div className="mt-12 md:w-[96%] bg-white border border-[#eee] rounded-lg p-4">
+                                            <div className="border-b border-[#eee] flex justify-center items-center pb-3">
+                                                <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
+                                                    <input type="radio"
+                                                        defaultChecked
+                                                        id="html"
+                                                        name="fav_language"
+                                                        defaultValue="one Way"
+                                                        onChange={onChangeOneWay} />
+                                                    <label htmlFor="html">one&nbsp;way</label>
                                                     <input
-                                                        type={"date"}
-                                                        required
-                                                        onChange={onChangeDepartureDate}
-                                                        className="w-full outline-none
-                                                        hover:border-b hover:border-[#113B75] py-2  
-                                                        focus:border-b focus:border-[#113B75] py-2"
-                                                    />
+                                                        type="radio"
+                                                        id="html"
+                                                        name="fav_language"
+                                                        defaultValue="Round Trip"
+                                                        onChange={onChangeRoundTrip} />
+                                                    <label htmlFor="html">round&nbsp;trip</label>
+                                                    <input
+                                                        type="radio"
+                                                        id="html"
+                                                        name="fav_language"
+                                                        defaultValue="Multi city"
+                                                        onChange={onChangeMulti} />
+                                                    <label htmlFor="html">multi&nbsp;city</label>
                                                 </div>
                                             </div>
-
-                                            {flightType.roundTrip &&
+                                            {/* travel form */}
+                                            <div className="pt-2 px-4 basis-full flex justify-between items-center gap-4">
                                                 <div className="flex flex-col basis-1/4 gap-2 text-xs">
-                                                    <div className="font-semibold flex gap-2 items-center">
-                                                        <RxCalendar className="text-sm" />
-                                                        <p>Return</p>
+                                                    <div className="font-semibold flex gap-1 items-center">
+                                                        <GiAirplaneDeparture className="text-base" />
+                                                        <p>From</p>
+                                                    </div>
+                                                    <div className="">
+                                                        <ReactDropDownSelectStyled
+                                                            required
+                                                            placeholder="Flight From?"
+                                                            options={locations ? locations && locations.map((data: any, _: number) => {
+                                                                return {
+                                                                    label: `${data.city} (${data.IATA})`,
+                                                                    value: JSON.stringify(data),
+                                                                }
+                                                            }) : []}
+                                                            values={[]}
+                                                            onChange={(values: any) => onChangeSelectFrom(values[0]?.value)}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col basis-1/4 gap-2 text-xs">
+                                                    <div className="font-semibold flex gap-1 items-center">
+                                                        <GiAirplaneArrival className="text-base" />
+                                                        <p>To</p>
+                                                    </div>
+                                                    <div className="">
+                                                        <ReactDropDownSelectStyled
+                                                            placeholder="Where To?"
+                                                            options={locations ? locations && locations.map((data: any, _: number) => {
+                                                                return {
+                                                                    label: `${data.city} (${data.IATA})`,
+                                                                    value: JSON.stringify(data),
+                                                                }
+                                                            }) : []}
+                                                            values={[]}
+                                                            onChange={(values: any) => onChangeSelectTo(values[0]?.value)} />
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col basis-1/4 gap-2 text-xs ">
+                                                    <div className="font-semibold flex flex-row gap-2 items-center">
+                                                        <RxCalendar className="text-base" />
+                                                        <p>Depart</p>
                                                     </div>
                                                     <div className="">
                                                         <input
                                                             type={"date"}
-                                                            onChange={onChangeReturnDate}
                                                             required
+                                                            onChange={onChangeDepartureDate}
                                                             className="w-full outline-none
+                                                        hover:border-b hover:border-[#113B75] py-2  
+                                                        focus:border-b focus:border-[#113B75] py-2"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                {flightType.roundTrip &&
+                                                    <div className="flex flex-col basis-1/4 gap-2 text-xs">
+                                                        <div className="font-semibold flex gap-2 items-center">
+                                                            <RxCalendar className="text-sm" />
+                                                            <p>Return</p>
+                                                        </div>
+                                                        <div className="">
+                                                            <input
+                                                                type={"date"}
+                                                                onChange={onChangeReturnDate}
+                                                                required
+                                                                className="w-full outline-none
                                                             hover:border-b hover:border-[#113B75] py-2 
                                                             focus:border-b focus:border-[#113B75] py-2"
-                                                        />
+                                                            />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            }
+                                                }
 
-                                            <div className="flex flex-col basis-1/4 gap-2 text-xs">
-                                                <div className="font-semibold flex gap-1 items-center">
-                                                    <MdOutlineAirlineSeatReclineExtra className="text-lg" />
-                                                    <p>cabin&nbsp;class&nbsp;travelers</p>
-                                                </div>
-                                                <div className="flex flex-row items-center gap-1">
-                                                    <div className="basis-4">
-                                                        <input
-                                                            type={"text"}
-                                                            className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
-                                                            defaultValue={1}
-                                                            required
-                                                            onChange={onChangeNumberOfPersons}
-                                                        />
+                                                <div className="flex flex-col basis-1/4 gap-2 text-xs">
+                                                    <div className="font-semibold flex gap-1 items-center">
+                                                        <MdOutlineAirlineSeatReclineExtra className="text-lg" />
+                                                        <p>cabin&nbsp;class&nbsp;travelers</p>
                                                     </div>
+                                                    <div className="flex flex-row items-center gap-1">
+                                                        <div className="basis-4">
+                                                            <input
+                                                                type={"text"}
+                                                                className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
+                                                                defaultValue={1}
+                                                                required
+                                                                onChange={onChangeNumberOfPersons}
+                                                            />
+                                                        </div>
 
-                                                    <div className="basis-[92%]">
-                                                        <ReactDropDownSelectStyled
-                                                            placeholder="Premium Economy"
-                                                            required
-                                                            options={[
-                                                                { text: 'Premium Economy', value: 'PremiumEconomy' },
-                                                                { text: 'Business', value: 'Business' },
-                                                                { text: 'First Class', value: 'FirstClass' }
-                                                            ].map((data: any, _: number) => {
-                                                                return {
-                                                                    label: `${data.text}`,
-                                                                    value: data.value,
-                                                                }
-                                                            })}
-                                                            values={[]}
-                                                            onChange={(values: any) => onChangeSelectCabin(values[0]?.value)}
-                                                        />
+                                                        <div className="basis-[92%]">
+                                                            <ReactDropDownSelectStyled
+                                                                placeholder="Premium Economy"
+                                                                required
+                                                                options={[
+                                                                    { text: 'Premium Economy', value: 'PremiumEconomy' },
+                                                                    { text: 'Business', value: 'Business' },
+                                                                    { text: 'First Class', value: 'FirstClass' }
+                                                                ].map((data: any, _: number) => {
+                                                                    return {
+                                                                        label: `${data.text}`,
+                                                                        value: data.value,
+                                                                    }
+                                                                })}
+                                                                values={[]}
+                                                                onChange={(values: any) => onChangeSelectCabin(values[0]?.value)}
+                                                            />
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                {!flightType.multiCity &&
+                                                    <div className="mt-3">
+                                                        <button type="submit" className="text-sm text-white text-center bg-[#113B75] rounded-md py-3 px-6">
+                                                            Search&nbsp;Flight
+                                                        </button>
+                                                    </div>
+                                                }
                                             </div>
-
-                                            {!flightType.multiCity &&
-                                                <div className="mt-3">
-                                                    <button type="submit" className="text-sm text-white text-center bg-[#113B75] rounded-md py-3 px-6">
-                                                        Search&nbsp;Flight
-                                                    </button>
-                                                </div>
-                                            }
                                         </div>
-                                    </div>
 
-                                    <div className=" w-full flex flex-column ">
-                                        {flightType.multiCity &&
-                                            <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={(e: any) => {
-                                                console.log('set timer func', e);
-                                                setTimer(1);
-                                        }} />}
+                                        <div className=" w-full flex flex-column ">
+                                            {flightType.multiCity &&
+                                                <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={(e: any) => {
+                                                    console.log('set timer func', e);
+                                                    setTimer(1);
+                                                }} />}
+                                        </div>
                                     </div>
                                 </form>
                             </div>

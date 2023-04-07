@@ -175,7 +175,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                 <div className='h-[12rem] overflow-y-auto mt-4 rounded-lg'>
                     {fields && fields.map((data: any, i: number) =>
                         <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
-                            <div className="w-[95%] flex p-3 bg-white mb-3 rounded-lg">
+                            <div className="w-full flex p-3 bg-white mb-3 rounded-lg">
                                 <section className="basis-full px-4 flex justify-between items-center gap-4">
                                     <div className="flex  flex-col basis-1/4 gap-2 text-xs">
                                         <div className="font-semibold flex gap-1 items-center">
@@ -291,7 +291,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                 </div>
 
 
-                <div className='w-[95%] flex flex-column gap-2 mt-2'>
+                <div className='w-full flex flex-column gap-2 mt-2'>
                     <div className='w-full flex justify-between items-center gap-4'>
                         <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
                             <span className='text-[10px] text-[#909090]'>Name</span>

@@ -14,10 +14,10 @@ const footerInfo = {
             title : 'How it works',
             route : '/#HowItWorks'
         },
-        {
-            title : 'Blog',
-            route : '/blog'
-        },
+        // {
+        //     title : 'Blog',
+        //     route : '/blog'
+        // },
         {
             title : 'Deals',
             // route : '/route'

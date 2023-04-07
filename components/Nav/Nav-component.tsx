@@ -61,11 +61,12 @@ export const NavBar:FC<props> = ({textColor}) => {
                     <span>{navObject.phone}</span>
                 </button>
 
-                <button 
+                {/* <button 
                     className="relative"
                     onClick={onClickMenuHandler}>
-                    <BiMenu className={`${textColor} text-2xl`}/>
-                </button>
+                </button> */}
+                <BiMenu className={`${textColor} text-2xl cursor-pointer`} onClick={onClickMenuHandler}/>
+
 
                 <div id="dropdown" className="absolute hidden divide-y divide-gray-100 w-fit"
                 style={{top : '8%', right : '5.5%'}}>
