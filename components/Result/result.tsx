@@ -15,7 +15,6 @@ import { getParam, showToast, toTitleCase, validateEmail, validatePhoneNumberStr
 import { NextRouter, useRouter } from 'next/router';
 import moment from 'moment';
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
 
 type Props={
     average : number,
@@ -187,6 +186,7 @@ const Result :FC<Props> = ({average, data}) => {
                                 <span className='text-[10px] text-[#909090]'>Phone Number</span>
                                 <PhoneInput
                                     country={'us'}
+                                    inputStyle={{ width: '15vw', border : 'none'}}
                                     // value={this.state.phone}
                                     // (queryResponseData?.data?.data?.phone || '')
                                     onChange={phone => onChangePhoneNumberHandler(phone)}

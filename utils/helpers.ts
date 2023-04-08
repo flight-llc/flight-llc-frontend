@@ -116,3 +116,10 @@ export async function httpRequest({ url, data, method, baseUrl, contentType } : 
       return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
     });
   }
+
+       // if(dropdown.style.display === "none") dropdown.style.display = "inline-block";
+            // document.addEventListener('mouseup', function(e) {
+            //     if (!dropdown.contains(e.target)) {
+            //       dropdown.style.display = 'none';
+            //     }
+            // });

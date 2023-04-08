@@ -51,13 +51,6 @@ export const NavBar:FC<props> = ({textColor, page='landing'}) => {
         // }
         
     }
-
-     // if(dropdown.style.display === "none") dropdown.style.display = "inline-block";
-            // document.addEventListener('mouseup', function(e) {
-            //     if (!dropdown.contains(e.target)) {
-            //       dropdown.style.display = 'none';
-            //     }
-            // });
     useEffect(() =>{},[state]);
     return(
         <div className={`w-full flex justify-between items-center ${textColor} py-4`}>
