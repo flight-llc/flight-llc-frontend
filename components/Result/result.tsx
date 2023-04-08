@@ -15,7 +15,6 @@ import { getParam, showToast, toTitleCase, validateEmail, validatePhoneNumberStr
 import { NextRouter, useRouter } from 'next/router';
 import moment from 'moment';
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
 
 type Props={
     average : number,

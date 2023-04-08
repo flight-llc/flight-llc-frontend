@@ -10,7 +10,8 @@ import {
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from 'react-query'
+} from 'react-query';
+import 'react-phone-input-2/lib/style.css'
 
 
 const queryClient = new QueryClient({
