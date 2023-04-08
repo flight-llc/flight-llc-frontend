@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {BiMenu} from 'react-icons/bi';
 import Link from 'next/link';
 
@@ -34,20 +34,27 @@ type props={
 }
 export const NavBar:FC<props> = ({textColor}) => {
 
-    const onClickMenuHandler = () => {
-        const dropdown: HTMLDivElement | any = document.getElementById('dropdown') as HTMLDivElement;
-        if(dropdown !== null){
-            if(dropdown.style.display === "none") dropdown.style.display = "inline-block";
-            document.addEventListener('mouseup', function(e) {
-                if (!dropdown.contains(e.target)) {
-                  dropdown.style.display = 'none';
-                }
-            });
-            // const result = dropdown.style.display === "none" ? dropdown.style.display = "inline-block" : dropdown.style.display = "none";
-            // return result;
-        }
+    const [state, setState] = useState(false);
+
+    const onClickMenuHandler = (e : any) => {
+        //e.persist();
+        setState(!state);
+        // const dropdown: HTMLDivElement | any = document.getElementById('dropdown') as HTMLDivElement;
+        // if(dropdown !== null){
+        //     const result = dropdown.style.display === "none" ? dropdown.style.display = "inline-block" : dropdown.style.display = "none";
+        //     return result;
+            
+        // }
         
     }
+
+     // if(dropdown.style.display === "none") dropdown.style.display = "inline-block";
+            // document.addEventListener('mouseup', function(e) {
+            //     if (!dropdown.contains(e.target)) {
+            //       dropdown.style.display = 'none';
+            //     }
+            // });
+    useEffect(() =>{},[state]);
     return(
         <div className={`w-full flex justify-between items-center ${textColor} py-4`}>
             <div className="flightPortalLogo text-4xl">
@@ -61,18 +68,24 @@ export const NavBar:FC<props> = ({textColor}) => {
                     <span>{navObject.phone}</span>
                 </button>
 
-                {/* <button 
+                <button 
                     className="relative"
                     onClick={onClickMenuHandler}>
-                </button> */}
-                <BiMenu className={`${textColor} text-2xl cursor-pointer`} onClick={onClickMenuHandler}/>
+                        <BiMenu 
+                        className={`${textColor} text-2xl cursor-pointer`} 
+                        />
+                </button>
 
-
-                <div id="dropdown" className="absolute hidden divide-y divide-gray-100 w-fit"
-                style={{top : '8%', right : '5.5%'}}>
+                {/* ${state ? 'absolute inline-block divide-y divide-gray-100 w-fit' : 'absolute hidden divide-y divide-gray-100 w-fit'}`} */}
+                {state &&  <div 
+                id="dropdown" 
+                className='absolute top-[8%] md:right-[4%] lg:right-[5.3%] xl:right-[5.5%] divide-y divide-gray-100 w-fit'
+                //style={{top : '8%', right : '5.5%'}}
+                >
                     <ul 
                     className={`py-6 text-xs text-center ${textColor}`} 
-                    aria-labelledby="dropdownHoverButton">
+                    //aria-labelledby="dropdownHoverButton"
+                    >
                     <Link href={'/#AboutUs'}>
                         <p className="block px-4 py-2 hover:text-[#0379E8]">About</p>
                     </Link>
@@ -89,7 +102,7 @@ export const NavBar:FC<props> = ({textColor}) => {
                         <p className="block px-4 py-2 hover:text-[#0379E8]">Contact us</p>
                     </Link>
                     </ul>
-                </div>
+                </div>}
 
                 
         
