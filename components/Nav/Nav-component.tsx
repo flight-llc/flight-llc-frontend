@@ -1,6 +1,9 @@
 import { FC } from "react";
 import {BiMenu} from 'react-icons/bi';
 import Link from 'next/link';
+import Image from "next/image";
+import logo_white from '@/public/logo-white.png';
+import logo_blue from '@/public/logo-blue.png';
 
 //phone number and object dropdown here
 const navObject = {
@@ -30,9 +33,10 @@ const navObject = {
 }
 
 type props={
-    textColor : string
+    textColor : string,
+    page: 'landing' | 'result',
 }
-export const NavBar:FC<props> = ({textColor}) => {
+export const NavBar:FC<props> = ({textColor, page='landing'}) => {
 
     const onClickMenuHandler = () => {
         const dropdown: HTMLDivElement | any = document.getElementById('dropdown') as HTMLDivElement;
@@ -50,8 +54,17 @@ export const NavBar:FC<props> = ({textColor}) => {
     }
     return(
         <div className={`w-full flex justify-between items-center ${textColor} py-4`}>
-            <div className="flightPortalLogo text-4xl">
+            {/* <div className="flightPortalLogo text-4xl">
                 <span>Flightportal</span>
+            </div> */}
+            <div className="">
+                <Image
+                src={!page ? logo_white : (page == 'result' ? logo_blue : logo_white )}
+                alt=""
+                width={200}
+                height={200}
+                />
+                {/* <span>Flightportal</span> */}
             </div>
 
             <div className="w-fit flex flex-row text-sm items-center gap-12">
