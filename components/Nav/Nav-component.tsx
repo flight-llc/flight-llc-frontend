@@ -71,7 +71,7 @@ export const NavBar:FC<props> = ({textColor, page='landing'}) => {
                 <p className="text-xs">24/7 live service</p>
 
                 <button className="bg-[#113B75] rounded-lg text-white outline-none text-xs p-3">
-                    <span>{navObject.phone}</span>
+                    <span><a href={`tel:${navObject.phone.replaceAll(' ', '')}`}>{navObject.phone}</a></span>
                 </button>
 
                 <button 

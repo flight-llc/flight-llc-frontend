@@ -314,7 +314,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
 
                 <div className='w-full flex flex-column gap-2 mt-2 ml-1'>
                     <div className='w-full flex items-center gap-4'>
-                        <div className='w-1/4 bg-white rounded-lg p-2 text-xs' style={{ height: 60 }}>
+                        <div className='w-1/4 bg-white rounded-lg p-2 text-xs' style={{ height: 50 }}>
                             <span className='text-[10px] text-[#909090]'>Name</span>
                             <input
                                 type={'text'}
@@ -327,11 +327,11 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                         {/* Phone number with country code */}
                         <div className= {`${person.phone && !validatePhoneNumberString(person.phone)
                             ? 'w-1/4 bg-white rounded-lg p-1 text-xs border border-red-500'
-                            : 'w-1/4 bg-white rounded-lg p-1  text-xs'}`} style={{ paddingBottom: 5, height: 60 }}>
+                            : 'w-1/4 bg-white rounded-lg p-1  text-xs'}`} style={{ paddingBottom: 5, height: 50 }}>
                             <span className='text-[10px] text-[#909090]'>Phone Number</span>
                             <PhoneInput
                                 country={'us'}
-                                inputStyle={{ width: '15vw', border : 'none'}}
+                                inputStyle={{ width: '15vw', border : 'none', height: 25 }}
                                 onChange={phone => onChangePhoneNumberHandler(phone)}
                             />
                             {/* <input
@@ -344,7 +344,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                         </div>
                         <div className={`${person.email && !validateEmail(person.email) 
                         ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
-                        : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`} style={{ height: 60 }}>
+                        : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`} style={{ height: 50 }}>
                             <span className='text-[10px] text-[#909090]'>email</span>
                             <input
                                 type={'text'}
@@ -367,7 +367,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                              text-center 
                              text-xs
                             disabled:bg-[#EFF0F6]'
-                            style={{ height: 60 }}
+                            style={{ height: 50 }}
                         />
                     </div>
                 </div>

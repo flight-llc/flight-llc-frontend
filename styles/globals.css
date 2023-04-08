@@ -9,7 +9,7 @@
 }
 
 #bg-cloud{
-  background-image: url('/cloud.svg');
+  background-image: url('/cloud.png');
   background-repeat: no-repeat;
   background-position: center;
   object-fit: cover;
