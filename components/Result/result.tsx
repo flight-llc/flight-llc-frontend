@@ -11,9 +11,11 @@ import { UserExperienceRatings } from '../Home/user-ratings-component';
 import { useMutation, useQuery } from 'react-query';
 import axios, { AxiosError } from 'axios';
 import { Loader } from '../Loader/Loader';
-import { getParam, showToast, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
+import { getParam, showToast, toTitleCase, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 import { NextRouter, useRouter } from 'next/router';
 import moment from 'moment';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 type Props={
     average : number,
@@ -88,8 +90,15 @@ const Result :FC<Props> = ({average, data}) => {
         setDetails({...details, email});
     } 
 
-    const onChangePhoneNumberHandler = ({target}:React.ChangeEvent<HTMLInputElement>) :void => {
-        const {value : phone} = target;
+    const onChangePhoneNumberHandler = ({target}: any) :void => {
+        // React.ChangeEvent<HTMLInputElement>
+        let phone;
+        if (target && target.value) {
+            phone = target.value;
+        } else {
+            phone = target;
+        }
+        // const {value : phone} = target;
         setDetails({...details, phone});
     } 
 
@@ -124,7 +133,7 @@ const Result :FC<Props> = ({average, data}) => {
     return (
         <>
         <div className='w-10/12 py-4 mx-auto'>
-            <NavBar textColor='text-[#113B75]'/>
+            <NavBar textColor='text-[#113B75]' page='result' />
             {/* title */}
             <div className="w-fit text-4xl my-12 leading-relaxed text-center headerText">
                 <h1 className="bg-gradient-to-r from-[#113B75] to-[#0379E8]">Complete the request form to</h1>
@@ -134,51 +143,61 @@ const Result :FC<Props> = ({average, data}) => {
             <div className='w-full flex bg-[#F6F6F6] rounded-xl'>
                 <div className='basis-3/5 flex gap-4'>
                     <div className='basis-1/2 p-8'>
-                        <p className='text-[#909090] text-xs py-2'>From</p>
-                        <p className='text-xl text-[#113B75] pb-2'>
-                            {(queryResponseData?.data?.data?.fromLocationDTO.city || '')}&nbsp;
-                            {`(${(queryResponseData?.data?.data?.fromLocationDTO.IATA || '')})`}
-                        </p>
-
-                        <div className='w-full flex gap-2'>
-                            <div className='bg-[#E7E7E7] h-px w-1/2 my-2'/>
-                            <div className='text-[#113B75] text-xs w-fit'>
-                                <p className='pb-1'>{queryResponseData?.data?.data?.returnDate ? 'RoundTrip' : 'OneWay'}</p>
-                                <Image src={'/Arrows.svg'} alt="" width={22} height={22} className="mx-auto"/>
-                            </div>
-                        </div>
-
-                        <div className=''>
-                            <p className='text-[#909090] text-xs pb-2'>To</p>
+                        <div style={{ height: 200 }}>
+                            <p className='text-[#909090] text-xs py-2'>From</p>
                             <p className='text-xl text-[#113B75] pb-2'>
-                            {(queryResponseData?.data?.data?.toLocationDTO.city || '')}&nbsp;
-                            {`(${(queryResponseData?.data?.data?.toLocationDTO.IATA || '')})`}
+                                {toTitleCase(queryResponseData?.data?.data?.fromLocationDTO.city || '')}&nbsp;
+                                {`(${(queryResponseData?.data?.data?.fromLocationDTO.IATA || '')})`}
                             </p>
-                        </div>
-                        <div className='bg-[#E7E7E7] h-px w-1/2 my-2'/>
-                        {/* Passenger Name */}
-                        <div className='bg-white rounded-lg p-2 text-xs'>
-                            <span className='text-[10px] text-[#909090]'>Name</span>
-                            <input 
-                            type={'text'} 
-                            defaultValue={(queryResponseData?.data?.data?.name || '')}
-                            className='text-[#113B75] py-1 font-semibold outline-none w-full'
-                            placeholder='Micheal Kors'
-                            onChange={onChangeNameHandler}
-                            />
-                        </div>
-                        {/* Phone number with country code */}
 
-                        <div className={`${details.phone && !validatePhoneNumberString(details.phone)
-                        ? 'bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
-                        : 'bg-white rounded-lg p-2 text-xs my-4'}`}>
-                            <span className='text-[10px] text-[#909090]'>Phone Number</span>
-                            <input 
-                            type={'text'}
-                            defaultValue={(queryResponseData?.data?.data?.phone || '')} 
-                            className='text-[#113B75] py-1 font-semibold outline-none w-full'
-                            placeholder='+1'
-                            onChange={onChangePhoneNumberHandler}/>
+                            <div className='w-full flex gap-2'>
+                                <div className='bg-[#E7E7E7] h-px w-1/2 my-2'/>
+                                <div className='text-[#113B75] text-xs w-fit'>
+                                    <p className='pb-1'>{queryResponseData?.data?.data?.returnDate ? 'RoundTrip' : 'OneWay'}</p>
+                                    <Image src={'/Arrows.svg'} alt="" width={22} height={22} className="mx-auto"/>
+                                </div>
+                            </div>
+
+                            <div className=''>
+                                <p className='text-[#909090] text-xs pb-2'>To</p>
+                                <p className='text-xl text-[#113B75] pb-2'>
+                                {toTitleCase(queryResponseData?.data?.data?.toLocationDTO.city || '')}&nbsp;
+                                {`(${(queryResponseData?.data?.data?.toLocationDTO.IATA || '')})`}
+                                </p>
+                            </div>
+                            <div className='bg-[#E7E7E7] h-px w-1/2 my-2'/>
+                        </div>
+                        {/* Passenger Name */}
+                        <div style={{height: 150, }}>
+                            <div className='bg-white rounded-lg p-2 text-xs'>
+                                <span className='text-[10px] text-[#909090]'>Name</span>
+                                <input 
+                                type={'text'} 
+                                defaultValue={(queryResponseData?.data?.data?.name || '')}
+                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                placeholder='Micheal Kors'
+                                onChange={onChangeNameHandler}
+                                />
+                            </div>
+                            {/* Phone number with country code */}
+
+                            <div className={`${details.phone && !validatePhoneNumberString(details.phone)
+                            ? 'bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
+                            : 'bg-white rounded-lg p-2 text-xs my-4'}`}>
+                                <span className='text-[10px] text-[#909090]'>Phone Number</span>
+                                <PhoneInput
+                                    country={'us'}
+                                    // value={this.state.phone}
+                                    // (queryResponseData?.data?.data?.phone || '')
+                                    onChange={phone => onChangePhoneNumberHandler(phone)}
+                                />
+                                {/* <input 
+                                type={'text'}
+                                defaultValue={(queryResponseData?.data?.data?.phone || '')} 
+                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                placeholder='+1'
+                                onChange={onChangePhoneNumberHandler}/> */}
+                            </div>
                         </div>
 
                         <div className="w-full flex justify-start gap-2">
@@ -193,60 +212,65 @@ const Result :FC<Props> = ({average, data}) => {
                     </div>
 
                     <div className='basis-1/2 p-8'>
-                        <div className='flex text-[#113B75] font-bold justify-center pb-4'>
-                            <p className='text-4xl'>${(queryResponseData?.data?.data?.totalCost || '-')}</p>
-                            <p className='text-sm'>&nbsp;*</p>
-                        </div>
-                        
-                        {/* seat type */}
-                        <div className='py-2'>       
-                            <p className='text-[#909090] text-xs text-center'>{(queryResponseData?.data?.data?.cabinClass || '')}</p>
-                            <div className='bg-[#E7E7E7] h-px w-full my-2'/>
-                        </div>  
-                        <div className='flex justify-between items-center'>
-                            {/* departure date */}
-                            <div className='w-fit text-center'>
-                                <p className='text-[#909090] text-xs text-center'>Departure</p>
-                                <p className='text-[#113B75] font-semibold py-1'>
-                                    {moment(new Date(queryResponseData?.data?.data?.departDate)).format('DD/MM')}
-                                </p>
+                        <div style={{ height: 200 }}>
+                            <div className='flex text-[#113B75] font-bold justify-center pb-4'>
+                                <p className='text-4xl'>${(queryResponseData?.data?.data?.totalCost || '-')}</p>
+                                <p className='text-sm'>&nbsp;*</p>
                             </div>
-                            {/* return date */}
-                            {queryResponseData?.data?.data?.returnDate && 
+                            
+                            {/* seat type */}
+                            <div className='py-2'>
+                                <p className='text-[#909090] text-xs text-center'>{(queryResponseData?.data?.data?.cabinClass || '')}</p>
+                                <div className='bg-[#E7E7E7] h-px w-full my-2'/>
+                            </div>  
+                            <div className='flex justify-between items-center'>
+                                {/* departure date */}
                                 <div className='w-fit text-center'>
-                                    <p className='text-[#909090] text-xs text-center'>Return</p>
+                                    <p className='text-[#909090] text-xs text-center'>Departure</p>
                                     <p className='text-[#113B75] font-semibold py-1'>
-                                    {moment(new Date(queryResponseData?.data?.data?.returnDate)).format("DD/MM")}
+                                        {moment(new Date(queryResponseData?.data?.data?.departDate)).format('DD/MM')}
                                     </p>
                                 </div>
-                            }
-                            
-                            {/* number of booked passengers for flight*/}
-                            <div className='w-fit text-center'>
-                                <p className='text-[#909090] text-xs text-center'>Passengers</p>
-                                <p className='text-[#113B75] font-semibold py-1'>{(queryResponseData?.data?.data?.noOfPersons || '')}</p>
+                                {/* return date */}
+                                {queryResponseData?.data?.data?.returnDate && 
+                                    <div className='w-fit text-center'>
+                                        <p className='text-[#909090] text-xs text-center'>Return</p>
+                                        <p className='text-[#113B75] font-semibold py-1'>
+                                        {moment(new Date(queryResponseData?.data?.data?.returnDate)).format("DD/MM")}
+                                        </p>
+                                    </div>
+                                }
+                                
+                                {/* number of booked passengers for flight*/}
+                                <div className='w-fit text-center'>
+                                    <p className='text-[#909090] text-xs text-center'>Passengers</p>
+                                    <p className='text-[#113B75] font-semibold py-1'>{(queryResponseData?.data?.data?.noOfPersons || '')}</p>
+                                </div>
                             </div>
                         </div>
-                        <div  className={`${details.email && !validateEmail(details.email)
-                        ? 'bg-white rounded-lg p-2 mt-6 text-xs w-full border border-red-500'
-                        : 'bg-white rounded-lg p-2 mt-6 text-xs w-full'}`}>
-                            <span className='text-[10px] text-[#909090]'>Email</span>
+                        <div style={{ height: 150, }} >
+                            <div  className={`${details.email && !validateEmail(details.email)
+                            ? 'bg-white rounded-lg p-2 text-xs w-full border border-red-500'
+                            : 'bg-white rounded-lg p-2 text-xs w-full'}`}>
+                                <span className='text-[10px] text-[#909090]'>Email</span>
+                                <input 
+                                type={'email'} 
+                                defaultValue={(queryResponseData?.data?.data?.email || '')}
+                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                placeholder='Korsmichaaelfk123@gmail.com'
+                                onChange={onChangeEmailHandler}/>
+                            </div>
                             <input 
-                            type={'email'} 
-                            defaultValue={(queryResponseData?.data?.data?.email || '')}
-                            className='text-[#113B75] py-1 font-semibold outline-none w-full'
-                            placeholder='Korsmichaaelfk123@gmail.com'
-                            onChange={onChangeEmailHandler}/>
+                                type={'submit'}
+                                value="Send Request"
+                                disabled={disableButton()}
+                                className='w-full bg-[#113B75] 
+                                text-white rounded-lg p-3.5 
+                                text-center mt-5 cursor-pointer 
+                                text-sm disabled:bg-[#EFF0F6]'
+                                onClick={sendPatchRequestForFlightBooked}/>
                         </div>
-                        <input 
-                            type={'submit'}
-                            value="Send Request"
-                            disabled={disableButton()}
-                            className='bg-[#113B75] 
-                            text-white rounded-lg p-3.5 
-                            text-center mt-4 cursor-pointer 
-                            text-sm disabled:bg-[#EFF0F6]'
-                            onClick={sendPatchRequestForFlightBooked}/>
+                        
                     </div>
                 </div>
                 <div className='basis-2/5'>
@@ -254,8 +278,8 @@ const Result :FC<Props> = ({average, data}) => {
                         <Image
                         src={result}
                         alt=""
-                        width={500}
-                        height={500}
+                        // width={500}
+                        // height={500}
                         />
                     </div>
                 </div>
