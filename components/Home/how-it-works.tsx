@@ -16,7 +16,7 @@ export const HowItWorks: FC = () => {
                     <Image src='/Search.svg' alt="" width={30} height={30} />
                 </div>
                 <p className="fill-in-your-contact-information">FILL IN YOUR CONTACT INFORMATION</p>
-                <div className="flex-row-3 ml-5">
+                <div className="flex-row-3 ml-6">
                     <Image src={'/menu.svg'} alt="" width={30} height={30} />
                     <Image src={Line} alt="" width={1} height={100} />
                 </div>

@@ -34,7 +34,7 @@ const navObject = {
 
 type props={
     textColor : string,
-    page: 'landing' | 'result',
+    page?: 'landing' | 'result',
 }
 export const NavBar:FC<props> = ({textColor, page='landing'}) => {
 

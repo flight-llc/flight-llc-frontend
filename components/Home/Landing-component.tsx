@@ -210,9 +210,11 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                     toIATA={bookFlight.toIATA}
                 />
             </>
+
             :
             <>
-                <div className={flightType.multiCity ? "w-full min-h-[150vh] relative block" : "w-full min-h-[120vh] relative block"}>
+                {/* {flightType.multiCity ? "w-full min-h-[150vh] relative block" : "w-full min-h-[120vh] relative block"} */}
+                <div className={flightType.multiCity ? 'w-full h-[135vh] relative block' :"w-full h-screen relative block"}>
                     <Image
                         src={home_img_1}
                         alt="flight seat"
@@ -221,7 +223,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                     />
                     <div className="absolute w-full flex justify-center items-center">
                         <div className="w-10/12 h-auto">
-                            <NavBar textColor="text-white" />
+                            <NavBar textColor="text-white" page='landing'/>
 
                             {/* landing page header title */}
                             <div className="text-white flex justify-center items-center w-full">
