@@ -293,18 +293,28 @@ const Result :FC<Props> = ({average, data}) => {
                 height={800}
                 />
             </div>
-
-            <div className='text-[#6E7491] text-xs text-center mx-auto'>
-                <p>*Price shown is a Round Trip fare in business class per person and based on weekday travel 
-                    (Monday-Thursday). The price is total includes all taxes and fees and is in USD. 
-                    The fares will vary based on class of travel availability,<br/> airline and city of departure. 
-                    Business-Class.com will not identify all travel partners or details so not to compete with 
-                    retail sales of our partners. Savings up to 40% off are based on un-restricted fares of ma
-                    jor airlines and can<br/> vary depending on the fare rules. All fares are non-refundable and cannot be 
-                    exchanged or transferred. Please call us directly to check the most current prices and availability. Other restrictions may apply. All fares are subject to<br/> 
-                    change until ticketed. FREE EXCHANGE - our agreement with all major Carriers is to shelter passengers from the inconvenience of COVID-19 related delays and cancellations. If the travel is to/from one of these affected areas,<br/> 
-                    passenger may be eligible to reschedule with no change fee within the limitations of those policies. Fare and/or tax difference may apply.</p>
-            </div>
+        </div>
+        <div className="text-xs p-1 text-center text-[#6E7491]">
+            <p>
+                *Price shown is a Round Trip fare in business class per person and based on weekday travel (Monday-Thursday).
+                The price is total includes all taxes and fees and is in USD.
+                The fares will vary based on class of travel availability,
+                <br/>airline and city of departure.
+                Business-Class.com will not identify all travel partners or details
+                so not to compete with retail sales of our partners. Savings up to 40%
+                off are based on un-restricted fares of major airlines and can
+                <br/>vary depending on the fare rules.
+                All fares are non-refundable and cannot be exchanged or transferred.
+                Please call us directly to check the most current prices and availability.
+                Other restrictions may apply. All fares are subject to
+                <br/>change until ticketed.
+                FREE EXCHANGE - our agreement with all major Carriers is to shelter passengers from the inconvenience of COVID-19
+                related delays and cancellations. If the travel is to/from one of these affected areas,
+                <br/>
+                passenger may be eligible to reschedule with no change fee within
+                the limitations of those policies.
+                Fare and/or tax difference may apply.<br/>
+            </p>
         </div>
 
         <div className='w-full'>
@@ -314,8 +324,8 @@ const Result :FC<Props> = ({average, data}) => {
             {/* How it works */}
             <HowItWorks/>
         </div>
+        <ContactUs/>
         <div className='w-10/12 py-4 mx-auto'>
-            <ContactUs/>
             <Footer/>
         </div>
         </>
