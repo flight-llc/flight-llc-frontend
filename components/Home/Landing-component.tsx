@@ -20,9 +20,14 @@ import https from 'https';
 import { NextRouter, useRouter } from "next/router";
 import { Loader } from "../Loader/Loader";
 import { MultiCityForm } from "./Multi-city-form";
-import { showToast } from "@/utils/helpers";
+import { showToast, toTitleCase } from "@/utils/helpers";
 import Select from "react-dropdown-select";
 import { ReactDropDownSelectStyled } from "@/pages/_app";
+// import DatePicker from 'react-date-picker';
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 
 const httpsAgent = new https.Agent({
@@ -39,8 +44,8 @@ type props = {
 const defaultPayload = {
     fromIATA: "",
     toIATA: "",
-    departDate: "2023-03-16T09:24:48.320Z",
-    returnDate: "2023-03-16T09:24:48.320Z",
+    departDate: moment(new Date()).toString(),
+    returnDate: moment(new Date()).toString(),
     email: "",
     fromLocation: "",
     fromRegion: "",
@@ -102,6 +107,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
     });
 
     const [bookFlight, setBookFlight] = useState<IBookFlightPayload>(defaultPayload);
+    const [returnDate, setReturnDate] = useState(new Date());
 
     const [timer, setTimer] = useState(0);
 
@@ -147,14 +153,32 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         }
     }
 
-    const onChangeDepartureDate = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        const { value: departDate } = target;
+    const onChangeDepartureDate = (target: any) => {
+        let departDate;
+        if (target && target.value) {
+            departDate = target.value;
+        } else {
+            departDate = target
+        }
+        // const { value: departDate } = target;
+        console.log('departDate', departDate);
         setBookFlight({ ...bookFlight, departDate });
     }
 
-    const onChangeReturnDate = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        const { value: returnDate } = target;
+    const onChangeReturnDate = (target: any) => {
+        // const { value: returnDate } = target;
+        
+        let returnDate;
+        if (target && target.value) {
+            returnDate = target.value;
+        } else {
+            returnDate = target
+        }
+
+        console.log('returnDate', returnDate);
+
         setBookFlight({ ...bookFlight, returnDate });
+        setReturnDate(returnDate);
     }
 
     const onChangeSelectCabin = (target: any) => {
@@ -165,6 +189,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         const { value: noOfPersons } = target;
         setBookFlight({ ...bookFlight, noOfPersons: Number.parseInt(noOfPersons) });
     }
+
 
     const OnsubmitHandlerForOneWayAndRoundTrip =
         async (event: React.SyntheticEvent<HTMLFormElement>)
@@ -202,6 +227,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
         }
 
+        useEffect(() => {}, []);
+
     return (
         (timer > 0) ?
             <>
@@ -221,7 +248,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                     />
                     <div className="absolute w-full flex justify-center items-center">
                         <div className="w-10/12 h-auto">
-                            <NavBar textColor="text-white" />
+                            <NavBar textColor="text-white" page="landing" />
 
                             {/* landing page header title */}
                             <div className="text-white flex justify-center items-center w-full">
@@ -277,7 +304,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             placeholder="Flight From?"
                                                             options={locations ? locations && locations.map((data: any, _: number) => {
                                                                 return {
-                                                                    label: `${data.city} (${data.IATA})`,
+                                                                    label: `${toTitleCase(data.city)} (${data.IATA})`,
                                                                     value: JSON.stringify(data),
                                                                 }
                                                             }) : []}
@@ -297,7 +324,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             placeholder="Where To?"
                                                             options={locations ? locations && locations.map((data: any, _: number) => {
                                                                 return {
-                                                                    label: `${data.city} (${data.IATA})`,
+                                                                    label: `${toTitleCase(data.city)} (${data.IATA})`,
                                                                     value: JSON.stringify(data),
                                                                 }
                                                             }) : []}
@@ -312,13 +339,22 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <p>Depart</p>
                                                     </div>
                                                     <div className="">
-                                                        <input
+                                                        {/* <input
                                                             type={"date"}
                                                             required
                                                             onChange={onChangeDepartureDate}
                                                             className="w-full outline-none
                                                         hover:border-b hover:border-[#113B75] py-2  
                                                         focus:border-b focus:border-[#113B75] py-2"
+                                                        /> */}
+                                                        <DatePicker 
+                                                        className="w-full outline-none
+                                                        hover:border-b hover:border-[#113B75] py-2  
+                                                        focus:border-b focus:border-[#113B75] py-2"
+                                                            selected={new Date(bookFlight.departDate)} 
+                                                            allowSameDay={false}
+                                                            minDate={new Date()}
+                                                            onChange={(date: any) => onChangeDepartureDate(moment(date).format('YYYY/MM/DD'))} 
                                                         />
                                                     </div>
                                                 </div>
@@ -330,14 +366,20 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             <p>Return</p>
                                                         </div>
                                                         <div className="">
-                                                            <input
+                                                            {/* <input
                                                                 type={"date"}
                                                                 onChange={onChangeReturnDate}
                                                                 required
                                                                 className="w-full outline-none
                                                             hover:border-b hover:border-[#113B75] py-2 
                                                             focus:border-b focus:border-[#113B75] py-2"
-                                                            />
+                                                            /> */}
+                                                            <DatePicker 
+                                                            selected={new Date(returnDate)} 
+                                                            allowSameDay={false}
+                                                            minDate={new Date()}
+                                                            onChange={(date: any) => onChangeReturnDate(moment(date).format('YYYY/MM/DD'))} 
+                                                        />
                                                         </div>
                                                     </div>
                                                 }

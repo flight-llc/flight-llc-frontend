@@ -11,9 +11,12 @@ import https from 'https';
 import { NextRouter, useRouter } from 'next/router';
 import { Loader } from '../Loader/Loader';
 import { useMutation } from 'react-query';
-import { showToast, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
+import { showToast, toTitleCase, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 import Select from 'react-dropdown-select';
 import { ReactDropDownSelectStyled } from '@/pages/_app';
+import DatePicker from "react-datepicker";
+import moment from 'moment';
+import PhoneInput from 'react-phone-input-2';
 //import { bookFlightAction } from '@/utils/helpers';
 
 type props = {
@@ -25,8 +28,8 @@ type props = {
 const defaultPayload = {
     fromIATA: "",
     toIATA: "",
-    departDate: "2023-03-16T09:24:48.320Z",
-    returnDate: "2023-03-16T09:24:48.320Z",
+    departDate: moment(new Date()).toString(),
+    returnDate: moment(new Date()).toString(),
     email: "",
     fromLocation: "",
     fromRegion: "",
@@ -50,6 +53,8 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
         email: '',
         phone: ''
     });
+
+    const [lastDepartDate, setLastDepartDate] = useState('');
 
     const {
         register,
@@ -120,9 +125,15 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
         setPerson({ ...person, email: value });
     }
 
-    const onChangePhoneNumberHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = target;
-        setPerson({ ...person, phone: value });
+    const onChangePhoneNumberHandler = (target : any) => {
+        let phone;
+        if (target && target.value) {
+            phone = target.value;
+        } else {
+            phone = target;
+        }
+        
+        setPerson({ ...person, phone });
     }
     const onSubmitMultiCityFlights = () => {
         const loaderTimer = 1;
@@ -170,10 +181,10 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
     return (
         <>
             
-            <div className='w-full'>
+            <div className='w-[96%]'>
                 {/* <form onSubmit={onSubmitMultiCityFlights}> */}
                 <div className='h-[12rem] overflow-y-auto mt-4 rounded-lg'>
-                    {fields && fields.map((data: any, i: number) =>
+                    {fields && fields.map((fieldData: any, i: number) =>
                         <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
                             <div className="w-full flex p-3 bg-white mb-3 rounded-lg">
                                 <section className="basis-full px-4 flex justify-between items-center gap-4">
@@ -189,7 +200,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 required
                                                 options={locations ? locations && locations.map((data: any, _: number) => {
                                                     return {
-                                                        label: `${data.city} (${data.IATA})`,
+                                                        label: `${toTitleCase(data.city)} (${data.IATA})`,
                                                         value: JSON.stringify(data),
                                                     }
                                                 }) : []}
@@ -212,7 +223,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
                                                 options={locations ? locations && locations.map((data: any, _: number) => {
                                                     return {
-                                                        label: `${data.city} (${data.IATA})`,
+                                                        label: `${toTitleCase(data.city)} (${data.IATA})`,
                                                         value: JSON.stringify(data),
                                                     }
                                                 }) : []}
@@ -228,13 +239,23 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                             <p>Depart</p>
                                         </div>
                                         <div className="">
-                                            <input
+                                            {/* <input
                                                 type={"date"}
                                                 {...register(`flights.${i}.departDate`, { required: true })}
                                                 required
                                                 className="w-full outline-none 
                                                 hover:border-b hover:border-[#113B75] py-2 
                                                 focus:border-b focus:border-[#113B75] py-2"
+                                            /> */}
+                                            <DatePicker
+                                                selected={(i != fields.length - 1) ? new Date(fieldData['departDate']) :  (lastDepartDate ? new Date(lastDepartDate): new Date())}
+                                                allowSameDay={false}
+                                                minDate={new Date()}
+                                                onChange={(value: any) => {
+                                                    const _date = moment(value).format('YYYY/MM/DD');
+                                                    setValue(`flights.${i}.departDate`, _date);
+                                                    setLastDepartDate(_date);
+                                                }}
                                             />
                                         </div>
                                     </div>
@@ -291,9 +312,9 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                 </div>
 
 
-                <div className='w-full flex flex-column gap-2 mt-2'>
-                    <div className='w-full flex justify-between items-center gap-4'>
-                        <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
+                <div className='w-full flex flex-column gap-2 mt-2 ml-1'>
+                    <div className='w-full flex items-center gap-4'>
+                        <div className='w-1/4 bg-white rounded-lg p-2 text-xs' style={{ height: 60 }}>
                             <span className='text-[10px] text-[#909090]'>Name</span>
                             <input
                                 type={'text'}
@@ -305,20 +326,25 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                         </div>
                         {/* Phone number with country code */}
                         <div className= {`${person.phone && !validatePhoneNumberString(person.phone)
-                            ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
-                            : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`}>
+                            ? 'w-1/4 bg-white rounded-lg p-1 text-xs border border-red-500'
+                            : 'w-1/4 bg-white rounded-lg p-1  text-xs'}`} style={{ paddingBottom: 5, height: 60 }}>
                             <span className='text-[10px] text-[#909090]'>Phone Number</span>
-                            <input
+                            <PhoneInput
+                                country={'us'}
+                                inputStyle={{ width: '15vw' }}
+                                onChange={phone => onChangePhoneNumberHandler(phone)}
+                            />
+                            {/* <input
                                 type={'text'}
                                 required
                                 className='text-[#113B75] py-1 font-semibold outline-none w-full'
                                 placeholder='+1'
                                 onChange={onChangePhoneNumberHandler}
-                            />
+                            /> */}
                         </div>
                         <div className={`${person.email && !validateEmail(person.email) 
                         ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
-                        : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`}>
+                        : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`} style={{ height: 60 }}>
                             <span className='text-[10px] text-[#909090]'>email</span>
                             <input
                                 type={'text'}
@@ -336,10 +362,12 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                             disabled={disableButton()}
                             className='bg-[#113B75] 
                             text-white 
+                            w-2/12
                             rounded-lg p-3.5 
-                            px-6 text-center 
-                            w-fit text-xs
+                             text-center 
+                             text-xs
                             disabled:bg-[#EFF0F6]'
+                            style={{ height: 60 }}
                         />
                     </div>
                 </div>
