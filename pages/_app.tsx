@@ -10,7 +10,7 @@ import {
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from 'react-query';
+} from '@tanstack/react-query';
 import 'react-phone-input-2/lib/style.css'
 
 

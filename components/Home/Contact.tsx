@@ -3,7 +3,7 @@ import facebook from '@/public/facebook.jpeg';
 import Image from 'next/image';
 import {AiFillFacebook, AiFillLinkedin} from 'react-icons/ai';
 import { BsInstagram } from 'react-icons/bs';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { ContactUsObjectInterface } from '@/utils/types';
 import axios from 'axios';
 import { Loader } from '../Loader/Loader';

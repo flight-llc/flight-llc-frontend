@@ -10,7 +10,7 @@ import axios from 'axios';
 import https from 'https';
 import { NextRouter, useRouter } from 'next/router';
 import { Loader } from '../Loader/Loader';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { showToast, toTitleCase, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
 import Select from 'react-dropdown-select';
 import { ReactDropDownSelectStyled } from '@/pages/_app';
