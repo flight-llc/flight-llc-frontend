@@ -86,7 +86,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
     const mutation = useMutation((bookedFlightsPayload: any[]) => {
         return bookFlightAction(bookedFlightsPayload).then((data) => data);
     }, {
-        onSuccess: data => {
+        onSuccess: (data : any) => {
             const responseData: any = data['data'];
             if (responseData && responseData['status']) {
                 if (responseData && responseData.data && responseData.data.flights.length > 0) {
@@ -104,7 +104,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
             }
             setTimer(0);
         },
-        onError: error => {
+        onError: (error : any) => {
             showToast({ message: 'Flight Booking failed, please try again.', type: 'error' });
             console.log(error);
         }

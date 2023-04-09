@@ -14,7 +14,7 @@ import { ContactUs } from "./Contact";
 import Footer from "../Footer/footer";
 import { HowItWorks } from "./how-it-works";
 import { IBookFlightPayload, UserReviewsResponseType } from "@/utils/types";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import https from 'https';
 import { NextRouter, useRouter } from "next/router";
@@ -70,11 +70,11 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         }).catch(err => err);
         return result;
     };
-    const mutation = useMutation(bookedFlightsPayload => {
+    const mutation = useMutation((bookedFlightsPayload : any )=> {
         const _bookedFlightsPayload: any = bookedFlightsPayload;
         return bookFlightAction(_bookedFlightsPayload).then(data => data);
     }, {
-        onSuccess: data => {
+        onSuccess: (data : any) => {
             const responseData: any = data['data'];
             if (responseData && responseData['status']) {
                 if (responseData.data && responseData.data.flights.length > 0) {
@@ -93,19 +93,12 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 showToast({ message: 'Failed to find trip information, please try again later.', type: 'error' });
             }
         },
-        onError: error => {
+        onError: (error : any) => {
             setTimer(0);
             showToast({ message: 'Flight Booking failed, please try again.', type: 'error' });
             console.log(error);
         }
     })
-    // const mutation = useMutation(
-    //     {
-    //     mutationfn :(bookedFlightsPayload => {
-    //             const _bookedFlightsPayload: any = bookedFlightsPayload;
-    //             return bookFlightAction(_bookedFlightsPayload).then(data => data);
-    //         }
-    //     });
     const { isLoading, isSuccess, mutate } = mutation;
 
     const [flightType, setFlightType] = useState({
@@ -254,7 +247,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                     ? 'w-full h-[140vh] relative block bg-green-900' 
                     :"w-full h-screen relative block block bg-green-900"} */}
                 {/* {flightType.multiCity ? "w-full min-h-[150vh] relative block" : "w-full min-h-[120vh] relative block"} */}
-                <div className={flightType.multiCity ? "w-full min-h-[55rem] relative block" : "w-full min-h-[45rem] relative block"}>
+                <div className={flightType.multiCity ? "w-full min-h-[58rem] relative block" : "w-full min-h-[45rem] relative block"}>
                 {/* <div className={"w-full h-screen relative block"}> */}
                     <Image
                         src={home_img_1}
@@ -457,7 +450,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                     </div>
                                 </form>
                             </div>
-                            <div id="external-airlines" className='"w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]'>
+                            <div id="external-airlines" className='"w-[70%] h-[10vh]" : "w-[70%] mt-[12%]'>
                                 {/* other airlines flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]" */}
                                 <ExternalAirlines />
                                 
