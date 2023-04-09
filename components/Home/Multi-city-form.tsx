@@ -196,7 +196,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         <div className="">
                                             <ReactDropDownSelectStyled
                                                 placeholder='Flight From?'
-                                                dropdownPosition='top'
+                                                dropdownPosition='bottom'
                                                 required
                                                 options={locations ? locations && locations.map((data: any, _: number) => {
                                                     return {
@@ -218,7 +218,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         <div className="">
                                             <ReactDropDownSelectStyled
                                                 placeholder='Where To?'
-                                                dropdownPosition='top'
+                                                dropdownPosition='bottom'
                                                 required
                                                 className="outline-none focus:border-b focus:border-[#113B75] py-2 pr-2"
                                                 options={locations ? locations && locations.map((data: any, _: number) => {
@@ -279,7 +279,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                             </div>
                                             <div className='basis-[92%]'>
                                                 <ReactDropDownSelectStyled
-                                                    dropdownPosition='top'
+                                                    dropdownPosition='bottom'
                                                     options={[
                                                         { text: 'Premium Economy', value: 'PremiumEconomy' },
                                                         { text: 'Business', value: 'Business' },
