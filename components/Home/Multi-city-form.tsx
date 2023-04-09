@@ -174,7 +174,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
         return false;
     }
     useEffect(() => {
-        const subscription = watch((value, { name, type }) => console.log(value, name, type));
+        const subscription = watch((value :any, { name, type } : any) => console.log(value, name, type));
         return () => subscription.unsubscribe();
     }, [watch]);
 
@@ -183,7 +183,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
             
             <div className='w-full'>
                 {/* <form onSubmit={onSubmitMultiCityFlights}> */}
-                <div className='max-h-[8rem] overflow-y-auto mt-4 rounded-lg' style={{ overflowY: 'auto' }}>
+                <div className='max-h-[13rem] bg-blue-800 overflow-y-auto mt-4 rounded-lg' style={{ overflowY: 'auto' }}>
                     {fields && fields.map((fieldData: any, i: number) =>
                         <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
                             <div className="w-full flex p-3 bg-white mb-3 rounded-lg">

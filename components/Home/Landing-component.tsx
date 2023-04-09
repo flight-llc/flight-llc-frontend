@@ -21,10 +21,10 @@ import { NextRouter, useRouter } from "next/router";
 import { Loader } from "../Loader/Loader";
 import { MultiCityForm } from "./Multi-city-form";
 import { showToast, toTitleCase } from "@/utils/helpers";
-import Select from "react-dropdown-select";
 import { ReactDropDownSelectStyled } from "@/pages/_app";
 // import DatePicker from 'react-date-picker';
 import DatePicker from "react-datepicker";
+import Select from 'react-dropdown-select';
 
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
@@ -238,10 +238,15 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                 />
             </>
 
+
+
             :
             <>
+                {/* {flightType.multiCity 
+                    ? 'w-full h-[140vh] relative block bg-green-900' 
+                    :"w-full h-screen relative block block bg-green-900"} */}
                 {/* {flightType.multiCity ? "w-full min-h-[150vh] relative block" : "w-full min-h-[120vh] relative block"} */}
-                <div className={flightType.multiCity ? 'w-full h-[55rem] relative block' :"w-full h-[45rem] relative block"}>
+                <div className={flightType.multiCity ? "w-full min-h-[55rem] relative block" : "w-full min-h-[45rem] relative block"}>
                 {/* <div className={"w-full h-screen relative block"}> */}
                     <Image
                         src={home_img_1}
@@ -444,9 +449,10 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                     </div>
                                 </form>
                             </div>
-                            <div id="external-airlines" className={flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]"}>
-                                {/* other airlines */}
+                            <div id="external-airlines" className='"w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]'>
+                                {/* other airlines flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]" */}
                                 <ExternalAirlines />
+                                
                             </div>
 
                             

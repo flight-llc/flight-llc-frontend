@@ -8,7 +8,7 @@ import { ContactUs } from '../Home/Contact';
 import Footer from '../Footer/footer';
 import { HowItWorks } from '../Home/how-it-works';
 import { UserExperienceRatings } from '../Home/user-ratings-component';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { Loader } from '../Loader/Loader';
 import { getParam, showToast, toTitleCase, validateEmail, validatePhoneNumberString } from '@/utils/helpers';
@@ -52,11 +52,11 @@ const Result :FC<Props> = ({average, data}) => {
             return err;
         });
     }, {
-        onSuccess: (data) => {
+        onSuccess: (data : any) => {
             console.log('data', data);
             showToast({ message: 'Flight Booked successfully', type: 'success' });
         },
-        onError: (error) => {
+        onError: (error : any) => {
             console.error(error);
             showToast({ message: 'Flight Booking failed, please try again.', type: 'error' });
         },
@@ -189,7 +189,7 @@ const Result :FC<Props> = ({average, data}) => {
                                     inputStyle={{ width: '15vw', border : 'none'}}
                                     // value={this.state.phone}
                                     // (queryResponseData?.data?.data?.phone || '')
-                                    onChange={phone => onChangePhoneNumberHandler(phone)}
+                                    onChange={(phone : any) => onChangePhoneNumberHandler(phone)}
                                 />
                                 {/* <input 
                                 type={'text'}

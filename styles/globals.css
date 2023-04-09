@@ -11,9 +11,8 @@
 #bg-cloud{
   background-image: url('/cloud.png');
   background-repeat: no-repeat;
-  background-position: center;
   object-fit: cover;
-  background-position: center top -10px;
+  background-position: right top -5px;
 }
 
 #bg-expert{
