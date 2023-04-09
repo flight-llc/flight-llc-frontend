@@ -183,7 +183,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
             
             <div className='w-full'>
                 {/* <form onSubmit={onSubmitMultiCityFlights}> */}
-                <div className='max-h-[14rem] overflow-y-auto mt-4 rounded-lg'>
+                <div className='max-h-[8rem] overflow-y-auto mt-4 rounded-lg' style={{ overflowY: 'auto' }}>
                     {fields && fields.map((fieldData: any, i: number) =>
                         <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
                             <div className="w-full flex p-3 bg-white mb-3 rounded-lg">
@@ -371,17 +371,20 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                         />
                     </div>
                 </div>
-                <div className='w-fit mt-4'>
-                    <button
-                        onClick={appendFlight}
-                        className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
-                        Add Flight
-                    </button>
-                    <button
-                        onClick={() => setValue('flights', [])}
-                        className='inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
-                        Clear all
-                    </button>
+                <div className='w-full flex flex-column gap-2 mt-2 ml-1'>
+                    <div className='w-1/4 flex flex-row ml-1'>
+                        <button
+                            onClick={appendFlight}
+                            className='w-1/2 inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
+                            Add Flight
+                        </button>
+                        <button
+                            onClick={() => setValue('flights', [])}
+                            className='w-1/2 inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
+                            Clear all
+                        </button>
+                    </div>
+                    
                 </div>
                 {/* </form> */}
             </div>

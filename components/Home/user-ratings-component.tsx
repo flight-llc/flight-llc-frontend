@@ -1,4 +1,5 @@
 import { IAverageRatingResponseBody, ReviewRowType, UserReviewsResponseType } from '@/utils/types';
+import moment from 'moment';
 import { FC } from 'react';
 import { BsStarFill, BsStar, BsStarHalf } from 'react-icons/bs';
 import { Navigation } from "swiper";
@@ -53,7 +54,7 @@ export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
                   <div className="text-xs w-full text-start">
                     <span className="text-[#A1B0CC]">
                       <strong className="text-[#6E7491]">{data.name}</strong>
-                      &nbsp;| {new Date(data.created_at).getHours()}&nbsp;ago</span>
+                      &nbsp;| {moment(data.created_at).fromNow()}&nbsp;</span>
 
                     <div className="flex text-sm text-[#2C53B8] pt-4">
                       {Array.from((Array(Math.trunc(Number.parseFloat(data.rating)))),(_:number, i:number) =>
