@@ -70,8 +70,9 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         }).catch(err => err);
         return result;
     };
-    const mutation = useMutation((bookedFlightsPayload: any[]) => {
-        return bookFlightAction(bookedFlightsPayload).then(data => data);
+    const mutation = useMutation(bookedFlightsPayload => {
+        const _bookedFlightsPayload: any = bookedFlightsPayload;
+        return bookFlightAction(_bookedFlightsPayload).then(data => data);
     }, {
         onSuccess: data => {
             const responseData: any = data['data'];
@@ -98,6 +99,13 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
             console.log(error);
         }
     })
+    // const mutation = useMutation(
+    //     {
+    //     mutationfn :(bookedFlightsPayload => {
+    //             const _bookedFlightsPayload: any = bookedFlightsPayload;
+    //             return bookFlightAction(_bookedFlightsPayload).then(data => data);
+    //         }
+    //     });
     const { isLoading, isSuccess, mutate } = mutation;
 
     const [flightType, setFlightType] = useState({
