@@ -241,7 +241,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
             :
             <>
                 {/* {flightType.multiCity ? "w-full min-h-[150vh] relative block" : "w-full min-h-[120vh] relative block"} */}
-                <div className={flightType.multiCity ? 'w-full h-[135vh] relative block' :"w-full h-screen relative block"}>
+                <div className={flightType.multiCity ? 'w-full h-[55rem] relative block' :"w-full h-[45rem] relative block"}>
+                {/* <div className={"w-full h-screen relative block"}> */}
                     <Image
                         src={home_img_1}
                         alt="flight seat"
@@ -255,7 +256,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             {/* landing page header title */}
                             <div className="text-white flex justify-center items-center w-full">
                                 <div className={`${!flightType.multiCity
-                                    ? 'mt-28 text-4xl leading-relaxed text-center headerText'
+                                    ? 'mt-[5%] text-4xl leading-relaxed text-center headerText'
                                     : 'text-4xl leading-relaxed text-center headerText'}`}>
                                     <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">Elevate Your Travel Experience</h1>
                                     <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">and Save up to 40% on Business Class Flights!</h1>
@@ -263,7 +264,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             </div>
 
                             {/* Travel info */}
-                            <div className="w-full">
+                            <div className={flightType.multiCity ? "w-full h-[55vh]" : "w-full"}>
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e)
                                     : e.preventDefault()} className="w-full flex justify-center">
                                     <div className="lg:w-[90%] xl:w-[80%]">
@@ -443,9 +444,12 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                     </div>
                                 </form>
                             </div>
+                            <div id="external-airlines" className={flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]"}>
+                                {/* other airlines */}
+                                <ExternalAirlines />
+                            </div>
 
-                            {/* other airlines */}
-                            <ExternalAirlines />
+                            
                         </div>
                     </div>
                 </div>
