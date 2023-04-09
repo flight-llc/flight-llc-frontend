@@ -95,7 +95,7 @@ export const NavBar: FC<props> = ({ textColor, page = 'landing' }) => {
                         //id="dropdown" 
                         className="absolute top-[15%] md:right-[4%] lg:right-[5.3%] xl:right-[5.5%] w-fit">
                         <ul
-                            className={`text-xs text-center ${textColor}`}
+                            className={`py-4 text-xs text-center ${textColor}`}
                             aria-labelledby="dropdownHoverButton"
                         >
                             <Link href={'/#AboutUs'} onClick={() => setState(false)}>
