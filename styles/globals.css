@@ -301,8 +301,12 @@ input[type="date"]::-webkit-clear-button {
 
 @media (min-width: 1280px) and (max-width: 1400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
-  #external-airlines {
-    margin-top: 25vh;
+  #external-airlines-multicity {
+    margin-top: 7%;
+  }
+
+  #external-airlines-multicity {
+    margin-top: 12%;
   }
 }
 
