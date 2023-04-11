@@ -186,8 +186,13 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
         setBookFlight({ ...bookFlight, ...{ cabinClass: target } });
     }
 
-    const onChangeNumberOfPersons = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-        const { value: noOfPersons } = target;
+    const onChangeNumberOfPersons = (target: any) => {
+        let noOfPersons;
+        if (target && target.value) {
+            noOfPersons = target.value;
+        } else {
+            noOfPersons = target;
+        }
         setBookFlight({ ...bookFlight, noOfPersons: Number.parseInt(noOfPersons) });
     }
 
@@ -270,12 +275,12 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             </div>
 
                             {/* Travel info */}
-                            <div className={flightType.multiCity ? "w-full h-[55vh]" : "w-full"}>
+                            <div className={`${flightType.multiCity ? "w-full booking-form-multicity" : "w-full booking-form"}`}>
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e)
                                     : e.preventDefault()} className="w-full flex justify-center">
                                     <div className="lg:w-[90%] xl:w-[80%]">
-                                        <div className="mt-12 md:w-[96.5%] bg-white border border-[#eee] rounded-lg p-4">
-                                            <div className="border-b border-[#eee] flex justify-center items-center pb-3">
+                                        <div className="mt-12 md:w-[96.5%] bg-white border border-[#eee] rounded-lg p-8">
+                                            <div className="border-b border-[#eee] flex justify-center items-center pb-6">
                                                 <div className="flex flex-row gap-4 capitalize text-xs font-semibold">
                                                     <input type="radio"
                                                         defaultChecked
@@ -399,17 +404,30 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                         <p>cabin&nbsp;class&nbsp;travelers</p>
                                                     </div>
                                                     <div className="flex flex-row items-center gap-1">
-                                                        <div className="basis-4">
-                                                            <input
+                                                        <div className="basis-[30%]">
+                                                            {/* <input
                                                                 type={"text"}
                                                                 className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
                                                                 defaultValue={1}
                                                                 required
                                                                 onChange={onChangeNumberOfPersons}
+                                                            /> */}
+                                                            <ReactDropDownSelectStyled
+                                                                placeholder="1 adult"
+                                                                className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
+                                                                required
+                                                                options={Array.from({length: 10}, (_, i) => i + 1).map((data: any, _: number) => {
+                                                                    return {
+                                                                        label: `${data} ${data > 1 ? 'adults': 'adult'}`,
+                                                                        value: data,
+                                                                    }
+                                                                })}
+                                                                values={[]}
+                                                                onChange={(values: any) => onChangeNumberOfPersons(values)}
                                                             />
                                                         </div>
 
-                                                        <div className="basis-[92%]">
+                                                        <div className="basis-[70%]">
                                                             <ReactDropDownSelectStyled
                                                                 placeholder="Premium Economy"
                                                                 required
@@ -450,7 +468,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                     </div>
                                 </form>
                             </div>
-                            <div id={flightType.multiCity ? "external-airlines-multicity" : "external-airlines"} className='"w-[70%] h-[10vh]" : "w-[70%] mt-[7%]'>
+                            <div id={flightType.multiCity ? "external-airlines-multicity" : "external-airlines"} className={"w-full"}>
                                 {/* other airlines flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]" */}
                                 <ExternalAirlines />
                                 

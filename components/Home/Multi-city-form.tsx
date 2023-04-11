@@ -266,8 +266,8 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                             <p>cabin&nbsp;class&nbsp;travelers</p>
                                         </div>
                                         <div className="flex flex-row items-center gap-1">
-                                            <div className='basis-4'>
-                                                <input
+                                            <div className='basis-[35%]'>
+                                                {/* <input
                                                     type={"text"}
                                                     {...register(`flights.${i}.noOfPersons`, { required: true })}
                                                     className="outline-none 
@@ -275,9 +275,22 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                     required
                                                     placeholder='1'
                                                     defaultValue={1}
+                                                /> */}
+                                                <ReactDropDownSelectStyled
+                                                    placeholder="1 adult"
+                                                    className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
+                                                    required
+                                                    options={Array.from({length: 10}, (_, i) => i + 1).map((data: any, _: number) => {
+                                                        return {
+                                                            label: `${data} ${data > 1 ? 'adults': 'adult'}`,
+                                                            value: data,
+                                                        }
+                                                    })}
+                                                    values={[]}
+                                                    onChange={(values: any) => setValue(`flights.${i}.noOfPersons`, values)}
                                                 />
                                             </div>
-                                            <div className='basis-[92%]'>
+                                            <div className='basis-[65%]'>
                                                 <ReactDropDownSelectStyled
                                                     dropdownPosition='bottom'
                                                     options={[
