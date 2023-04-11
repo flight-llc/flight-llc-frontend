@@ -85,7 +85,7 @@ export const NavBar: FC<props> = ({ textColor, page = 'landing' }) => {
                     <div className="w-full">
                         <section className="flex justify-end">
                             <button
-                                className="relative mr-1"
+                                className="relative mr-4"
                                 onClick={onClickMenuHandler}>
                                 <BiMenu className={`${textColor} text-2xl cursor-pointer`} />
                             </button>

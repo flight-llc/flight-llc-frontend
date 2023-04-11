@@ -188,7 +188,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                         <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
                             <div className="w-full flex p-4 bg-white mb-3 rounded-lg">
                                 <section className="basis-full px-4 flex justify-between items-center gap-4">
-                                    <div className="flex  flex-col basis-1/4 gap-2 text-xs">
+                                    <div className="flex  flex-col basis-1/4 gap-2 text-sm">
                                         <div className="font-semibold flex gap-1 items-center">
                                             <GiAirplaneDeparture className="text-base"/>
                                             <p>From</p>
@@ -210,7 +210,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col basis-1/4 gap-2 text-xs">
+                                    <div className="flex flex-col basis-1/4 gap-2 text-sm">
                                         <div className="font-semibold flex gap-1 items-center">
                                             <GiAirplaneArrival className="text-base" />
                                             <p>To</p>
@@ -233,7 +233,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col basis-1/4 gap-2 text-xs ">
+                                    <div className="flex flex-col basis-1/4 gap-2 text-sm">
                                         <div className="font-semibold flex flex-row gap-2 items-center">
                                             <RxCalendar className="text-base" />
                                             <p>Depart</p>
@@ -248,6 +248,9 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 focus:border-b focus:border-[#113B75] py-2"
                                             /> */}
                                             <DatePicker
+                                                className="w-full outline-none
+                                                hover:border-b hover:border-[#113B75] py-2  
+                                                focus:border-b focus:border-[#113B75] py-2"
                                                 selected={(i != fields.length - 1) ? new Date(fieldData['departDate']) :  (lastDepartDate ? new Date(lastDepartDate): new Date())}
                                                 allowSameDay={false}
                                                 minDate={new Date()}
@@ -260,7 +263,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col basis-1/4 gap-2 text-xs px-4">
+                                    <div className="flex flex-col basis-1/4 gap-2 text-sm px-4">
                                         <div className="font-semibold flex gap-1 items-center">
                                             <MdOutlineAirlineSeatReclineExtra className="text-lg" />
                                             <p>cabin&nbsp;class&nbsp;travelers</p>
@@ -280,6 +283,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                             <div className='basis-[92%]'>
                                                 <ReactDropDownSelectStyled
                                                     dropdownPosition='bottom'
+                                                    placeholder="Premium Economy"
                                                     options={[
                                                         { text: 'Premium Economy', value: 'PremiumEconomy' },
                                                         { text: 'Business', value: 'Business' },
@@ -315,7 +319,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                 <div className='w-full flex flex-column gap-2 mt-2 ml-1'>
                     <div className='w-full flex items-center gap-4'>
                         <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
-                            <span className='text-[10px] text-[#909090] px-1.5'>Name</span>
+                            <span className='text-xs text-[#909090] px-1.5'>Name</span>
                             <input
                                 type={'text'}
                                 required
@@ -329,7 +333,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                             ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
                             : 'w-1/4 bg-white rounded-lg p-2  text-xs'}`}>
                             <div className='px-1.5'>
-                                <span className='text-[10px] text-[#909090]'>Phone Number</span>
+                                <span className='text-xs text-[#909090]'>Phone Number</span>
                                 <PhoneInput
                                     country={'us'}
                                     inputStyle={{ width: '15vw', border : 'none', height: 25}}
@@ -348,7 +352,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                         <div className={`${person.email && !validateEmail(person.email) 
                         ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
                         : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`}>
-                            <span className='text-[10px] text-[#909090] px-1.5'>email</span>
+                            <span className='text-xs text-[#909090] px-1.5'>Email</span>
                             <input
                                 type={'text'}
                                 required
@@ -378,12 +382,12 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                     <div className='w-1/4 flex flex-row ml-1'>
                         <button
                             onClick={appendFlight}
-                            className='w-1/2 inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
+                            className='w-1/2 inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-sm'>
                             Add Flight
                         </button>
                         <button
                             onClick={() => setValue('flights', [])}
-                            className='w-1/2 inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-xs'>
+                            className='w-1/2 inline-block mr-2 bg-[#A1A1A1] text-white rounded-lg p-3.5 text-center text-sm'>
                             Clear all
                         </button>
                     </div>

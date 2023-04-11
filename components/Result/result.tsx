@@ -274,13 +274,8 @@ const Result :FC<Props> = ({average, data}) => {
                     </div>
                 </div>
                 <div className='basis-2/5'>
-                    <div className='w-full h-full'>
-                        <Image
-                        src={result}
-                        alt=""
-                        // width={500}
-                        // height={500}
-                        />
+                    <div id="result" className='w-full h-full'>
+                        {/* <object data={'/result.svg'} className=''/> */}
                     </div>
                 </div>
             </div>

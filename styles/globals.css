@@ -300,6 +300,11 @@ input[type="date"]::-webkit-clear-button {
    z-index: 1;
 }
 
+#result{
+  background-image: url('/result.svg');
+  background-repeat: no-repeat;
+  object-fit: cover;
+}
 @media (min-width: 1280px) and (max-width: 1400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
   #external-airlines-multicity {
@@ -316,7 +321,7 @@ input[type="date"]::-webkit-clear-button {
     right: 6.2%;
   }
 }
-@media (min-width: 2560) and (max-width: 3072px)  {
+@media (min-width: 1920) and (max-width: 3072px)  {
   #dropdown{
     right: 6.2%;
   }
