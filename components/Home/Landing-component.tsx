@@ -248,7 +248,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
             :
             <>
-                <div className={flightType.multiCity ? "w-full min-h-[58rem] relative block" : "w-full min-h-[45rem] relative block"}>
+                <div className={flightType.multiCity ? "w-full min-h-[140vh] relative block" : "w-full min-h-screen relative block"}>
                 {/* <div className={"w-full h-screen relative block"}> */}
                     <Image
                         src={home_img_1}
@@ -274,9 +274,9 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             <div className={`${flightType.multiCity ? "w-full booking-form-multicity" : "w-full booking-form"}`}>
                                 <form onSubmit={(e) => !flightType.multiCity ? OnsubmitHandlerForOneWayAndRoundTrip(e)
                                     : e.preventDefault()} className="w-full flex justify-center">
-                                    <div className="lg:w-[90%] xl:w-[80%]">
-                                        <div className="mt-12 md:w-[96.5%] bg-white border border-[#eee] rounded-lg p-8">
-                                            <div className="border-b border-[#eee] flex justify-center items-center pb-6">
+                                    <div className={flightType.roundTrip ? "lg:w-[90%] xl:w-[97%]" : "lg:w-[90%] xl:[87%]"} >
+                                        <div className="mt-12 md:w-[96.5%] bg-white border border-[#eee] rounded-lg p-4">
+                                            <div className="border-b border-[#eee] flex justify-center items-center pb-4 pt-1">
                                                 <div className="flex flex-row gap-4 capitalize text-sm font-semibold">
                                                     <input type="radio"
                                                         defaultChecked
@@ -303,7 +303,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                             </div>
                                             {/* travel form */}
                                             <div className="pt-2 px-4 basis-full flex justify-between items-center gap-4">
-                                                <div className="flex flex-col basis-1/4 gap-2 text-sm">
+                                                <div className="flex flex-col basis-1/5 gap-2 text-sm">
                                                     <div className="font-semibold flex gap-1 items-center">
                                                         <GiAirplaneDeparture className="text-base" />
                                                         <p>From</p>
@@ -324,7 +324,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-col basis-1/4 gap-2 text-sm">
+                                                <div className="flex flex-col basis-1/5 gap-2 text-sm">
                                                     <div className="font-semibold flex gap-1 items-center">
                                                         <GiAirplaneArrival className="text-base" />
                                                         <p>To</p>
@@ -343,7 +343,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                     </div>
                                                 </div>
 
-                                                <div className="flex flex-col basis-1/4 gap-2 text-sm">
+                                                <div className="flex flex-col basis-1/5 gap-2 text-sm">
                                                     <div className="font-semibold flex flex-row gap-2 items-center">
                                                         <RxCalendar className="text-base" />
                                                         <p>Depart</p>
@@ -370,7 +370,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                 </div>
 
                                                 {flightType.roundTrip &&
-                                                    <div className="flex flex-col basis-1/4 gap-2 text-sm">
+                                                    <div className="flex flex-col basis-1/5 gap-2 text-sm">
                                                         <div className="font-semibold flex gap-2 items-center">
                                                             <RxCalendar className="text-sm" />
                                                             <p>Return</p>
@@ -385,6 +385,9 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             focus:border-b focus:border-[#113B75] py-2"
                                                             /> */}
                                                             <DatePicker 
+                                                            className="w-full outline-none
+                                                            hover:border-b hover:border-[#113B75] py-2  
+                                                            focus:border-b focus:border-[#113B75] py-2"
                                                             selected={new Date(returnDate)} 
                                                             allowSameDay={false}
                                                             minDate={new Date()}
@@ -394,13 +397,13 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                     </div>
                                                 }
 
-                                                <div className="flex flex-col basis-1/4 gap-2 text-sm">
-                                                    <div className="font-semibold flex gap-1 items-center">
+                                                <div className="flex flex-col basis-1/3 gap-2 text-sm">
+                                                    <div className="w-full font-semibold flex gap-1 items-center">
                                                         <MdOutlineAirlineSeatReclineExtra className="text-lg" />
                                                         <p>cabin&nbsp;class&nbsp;travelers</p>
                                                     </div>
                                                     <div className="flex flex-row items-center gap-1">
-                                                        <div className="basis-[30%]">
+                                                        <div className="basis-[30%] text-sm">
                                                             {/* <input
                                                                 type={"text"}
                                                                 className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
@@ -410,11 +413,11 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             /> */}
                                                             <ReactDropDownSelectStyled
                                                                 placeholder="1 adult"
-                                                                className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
                                                                 required
+                                                                style={{fontSize : '12px'}}
                                                                 options={Array.from({length: 10}, (_, i) => i + 1).map((data: any, _: number) => {
                                                                     return {
-                                                                        label: `${data} ${data > 1 ? 'adults': 'adult'}`,
+                                                                        label: `${data > 1 ? `${data} adults`: `${data} adult`}`,
                                                                         value: data,
                                                                     }
                                                                 })}
@@ -423,7 +426,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                                             />
                                                         </div>
 
-                                                        <div className="basis-[70%]">
+                                                        <div className="basis-[70%] text-sm">
                                                             <ReactDropDownSelectStyled
                                                                 placeholder="Premium Economy"
                                                                 required
@@ -465,9 +468,12 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                     </div>
                                 </form>
                             </div>
-                            <div id={flightType.multiCity ? "external-airlines-multicity" : "external-airlines"} className={"w-full"}>
-                                {/* other airlines flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]" */}
-                                <ExternalAirlines />
+                            <div  className={"w-full flex justify-center items-center"}>
+                                <div className={!flightType.multiCity ? 'lg:w-[90%] mt-0' : 'lg:w-[90%] xl:w-[87%] ml-0 mt-[20vh]'}>
+                                    <ExternalAirlines />
+                                </div>
+                                {/* id={flightType.multiCity ? "external-airlines-multicity" : "external-airlines"} other airlines flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]" */}
+                                
                             </div>
 
                             

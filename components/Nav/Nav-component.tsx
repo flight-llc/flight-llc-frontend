@@ -95,7 +95,7 @@ export const NavBar: FC<props> = ({ textColor, page = 'landing' }) => {
                         {state &&
                             <div
                                 //id="dropdown"
-                                className="w-32 absolute flex justify-center top-[12%] w-fit">
+                                className="w-32 absolute flex justify-center top-[13%] w-fit">
                                 <ul
                                     className={`py-4 text-xs text-center ${textColor}`}
                                     aria-labelledby="dropdownHoverButton"
