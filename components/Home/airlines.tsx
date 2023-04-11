@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 export const ExternalAirlines : FC = () => {
     return(
-        <div className="flex justify-center relative">
+        <div className="w-full relative">
             <div className="absolute w-fit h-4">
                 <Image
                 src={group}

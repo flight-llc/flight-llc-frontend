@@ -3,6 +3,7 @@ import Image from 'next/image';
 import LoaderImg from '@/public/LoaderImg.svg';
 import Circle from '@/public/Circle.svg';
 import {IoIosAirplane} from 'react-icons/io';
+import logo_white from '@/public/logo-white.png';
 
 /**todo
  * loader should be dynamic not static
@@ -39,8 +40,13 @@ export const Loader :FC<IParams> = (props: IParams) => {
             />
             <div className='absolute w-full'>
                 <div className='w-4/5 h-screen mx-auto pt-8'>
-                    <div className="flightPortalLogo text-5xl text-white">
-                        <span>Flightportal</span>
+                    <div className="text-white">
+                        <Image
+                        src={logo_white}
+                        alt=""
+                        width={200}
+                        height={200}
+                        />
                     </div>
 
                     <div className='flex justify-center h-screen items-center'>

@@ -74,51 +74,49 @@ export const NavBar: FC<props> = ({ textColor, page = 'landing' }) => {
                 {/* <span>Flightportal</span> */}
             </div>
 
-            <div className="w-fit flex flex-row text-sm items-center gap-12">
-                <p className="text-xs">24/7 live service</p>
+            <div className="w-fit flex flex-row text-sm items-center gap-4">
+                <p className="text-xs px-4">24/7 live service</p>
 
-                <button className="bg-[#113B75] rounded-lg text-white outline-none text-xs p-3">
+                <button className="bg-[#113B75] px-4 rounded-lg text-white outline-none text-xs p-3">
                     <span><a href={`tel:${navObject.phone.replaceAll(' ', '')}`}>{navObject.phone}</a></span>
                 </button>
 
-                <button
-                    className="relative"
-                    onClick={onClickMenuHandler}>
-                    <BiMenu className={`${textColor} text-2xl cursor-pointer`} />
-                </button>
-                {/* className={state && state.open 
-                    ?'absolute visible top-[8%] md:right-[4%] lg:right-[5.3%] xl:right-[5.5%] divide-y divide-gray-100 w-fit'
-                    :'invisible'} */}
-                {/* <BiMenu className={`${textColor} text-2xl bg-green-900 cursor-pointer`} onClick={onClickMenuHandler}/> */}
-                {state &&
-                    <div
-                        //id="dropdown" 
-                        className="absolute top-[15%] md:right-[4%] lg:right-[5.3%] xl:right-[5.5%] w-fit">
-                        <ul
-                            className={`py-4 text-xs text-center ${textColor}`}
-                            aria-labelledby="dropdownHoverButton"
-                        >
-                            <Link href={'/#AboutUs'} onClick={() => setState(false)}>
-                                <p className="block px-4 py-2 hover:text-[#0379E8]">About</p>
-                            </Link>
-                            <Link href={"/#HowItWorks"} onClick={() => setState(false)}>
-                                <p className="block px-4 py-2 hover:text-[#0379E8]">How it Works</p>
-                            </Link>
-                            {/* <Link href={"/blog"}>
-                         <p className="block px-4 py-2 hover:text-[#0379E8]">Blog</p>
-                     </Link> */}
-                            <Link href={'/#deal'} onClick={() => setState(false)}>
-                                <p className="block px-4 py-2 hover:text-[#0379E8]">Deals</p>
-                            </Link>
-                            <Link href={'/#ContactUs'} onClick={() => setState(false)}>
-                                <p className="block px-4 py-2 hover:text-[#0379E8]">Contact us</p>
-                            </Link>
-                        </ul>
+                <div className="w-20 flex justify-center">
+                    <div className="w-full">
+                        <section className="flex justify-end">
+                            <button
+                                className="relative mr-1"
+                                onClick={onClickMenuHandler}>
+                                <BiMenu className={`${textColor} text-2xl cursor-pointer`} />
+                            </button>
+                        </section>
+                        
+                        {/* md:right-[4%] lg:right-[5.3%] xl:right-[5.5%]  */}
+                        {state &&
+                            <div
+                                //id="dropdown"
+                                className="w-32 absolute flex justify-center top-[12%] w-fit">
+                                <ul
+                                    className={`py-4 text-xs text-center ${textColor}`}
+                                    aria-labelledby="dropdownHoverButton"
+                                >
+                                    <Link href={'/#AboutUs'} onClick={() => setState(false)}>
+                                        <p className="block px-4 py-2 hover:text-[#0379E8]">About</p>
+                                    </Link>
+                                    <Link href={"/#HowItWorks"} onClick={() => setState(false)}>
+                                        <p className="block px-4 py-2 hover:text-[#0379E8]">How it Works</p>
+                                    </Link>
+                                    <Link href={'/#deal'} onClick={() => setState(false)}>
+                                        <p className="block px-4 py-2 hover:text-[#0379E8]">Deals</p>
+                                    </Link>
+                                    <Link href={'/#ContactUs'} onClick={() => setState(false)}>
+                                        <p className="block px-4 py-2 hover:text-[#0379E8]">Contact us</p>
+                                    </Link>
+                                </ul>
+                            </div>
+                        }
                     </div>
-                }
-
-
-
+                </div>
             </div>
         </div>
     );

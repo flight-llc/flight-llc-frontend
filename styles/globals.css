@@ -217,6 +217,7 @@ input[type='radio']{
 .flex-row-4 {
   align-items: flex-start;
   display: flex;
+  align-items: center;
   gap: 19px;
   margin-left: 56.52px;
   margin-top: 6px;
@@ -317,14 +318,13 @@ input[type="date"]::-webkit-clear-button {
 @media (min-width: 1280px) and (max-width: 1400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
   #external-airlines-multicity {
-    margin-top: 7%;
+    margin-top: 10%;
   }
 
   #external-airlines-multicity {
     margin-top: 12%;
   }
 }
-
 
 @media (min-width: 1400px) and (max-width: 2400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
@@ -351,6 +351,16 @@ input[type="date"]::-webkit-clear-button {
   }
 }
 
+@media (min-width: 1500px) and (max-width: 2560px)  {
+  #dropdown{
+    right: 6.2%;
+  }
+}
+@media (min-width: 2560) and (max-width: 3072px)  {
+  #dropdown{
+    right: 6.2%;
+  }
+}
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
