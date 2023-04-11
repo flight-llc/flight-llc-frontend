@@ -450,10 +450,12 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                     </div>
                                 </form>
                             </div>
-                            <div id={flightType.multiCity ? "external-airlines-multicity" : "external-airlines"} className='"w-[70%] h-[10vh]" : "w-[70%] mt-[7%]'>
-                                {/* other airlines flightType.multiCity ? "w-[70%] ml-[15%] h-[10vh]" : "w-[70%] ml-[15%] mt-[5%]" */}
-                                <ExternalAirlines />
-                                
+                            <div 
+                            id={flightType.multiCity ? "external-airlines-multicity" : "external-airlines"} 
+                            className={flightType.multiCity ? "flex justify-center w-full h-[10vh] mt-[10%]" : "flex justify-center w-full h-[10vh] mt-[7%]"}>
+                                <div className="w-[80%]">
+                                    <ExternalAirlines />
+                                </div>                                
                             </div>
 
                             

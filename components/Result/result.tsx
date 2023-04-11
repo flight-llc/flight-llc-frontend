@@ -173,7 +173,7 @@ const Result :FC<Props> = ({average, data}) => {
                                 <input 
                                 type={'text'} 
                                 defaultValue={(queryResponseData?.data?.data?.name || '')}
-                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                className='text-[#113B75] py-1.5 font-semibold outline-none w-full'
                                 placeholder='Micheal Kors'
                                 onChange={onChangeNameHandler}
                                 />
@@ -181,8 +181,8 @@ const Result :FC<Props> = ({average, data}) => {
                             {/* Phone number with country code */}
 
                             <div className={`${details.phone && !validatePhoneNumberString(details.phone)
-                            ? 'bg-white rounded-lg p-2 text-xs my-4 border border-red-500'
-                            : 'bg-white rounded-lg p-2 text-xs my-4'}`}>
+                            ? 'bg-white rounded-lg p-1 text-xs my-4 border border-red-500'
+                            : 'bg-white rounded-lg p-1 text-xs my-4'}`}>
                                 <span className='text-[10px] text-[#909090]'>Phone Number</span>
                                 <PhoneInput
                                     country={'us'}
@@ -256,7 +256,7 @@ const Result :FC<Props> = ({average, data}) => {
                                 <input 
                                 type={'email'} 
                                 defaultValue={(queryResponseData?.data?.data?.email || '')}
-                                className='text-[#113B75] py-1 font-semibold outline-none w-full'
+                                className='text-[#113B75] py-1.5 font-semibold outline-none w-full'
                                 placeholder='Korsmichaaelfk123@gmail.com'
                                 onChange={onChangeEmailHandler}/>
                             </div>
@@ -265,8 +265,8 @@ const Result :FC<Props> = ({average, data}) => {
                                 value="Send Request"
                                 disabled={disableButton()}
                                 className='w-full bg-[#113B75] 
-                                text-white rounded-lg p-3.5 
-                                text-center mt-5 cursor-pointer 
+                                text-white rounded-lg py-[1.15rem] 
+                                text-center mt-4 cursor-pointer 
                                 text-sm disabled:bg-[#EFF0F6]'
                                 onClick={sendPatchRequestForFlightBooked}/>
                         </div>
