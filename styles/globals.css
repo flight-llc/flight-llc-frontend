@@ -12,7 +12,8 @@
   background-image: url('/cloud.png');
   background-repeat: no-repeat;
   object-fit: cover;
-  background-position: right top -5px;
+  background-position: top -8vh right -9vw;
+  background-size: 100% auto;
 }
 
 #bg-expert{
@@ -300,6 +301,20 @@ input[type="date"]::-webkit-clear-button {
    z-index: 1;
 }
 
+.booking-form {
+  /* padding: 20px; */
+}
+.booking-form-multicity {
+  height: 55vh;
+}
+#external-airlines-multicity {
+  margin-top: 15vh;
+}
+
+#AboutUs {
+  height: 130vh;
+}
+
 @media (min-width: 1280px) and (max-width: 1400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
   #external-airlines-multicity {
@@ -308,6 +323,31 @@ input[type="date"]::-webkit-clear-button {
 
   #external-airlines-multicity {
     margin-top: 12%;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 2400px) {
+  /* Your CSS code for screen sizes between 1300px and 1600px */
+  .booking-form-multicity {
+    height: 55vh;
+  }
+  #external-airlines-multicity {
+    margin-top: 15vh;
+  }
+}
+
+@media (min-width: 2401px) {
+  /* Your CSS code for screen sizes between 1300px and 1600px */
+  .booking-form-multicity {
+    height: 28vh;
+  }
+  #external-airlines-multicity {
+    margin-top: 1vh;
+    height: 25vh;
+  }
+
+  #AboutUs {
+    height: 60vh;
   }
 }
 
