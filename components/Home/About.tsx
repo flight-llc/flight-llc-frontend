@@ -28,7 +28,7 @@ export const AboutUs : FC = () => {
                         />
                    </div>   
 
-                    <div className="text-[15px]">
+                    <div className="text-base">
                         <p>
                             As a travel consulting agency, we craft unforgettable, 
                         budget-friendly luxury travel experiences. We specialize in <br/> providing 

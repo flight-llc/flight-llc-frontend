@@ -6,12 +6,13 @@ import { FC } from 'react';
 export const ExternalAirlines : FC = () => {
     return(
         <div className="w-full relative">
-            <div className="w-fit h-4">
+            <div className='w-full h-32'>
+                {/* <object data="/group.svg" className='w-full h-full object-cover'/> */}
                 <Image
                 src={group}
                 alt=""
-                width={1100}
-                height={1100}
+                fill
+                className='object-cover'
                 />
             </div>
     </div>

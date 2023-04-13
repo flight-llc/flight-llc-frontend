@@ -310,11 +310,22 @@ input[type="date"]::-webkit-clear-button {
 #external-airlines-multicity {
   margin-top: 15vh;
 }
-
 #AboutUs {
   height: 130vh;
 }
 
+@media(min-width : 992px){
+  #landing-form-height{
+    height: fit-content;
+  }
+  #multi-form-height{
+    height: fit-content;
+  }
+
+  #multi-city-height{
+    max-height: 14rem;
+  }
+}
 @media (min-width: 1280px) and (max-width: 1400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
   #external-airlines-multicity {
@@ -341,32 +352,34 @@ input[type="date"]::-webkit-clear-button {
   .booking-form-multicity {
     height: 28vh;
   }
+  #landing-form-height{
+    height: 13rem;
+    padding-top: 2rem;
+  }
+
+  #multi-form-height{
+    height: 13rem;
+  }
+
+  /* #contact-form-height input{
+    height: 5rem;
+  } */
+
   #external-airlines-multicity {
     margin-top: 1vh;
     height: 25vh;
   }
-
+  #multi-city-height{
+    max-height: 28rem;
+  }
   #AboutUs {
     height: 60vh;
   }
 }
 
-#result{
-  background-image: url('/result.svg');
-  background-repeat: no-repeat;
-  object-fit: cover;
-}
 
-@media (min-width: 1500px) and (max-width: 2560px)  {
-  #dropdown{
-    right: 6.2%;
-  }
-}
-@media (min-width: 1920) and (max-width: 3072px)  {
-  #dropdown{
-    right: 6.2%;
-  }
-}
+/* @media (min-width: 1600px) and (max-width: 2560px)  {}
+@media (min-width: 1920) and (max-width: 3072px)  {} */
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;

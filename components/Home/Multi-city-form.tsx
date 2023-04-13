@@ -22,7 +22,7 @@ import PhoneInput from 'react-phone-input-2';
 type props = {
     bookFlight: any,
     locations: any,
-    setTimer : any
+    setTimer: any
 }
 
 const defaultPayload = {
@@ -86,7 +86,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
     const mutation = useMutation((bookedFlightsPayload: any[]) => {
         return bookFlightAction(bookedFlightsPayload).then((data) => data);
     }, {
-        onSuccess: (data : any) => {
+        onSuccess: (data: any) => {
             const responseData: any = data['data'];
             if (responseData && responseData['status']) {
                 if (responseData && responseData.data && responseData.data.flights.length > 0) {
@@ -104,7 +104,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
             }
             setTimer(0);
         },
-        onError: (error : any) => {
+        onError: (error: any) => {
             showToast({ message: 'Flight Booking failed, please try again.', type: 'error' });
             console.log(error);
         }
@@ -125,14 +125,14 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
         setPerson({ ...person, email: value });
     }
 
-    const onChangePhoneNumberHandler = (target : any) => {
+    const onChangePhoneNumberHandler = (target: any) => {
         let phone;
         if (target && target.value) {
             phone = target.value;
         } else {
             phone = target;
         }
-        
+
         setPerson({ ...person, phone });
     }
     const onSubmitMultiCityFlights = () => {
@@ -163,34 +163,34 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
 
     }
     const disableButton = () => {
-        const {name, email, phone} = person;
-        if(!email && !phone && !name && !phone) return false;
+        const { name, email, phone } = person;
+        if (!email && !phone && !name && !phone) return false;
 
-        if(!validateEmail(email) || 
-        !validatePhoneNumberString(phone) ||
-        !name)
-        return true;
+        if (!validateEmail(email) ||
+            !validatePhoneNumberString(phone) ||
+            !name)
+            return true;
 
         return false;
     }
     useEffect(() => {
-        const subscription = watch((value :any, { name, type } : any) => console.log(value, name, type));
+        const subscription = watch((value: any, { name, type }: any) => console.log(value, name, type));
         return () => subscription.unsubscribe();
     }, [watch]);
 
     return (
         <>
-            
+
             <div className='w-full'>
                 {/* <form onSubmit={onSubmitMultiCityFlights}> */}
-                <div className='max-h-[12rem] overflow-y-auto mt-4 rounded-lg' style={{ overflowY: 'auto' }}>
+                <div id="multi-city-height" className='overflow-y-auto mt-4 rounded-lg' style={{ overflowY: 'auto' }}>
                     {fields && fields.map((fieldData: any, i: number) =>
                         <div key={`key_${i}`} className='flex flex-row items-center gap-4'>
-                            <div className="w-full flex p-4 bg-white mb-3 rounded-lg">
+                            <div id="multi-form-height" className="w-[96.6%] flex px-4 py-8 bg-white mb-3 rounded-lg">
                                 <section className="basis-full px-4 flex justify-between items-center gap-4">
-                                    <div className="flex  flex-col basis-1/4 gap-2 text-sm">
+                                    <div className="flex  flex-col basis-1/5 gap-2 text-sm">
                                         <div className="font-semibold flex gap-1 items-center">
-                                            <GiAirplaneDeparture className="text-base"/>
+                                            <GiAirplaneDeparture className="text-base" />
                                             <p>From</p>
                                         </div>
                                         <div className="">
@@ -210,7 +210,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col basis-1/4 gap-2 text-sm">
+                                    <div className="flex flex-col basis-1/5 gap-2 text-sm">
                                         <div className="font-semibold flex gap-1 items-center">
                                             <GiAirplaneArrival className="text-base" />
                                             <p>To</p>
@@ -233,7 +233,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col basis-1/4 gap-2 text-sm">
+                                    <div className="flex flex-col basis-1/5 gap-2 text-sm">
                                         <div className="font-semibold flex flex-row gap-2 items-center">
                                             <RxCalendar className="text-base" />
                                             <p>Depart</p>
@@ -251,7 +251,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                 className="w-full outline-none
                                                 hover:border-b hover:border-[#113B75] py-2  
                                                 focus:border-b focus:border-[#113B75] py-2"
-                                                selected={(i != fields.length - 1) ? new Date(fieldData['departDate']) :  (lastDepartDate ? new Date(lastDepartDate): new Date())}
+                                                selected={(i != fields.length - 1) ? new Date(fieldData['departDate']) : (lastDepartDate ? new Date(lastDepartDate) : new Date())}
                                                 allowSameDay={false}
                                                 minDate={new Date()}
                                                 onChange={(value: any) => {
@@ -263,10 +263,10 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                         </div>
                                     </div>
 
-                                    <div className="flex flex-col basis-1/4 gap-2 text-sm px-4">
+                                    <div className="flex flex-col basis-1/3 gap-2 text-sm">
                                         <div className="font-semibold flex gap-1 items-center">
                                             <MdOutlineAirlineSeatReclineExtra className="text-lg" />
-                                            <p>cabin&nbsp;class&nbsp;travelers</p>
+                                            <p>Cabin&nbsp;Class&nbsp;Travelers</p>
                                         </div>
                                         <div className="flex flex-row items-center gap-1">
                                             <div className='basis-[35%]'>
@@ -280,12 +280,12 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                                     defaultValue={1}
                                                 /> */}
                                                 <ReactDropDownSelectStyled
-                                                    placeholder="1 adult"
+                                                    placeholder="1 traveler"
                                                     className="outline-none focus:border-b w-full focus:border-[#113B75] px-1 py-2"
                                                     required
-                                                    options={Array.from({length: 10}, (_, i) => i + 1).map((data: any, _: number) => {
+                                                    options={Array.from({ length: 10 }, (_, i) => i + 1).map((data: any, _: number) => {
                                                         return {
-                                                            label: `${data} ${data > 1 ? 'adults': 'adult'}`,
+                                                            label: `${data} ${data > 1 ? 'travelers' : 'traveler'}`,
                                                             value: data,
                                                         }
                                                     })}
@@ -329,8 +329,8 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                 </div>
 
 
-                <div className='w-full flex flex-column gap-2 mt-2 ml-1'>
-                    <div className='w-full flex items-center gap-4'>
+                <div className='w-[96.6%] flex flex-column gap-2 mt-2 ml-1'>
+                    <div id="contact-form-height" className='w-full flex items-center gap-4 h-auto'>
                         <div className='w-1/4 bg-white rounded-lg p-2 text-xs'>
                             <span className='text-xs text-[#909090] px-1.5'>Name</span>
                             <input
@@ -342,18 +342,18 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                             />
                         </div>
                         {/* Phone number with country code */}
-                        <div className= {`${person.phone && !validatePhoneNumberString(person.phone)
+                        <div className={`${person.phone && !validatePhoneNumberString(person.phone)
                             ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
                             : 'w-1/4 bg-white rounded-lg p-2  text-xs'}`}>
                             <div className='px-1.5'>
                                 <span className='text-xs text-[#909090]'>Phone Number</span>
                                 <PhoneInput
                                     country={'us'}
-                                    inputStyle={{ width: '15vw', border : 'none', height: 25}}
+                                    inputStyle={{ width: '15vw', border: 'none', minHeight: 25 }}
                                     onChange={phone => onChangePhoneNumberHandler(phone)}
                                 />
                             </div>
-                            
+
                             {/* <input
                                 type={'text'}
                                 required
@@ -362,9 +362,9 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                 onChange={onChangePhoneNumberHandler}
                             /> */}
                         </div>
-                        <div className={`${person.email && !validateEmail(person.email) 
-                        ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
-                        : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`}>
+                        <div className={`${person.email && !validateEmail(person.email)
+                            ? 'w-1/4 bg-white rounded-lg p-2 text-xs border border-red-500'
+                            : 'w-1/4 bg-white rounded-lg p-2 text-xs'}`}>
                             <span className='text-xs text-[#909090] px-1.5'>Email</span>
                             <input
                                 type={'text'}
@@ -374,21 +374,24 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                                 onChange={onChangeEmailHandler}
                             />
                         </div>
-                        <input
-                            type={'submit'}
-                            value={"Send Request"}
-                            onClick={onSubmitMultiCityFlights}
-                            readOnly
-                            disabled={disableButton()}
-                            className='bg-[#113B75] 
-                            text-white 
-                            w-2/12
-                            rounded-lg
-                            text-center 
-                            text-xs
-                            h-[60px]    
-                            disabled:bg-[#EFF0F6]'
-                        />
+                        <div id='submit' className='basis-1/4 h-[60px]'>
+                            <input
+                                type={'submit'}
+                                value={"Send Request"}
+                                onClick={onSubmitMultiCityFlights}
+                                readOnly
+                                disabled={disableButton()}
+                                className='bg-[#113B75] 
+                                text-white 
+                                w-full
+                                rounded-lg
+                                h-full
+                                text-center 
+                                text-sm    
+                                disabled:bg-[#EFF0F6]'
+                                />
+                        </div>
+
                     </div>
                 </div>
                 <div className='w-full flex flex-column gap-2 mt-4 ml-1'>
@@ -404,7 +407,7 @@ export const MultiCityForm: FC<props> = ({ bookFlight, locations, setTimer }) =>
                             Clear all
                         </button>
                     </div>
-                    
+
                 </div>
                 {/* </form> */}
             </div>
