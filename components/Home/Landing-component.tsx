@@ -257,7 +257,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                         className="object-cover"
                     />
                     <div className="absolute w-full flex justify-center items-center">
-                        <div className="w-10/12 h-auto">
+                        <div className="w-[91%] h-auto">
                             <NavBar textColor="text-white" page="landing" />
 
                             {/* landing page header title */}
@@ -470,7 +470,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             </div>
                             <div  className={"w-full flex justify-center items-center"}>
                             {/* {!flightType.multiCity ? 'lg:w-[90%] mt-0 p-4 bg-black' : 'lg:w-[90%] xl:w-[87%] ml-0 mt-[20vh] bg-green-900'} */}
-                                <div className={`${flightType.roundTrip && "lg:w-[90%] xl:w-[97%] mt-4" ||
+                                <div className={`lg:w-[90%] xl:[87%] mt-4 ${flightType.roundTrip && "lg:w-[90%] xl:w-[97%] mt-4" ||
                                 flightType.oneWay && "lg:w-[90%] xl:[87%] mt-4"
                                 || flightType.multiCity && "mt-[24vh] lg:w-[90%] xl:[87%]"}`}>
                                     <div className="w-full">
