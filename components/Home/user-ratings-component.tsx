@@ -16,7 +16,7 @@ type props = {
 export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
   return (
 
-    <div id="bg-cloud" className="w-full h-[600px] p-4 flex justify-center items-center">
+    <div id="bg-cloud" className="w-full h-[800px] p-4 flex justify-center items-center">
       <div className="w-4/5 h-auto">
         <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">
           <span className="text-[#6E7491]">What flight portal users are saying</span>&nbsp;- {average}&nbsp;rating</p>

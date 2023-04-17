@@ -274,7 +274,8 @@ const Result :FC<Props> = ({average, data}) => {
                     </div>
                 </div>
                 <div className='basis-2/5'>
-                    <div id="result" className='w-full h-full'>
+                    <div className='w-full h-full'>
+                        <div id='result'/>
                         {/* <object data={'/result.svg'} className=''/> */}
                     </div>
                 </div>
@@ -289,7 +290,7 @@ const Result :FC<Props> = ({average, data}) => {
                 />
             </div>
         </div>
-        <div className="text-xs p-1 text-center text-[#6E7491]">
+        <div className="text-xs p-1 text-center text-[#6E7491] mb-20">
             <p>
                 *Price shown is a Round Trip fare in business class per person and based on weekday travel (Monday-Thursday).
                 The price is total includes all taxes and fees and is in USD.
