@@ -12,7 +12,6 @@ export const ExternalAirlines : FC = () => {
                 src={group}
                 alt=""
                 fill
-                className='object-cover'
                 />
             </div>
     </div>

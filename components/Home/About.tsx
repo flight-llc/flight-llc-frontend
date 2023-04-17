@@ -28,7 +28,9 @@ export const AboutUs : FC = () => {
                         />
                    </div>   
 
-                    <div className="text-sm xl:text-base">
+                    <div
+                    id="aboutUs-super-lg-screen-textSize" 
+                    className="text-sm xl:text-base">
                         <p>
                             As a travel consulting agency, we craft unforgettable, 
                         budget-friendly luxury travel experiences. We specialize in <br/> providing 

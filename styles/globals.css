@@ -318,6 +318,11 @@ input[type="date"]::-webkit-clear-button {
   #landing-form-height{
     height: fit-content;
   }
+
+  #radio-select-travel-type{
+    padding-bottom: 1rem;
+  }
+
   #multi-form-height{
     height: fit-content;
   }
@@ -325,6 +330,14 @@ input[type="date"]::-webkit-clear-button {
   #multi-city-height{
     max-height: 14rem;
   }
+
+  /* .travel-form-width-for-roundTrip{
+    width: 97%;
+  }
+
+  .travel-form-width-for-multiOne{
+    width: 87%;
+  } */
 }
 @media (min-width: 1280px) and (max-width: 1400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
@@ -349,19 +362,50 @@ input[type="date"]::-webkit-clear-button {
 
 @media (min-width: 2401px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
+  #travel-width-lg-screen{
+    width: 70%;
+  }
+
+  #deals-text-size{
+    font-size: 20px;
+    line-height: 1.5rem;
+    
+  }
+  #text-size{
+    font-size: 25px;
+    line-height: 2rem;
+  }
+  #deals-image-height{
+    height: 20rem;
+  }
+  #marginTopId{
+    margin-top: 5rem;
+  }
+
+  #travel-width-lg-screen-roundTrip{
+    width: 85%;
+  }
+  
   .booking-form-multicity {
     height: 28vh;
   }
   
   #landing-form-height{
     height: 13rem;
-    padding-top: 2rem;
+  }
+
+  #radio-select-travel-type{
+    padding-bottom: 1.5rem;
   }
 
   #multi-form-height{
-    height: 13rem;
+    height: 12rem;
   }
 
+  #aboutUs-super-lg-screen-textSize{
+    font-size: 26px;
+    line-height: 1.7rem;
+  }
   /* #contact-form-height input{
     height: 5rem;
   } */

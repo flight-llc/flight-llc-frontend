@@ -16,8 +16,8 @@ type props = {
 export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
   return (
 
-    <div id="bg-cloud" className="w-full p-4 flex justify-center">
-      <div className="w-4/5 h-auto py-16">
+    <div id="bg-cloud" className="w-full h-[600px] p-4 flex justify-center items-center">
+      <div className="w-4/5 h-auto">
         <p className="text-xl font-semibold text-[#2C53B8] text-center pb-4">
           <span className="text-[#6E7491]">What flight portal users are saying</span>&nbsp;- {average}&nbsp;rating</p>
           <Swiper
@@ -65,7 +65,9 @@ export const UserExperienceRatings: FC<props> = ({ comments, average }) => {
                       {Math.trunc(Number.parseFloat(data.rating)) <= 4 && Number.parseFloat(data.rating)-Math.floor(Number.parseFloat(data.rating)) < 0.5 &&  <BsStar/>}
                     </div>
 
-                    <div className="text-sm leading-relaxedS py-4">
+                    <div
+                    id='text-size' 
+                    className="text-sm py-4">
                       {data.review}
                     </div>
                   </div>

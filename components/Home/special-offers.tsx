@@ -138,12 +138,13 @@ export const SpecialOffers: FC<props> = ({ offers }) => {
                       <div className="">
                         <div className="bg-[#F1F1F2] rounded-3xl">
                             {/* <a href="#"> */}
-                            <div className="w-full h-[15rem] rounded-t-3xl">
+                            <div id="deals-image-height" className="w-full h-[15rem] rounded-t-3xl">
                                 {/* <object data={data.image} className="rounded-t-lg"></object> */}
                                 <Image
                                 src={data.image}
                                 alt={data.name}
                                 //fill 
+                                id="deals-image-height"
                                 className="rounded-t-3xl w-full h-[15rem]" />
                             </div>
                             {/* </a> className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" */}
