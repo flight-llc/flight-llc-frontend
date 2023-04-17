@@ -14,6 +14,7 @@
   object-fit: cover;
   background-position: top -0vh right -9vw;
   background-size: 100% auto;
+  height: 800px;
 }
 
 #bg-expert{
@@ -362,6 +363,25 @@ input[type="date"]::-webkit-clear-button {
 
 @media (min-width: 2401px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
+  .overlap-group7{
+    min-height: 1500px;
+    padding: 250px 250px;
+  }
+  /* .group-1176{
+    font-size: 18px;
+  } */
+  #bg-cloud{
+    background-image: url('/cloud.png');
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-position: top -0vh right -9vw;
+    background-size: 100% auto;
+    min-height: 1500px;
+  }
+  #review-text-size{
+    font-size: 40px;
+    padding-bottom: 4rem;
+  }
   #travel-width-lg-screen{
     width: 70%;
   }
