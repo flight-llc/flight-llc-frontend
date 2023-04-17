@@ -12,7 +12,7 @@ export const AboutUs : FC = () => {
                 className="object-cover"
             />
             <div className="absolute w-full flex justify-center items-center">
-                <div className="w-4/5 xl:w-3/5 py-20 text-center text-white">
+                <div className="w-[90%] xl:w-4/5 py-20 text-center text-white">
                     <p className="uppercase text-lg font-bold">About us</p>
 
                     {/* <div className="flightPortalLogo text-7xl my-12">
@@ -28,7 +28,7 @@ export const AboutUs : FC = () => {
                         />
                    </div>   
 
-                    <div className="text-base">
+                    <div className="text-sm xl:text-base">
                         <p>
                             As a travel consulting agency, we craft unforgettable, 
                         budget-friendly luxury travel experiences. We specialize in <br/> providing 
