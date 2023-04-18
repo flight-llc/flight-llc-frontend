@@ -109,6 +109,10 @@ const Result :FC<Props> = ({average, data}) => {
     const sendPatchRequestForFlightBooked = () => {
         const {query} = router;
         const {name, email, phone, smsPriceQuote} = details;
+        if (!name || !email || !phone) {
+            showToast({ message: 'Please fill in all fields', type: 'error' });
+            return;
+        }
         mutate({
             name,
             email,
@@ -136,10 +140,10 @@ const Result :FC<Props> = ({average, data}) => {
             {/* title */}
             <div className="w-fit text-4xl my-12 leading-relaxed text-center headerText">
                 <h1 className="bg-gradient-to-r from-[#113B75] to-[#0379E8]">Complete the request form to</h1>
-                <h1 className="bg-gradient-to-r from-[#113B75] to-[#0379E8]">secure this discounted price</h1>
+                <h1 className="bg-gradient-to-r from-[#113B75] to-[#0379E8]" style={{marginRight: '15px'}}>secure this discounted price</h1>
             </div>
 
-            <div className='w-full flex bg-[#F6F6F6] rounded-xl'>
+            <div className='w-full h-[75vh] flex bg-[#F6F6F6] rounded-xl' style={{ borderBottomRightRadius: '20px',borderTopRightRadius: '20px' }}>
                 <div className='basis-3/5 flex gap-4'>
                     <div className='basis-1/2 p-8'>
                         <div style={{ height: 200 }}>
@@ -273,7 +277,7 @@ const Result :FC<Props> = ({average, data}) => {
                         
                     </div>
                 </div>
-                <div className='basis-2/5'>
+                <div className='basis-2/5' style={{ borderBottomRightRadius: '20px',borderTopRightRadius: '20px' }}>
                     <div className='basis-full h-full'>
                         <div id='result'/>
                         {/* <Image src={'/result.svg'} alt='' className='object-cover'/> */}

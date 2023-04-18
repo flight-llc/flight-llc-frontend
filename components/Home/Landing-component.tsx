@@ -248,7 +248,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
             :
             <>
-                <div className={flightType.multiCity ? "w-full min-h-[140vh] relative block" : "w-full min-h-screen relative block"}>
+                <div className={flightType.multiCity ? "w-full min-h-[140vh] relative block" : "w-full min-h-[110vh] relative block"}>
                 {/* <div className={"w-full h-screen relative block"}> */}
                     <Image
                         src={home_img_1}
@@ -265,8 +265,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                 <div className={`${!flightType.multiCity
                                     ? 'mt-[5%] text-4xl leading-relaxed text-center headerText'
                                     : 'text-4xl leading-relaxed text-center headerText'}`}>
-                                    <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">Elevate Your Travel Experience</h1>
-                                    <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]">and Save up to 40% on Business Class Flights!</h1>
+                                    <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]" style={{fontSize: '48px'}}>Elevate Your Travel Experience</h1>
+                                    <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]" style={{fontSize: '48px'}}>and Save up to 40% on Business Class Flights!</h1>
                                 </div>
                             </div>
 

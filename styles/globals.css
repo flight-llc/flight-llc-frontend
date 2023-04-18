@@ -315,6 +315,22 @@ input[type="date"]::-webkit-clear-button {
   height: 130vh;
 }
 
+
+#result{
+  background-image: url('/result.svg');
+  background-repeat: no-repeat;
+  width: 100% !important;
+  height: 100%;
+  background-size: cover;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-position: top 0vh right 1px;
+}
+
+#hamburger-menu-items {
+  top: 80px;
+}
+
 @media(min-width : 992px){
   #landing-form-height{
     height: fit-content;
@@ -350,7 +366,6 @@ input[type="date"]::-webkit-clear-button {
     margin-top: 12%;
   }
 }
-
 @media (min-width: 1400px) and (max-width: 2400px) {
   /* Your CSS code for screen sizes between 1300px and 1600px */
   .booking-form-multicity {
@@ -359,10 +374,10 @@ input[type="date"]::-webkit-clear-button {
   #external-airlines-multicity {
     margin-top: 15vh;
   }
+
 }
 
 @media (min-width: 2401px) {
-  /* Your CSS code for screen sizes between 1300px and 1600px */
   .overlap-group7{
     min-height: 1500px;
     padding: 250px 250px;
@@ -440,15 +455,11 @@ input[type="date"]::-webkit-clear-button {
   #AboutUs {
     height: 60vh;
   }
+  #HowItWorks {
+    padding-top: 20px;
+  }
 }
 
-#result{
-  background-image: url('/result.svg');
-  background-repeat: no-repeat;
-  width: 100% !important;
-  height: 100%;
-  background-size: cover;
-}
 
 /* @media (min-width: 1600px) and (max-width: 2560px)  {}
 @media (min-width: 1920) and (max-width: 3072px)  {} */
