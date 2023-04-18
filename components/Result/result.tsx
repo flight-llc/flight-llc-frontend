@@ -143,7 +143,7 @@ const Result :FC<Props> = ({average, data}) => {
                 <h1 className="bg-gradient-to-r from-[#113B75] to-[#0379E8]" style={{marginRight: '15px'}}>secure this discounted price</h1>
             </div>
 
-            <div className='w-full h-[75vh] flex bg-[#F6F6F6] rounded-xl' style={{ borderBottomRightRadius: '20px',borderTopRightRadius: '20px' }}>
+            <div className='w-full h-[500px] flex bg-[#F6F6F6] rounded-xl' style={{ borderBottomRightRadius: '30px',borderTopRightRadius: '30px' }}>
                 <div className='basis-3/5 flex gap-4'>
                     <div className='basis-1/2 p-8'>
                         <div style={{ height: 200 }}>
