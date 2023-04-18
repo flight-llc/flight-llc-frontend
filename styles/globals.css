@@ -460,6 +460,16 @@ input[type="date"]::-webkit-clear-button {
   }
 }
 
+@media (min-width: 3000px) {
+  .overlap-group7{
+    min-height: 1500px;
+    /* padding: 250px 250px; */
+    padding-top: 350px;
+    background-position-y: top -20px ;
+    background-position-x: 50%;
+  }
+}
+
 
 /* @media (min-width: 1600px) and (max-width: 2560px)  {}
 @media (min-width: 1920) and (max-width: 3072px)  {} */
