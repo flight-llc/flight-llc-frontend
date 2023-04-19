@@ -331,6 +331,22 @@ input[type="date"]::-webkit-clear-button {
   top: 80px;
 }
 
+#landing-component {
+  height: 110vh;
+}
+
+#multi-city-component {
+  height: 145vh;
+}
+
+/* #external-airlines {
+  margin-top: 5rem;
+} */
+
+#multi-city-external-airlines {
+  margin-top: 10rem;
+}
+
 @media(min-width : 992px){
   #landing-form-height{
     height: fit-content;
@@ -377,7 +393,7 @@ input[type="date"]::-webkit-clear-button {
 
 }
 
-@media (min-width: 2401px) {
+@media (min-width: 2401px)  and (max-width: 3000px) {
   .overlap-group7{
     min-height: 1500px;
     padding: 250px 250px;
@@ -458,15 +474,49 @@ input[type="date"]::-webkit-clear-button {
   #HowItWorks {
     padding-top: 20px;
   }
+  #landing-component {
+    height: 60vh;
+  }
+  #multi-city-component {
+    height: 80vh;
+  }
+  #external-airlines {
+    margin-top: 25rem;
+  }
+  #multi-city-external-airlines {
+    margin-top: 25rem;
+  }
 }
 
-@media (min-width: 3000px) {
+@media (min-width: 3001px) {
   .overlap-group7{
     min-height: 1500px;
     /* padding: 250px 250px; */
     padding-top: 350px;
     background-position-y: top -20px ;
     background-position-x: 50%;
+  }
+  #multi-city-component {
+    height: 75vh;
+  }
+  #landing-component {
+    height: 60vh;
+  }
+  #aboutUs-super-lg-screen-textSize{
+    font-size: 26px;
+    line-height: 1.7rem;
+  }
+  #AboutUs {
+    height: 55vh;
+  }
+  #landing-form-height{
+    height: 13rem;
+  }
+  #external-airlines {
+     margin-top: -25rem;
+   }
+   #multi-city-external-airlines {
+    margin-top: -5rem;
   }
 }
 

@@ -248,7 +248,8 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
 
             :
             <>
-                <div className={flightType.multiCity ? "w-full min-h-[140vh] relative block" : "w-full min-h-[110vh] relative block"}>
+                {/* <div id="landing-component" className={flightType.multiCity ? "w-full min-h-[140vh] relative block" : "w-full min-h-[110vh] relative block"}> */}
+                <div id={ flightType.multiCity ? "multi-city-component" : "landing-component"} className={flightType.multiCity ? "w-full relative block" : "w-full relative block"}>
                 {/* <div className={"w-full h-screen relative block"}> */}
                     <Image
                         src={home_img_1}
@@ -480,11 +481,11 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             <div  className={"w-full flex justify-center items-center"}>
                             {/* {!flightType.multiCity ? 'lg:w-[90%] mt-0 p-4 bg-black' : 'lg:w-[90%] xl:w-[87%] ml-0 mt-[20vh] bg-green-900'} */}
                                 <div 
-                                id={`${!flightType.multiCity && 'marginTopId'}`}
+                                id={`${!flightType.multiCity ? '': 'multi-city-external-airlines'}`}
                                 className={`lg:w-[90%] xl:[87%] mt-4 
                                 ${flightType.roundTrip && "lg:w-[90%] xl:w-[97%] mt-4" ||
                                 flightType.oneWay && "lg:w-[90%] xl:[87%] mt-4"
-                                || flightType.multiCity && "mt-[24vh] lg:w-[90%] xl:[87%]"}`
+                                || flightType.multiCity && "lg:w-[90%] xl:[87%]"}`
                                 }>
                                     <div className="w-full">
                                         <div className="w-[96.5%]">
