@@ -481,7 +481,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                             <div  className={"w-full flex justify-center items-center"}>
                             {/* {!flightType.multiCity ? 'lg:w-[90%] mt-0 p-4 bg-black' : 'lg:w-[90%] xl:w-[87%] ml-0 mt-[20vh] bg-green-900'} */}
                                 <div 
-                                id={`${!flightType.multiCity ? 'marginTopId': ''}`}
+                                id={`${!flightType.multiCity ? '': 'multi-city-external-airlines'}`}
                                 className={`lg:w-[90%] xl:[87%] mt-4 
                                 ${flightType.roundTrip && "lg:w-[90%] xl:w-[97%] mt-4" ||
                                 flightType.oneWay && "lg:w-[90%] xl:[87%] mt-4"

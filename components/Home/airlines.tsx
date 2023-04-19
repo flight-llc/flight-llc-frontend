@@ -4,8 +4,10 @@ import group from '@/public/group.svg';
 import { FC } from 'react';
 
 export const ExternalAirlines : FC = () => {
+    // id='external-airlines'
     return(
-        <div className="w-full relative">
+        <div className="w-full relative"> 
+        {/* <div className="w-full"> */}
             <div className='w-full h-32'>
                 {/* <object data="/group.svg" className='w-full h-full object-cover'/> */}
                 <Image
