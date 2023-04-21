@@ -393,7 +393,7 @@ input[type="date"]::-webkit-clear-button {
 
 }
 
-@media (min-width: 2401px)  and (max-width: 3000px) {
+@media (min-width: 2401px)  and (max-width: 30071px) {
   .overlap-group7{
     min-height: 1500px;
     padding: 250px 250px;
@@ -488,7 +488,7 @@ input[type="date"]::-webkit-clear-button {
   }
 }
 
-@media only screen and (min-device-width: 3072px) and (max-device-height: 1920px) {
+@media only screen and (min-device-width: 3072px)  {
   /* CSS code here */
 /* }
 
