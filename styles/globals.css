@@ -527,6 +527,50 @@ input[type="date"]::-webkit-clear-button {
 }
 
 
+
+/* Media query for small screens */
+@media only screen and (min-width: 320px) {
+  /* CSS code for small screens */
+}
+
+/* Media query for medium screens */
+@media only screen and (min-width: 768px) {
+  /* CSS code for medium screens */
+}
+
+/* Media query for large screens */
+@media only screen and (min-width: 1024px) {
+  /* CSS code for large screens */
+  #test-mq {
+    color: yellow !important;
+  }
+}
+
+/* Media query for extra large screens */
+@media only screen and (min-width: 1440px) {
+  /* CSS code for extra large screens */
+  #test-mq {
+    color: red !important;
+  }
+}
+
+/* Media query for high-density Retina displays */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 1920px) {
+  /* CSS code for high-density Retina displays */
+  #test-mq {
+    color: green !important;
+  }
+}
+
+/* Media query for MacBook Pro 16-inch */
+@media only screen and (min-device-width: 3072px) and (max-device-height: 1920px) {
+  /* CSS code for MacBook Pro 16-inch */
+  #test-mq {
+    color: purple !important;
+  }
+}
+
+
 /* @media (min-width: 1600px) and (max-width: 2560px)  {}
 @media (min-width: 1920) and (max-width: 3072px)  {} */
 /* :root {
