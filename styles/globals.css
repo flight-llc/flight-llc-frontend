@@ -488,7 +488,11 @@ input[type="date"]::-webkit-clear-button {
   }
 }
 
-@media (min-width: 3001px) {
+@media only screen and (min-device-width: 3072px) and (max-device-height: 1920px) {
+  /* CSS code here */
+/* }
+
+@media (min-width: 3001px) { */
   .overlap-group7{
     min-height: 1500px;
     /* padding: 250px 250px; */
