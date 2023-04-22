@@ -488,7 +488,8 @@ input[type="date"]::-webkit-clear-button {
   }
 }
 
-@media only screen and (min-device-width: 3072px)  {
+/* @media only screen and (min-device-width: 3072px)  { */
+@media only screen and (min-width: 1440px) {
   /* CSS code here */
 /* }
 
@@ -503,17 +504,17 @@ input[type="date"]::-webkit-clear-button {
     background-position: 50% top -20px;
   }
   #multi-city-component {
-    height: 75vh;
+    height: 80rem;
   }
   #landing-component {
-    height: 60vh;
+    height: 60rem;
   }
   #aboutUs-super-lg-screen-textSize{
     font-size: 26px;
     line-height: 1.7rem;
   }
   #AboutUs {
-    height: 55vh;
+    height: 80rem;
   }
   #landing-form-height{
     height: 13rem;
@@ -522,7 +523,7 @@ input[type="date"]::-webkit-clear-button {
      margin-top: -25rem;
    }
    #multi-city-external-airlines {
-    margin-top: -5rem;
+    margin-top: 15rem;
   }
 }
 
