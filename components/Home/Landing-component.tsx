@@ -266,8 +266,7 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                 <div className={`${!flightType.multiCity
                                     ? 'mt-[5%] text-4xl leading-relaxed text-center headerText'
                                     : 'text-4xl leading-relaxed text-center headerText'}`}>
-                                    {/* <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]" style={{fontSize: '48px'}} id="test-mq">Elevate Your Travel Experience</h1> */}
-                                    <h2 className="" style={{fontSize: '48px'}} id="test-mq">Elevate Your Travel Experience</h2>
+                                    <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]" style={{fontSize: '48px'}} id="test-mq">Elevate Your Travel Experience</h1>
                                     <h1 className="bg-gradient-to-r from-[#EDEFF1] to-[#0379E8]" style={{fontSize: '48px'}}>and Save up to 40% on Business Class Flights!</h1>
                                 </div>
                             </div>
