@@ -504,17 +504,17 @@ input[type="date"]::-webkit-clear-button {
     background-position: 50% top -20px;
   }
   #multi-city-component {
-    height: 120vh;
+    height: 80rem;
   }
   #landing-component {
-    height: 80vh;
+    height: 60rem;
   }
   #aboutUs-super-lg-screen-textSize{
     font-size: 26px;
     line-height: 1.7rem;
   }
   #AboutUs {
-    height: 100vh;
+    height: 80rem;
   }
   #landing-form-height{
     height: 13rem;
@@ -523,7 +523,7 @@ input[type="date"]::-webkit-clear-button {
      margin-top: -25rem;
    }
    #multi-city-external-airlines {
-    margin-top: 10rem;
+    margin-top: 15rem;
   }
 }
 
