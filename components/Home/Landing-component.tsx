@@ -468,12 +468,16 @@ const LandingComponent: FC<props> = ({ data, locations, average }) => {
                                             
                                         </div>
 
+                                        <div 
+                                        id='landing-form-height' 
+                                        className="w-[100%]">
                                         <div className=" w-full flex flex-column ">
                                             {flightType.multiCity &&
                                                 <MultiCityForm bookFlight={bookFlight} locations={locations} setTimer={(e: any) => {
                                                     console.log('set timer func', e);
                                                     setTimer(1);
                                                 }} />}
+                                        </div>
                                         </div>
                                     </div>
                                 </form>

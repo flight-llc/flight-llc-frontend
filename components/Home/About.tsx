@@ -12,7 +12,7 @@ export const AboutUs : FC = () => {
                 className="object-cover"
             />
             <div className="absolute w-full flex justify-center items-center">
-                <div className="w-[90%] xl:w-4/5 py-20 text-center text-white">
+                <div className="w-[90%] xl:w-4.2/5 py-20 text-center text-white">
                     <p className="uppercase text-lg font-bold">About us</p>
 
                     {/* <div className="flightPortalLogo text-7xl my-12">

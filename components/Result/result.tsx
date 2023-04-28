@@ -264,15 +264,19 @@ const Result :FC<Props> = ({average, data}) => {
                                 placeholder='Korsmichaaelfk123@gmail.com'
                                 onChange={onChangeEmailHandler}/>
                             </div>
-                            <input 
-                                type={'submit'}
-                                value="Send Request"
-                                disabled={disableButton()}
-                                className='w-full bg-[#113B75] 
-                                text-white rounded-lg py-[1.15rem] 
-                                text-center mt-4 cursor-pointer 
-                                text-sm disabled:bg-[#EFF0F6]'
-                                onClick={sendPatchRequestForFlightBooked}/>
+                            <div className='w-full rounded-lg pt-0 text-xs my-4'>
+                                <input 
+                                    type={'submit'}
+                                    value="Send Request"
+                                    disabled={disableButton()}
+                                    className='w-full bg-[#113B75] 
+                                    text-white rounded-lg py-[1rem] 
+                                    text-center cursor-pointer 
+                                    text-sm disabled:bg-[#EFF0F6]'
+                                    onClick={sendPatchRequestForFlightBooked}
+                                />
+                            </div>
+                            
                         </div>
                         
                     </div>
